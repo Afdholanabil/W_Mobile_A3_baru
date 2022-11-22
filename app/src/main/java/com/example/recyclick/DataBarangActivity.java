@@ -36,7 +36,7 @@ public class DataBarangActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity();
-                getSupportFragmentManager().beginTransaction().replace(R.id.layoutFragment,new ContainerFragment().getClass());
+
             }
         });
         showDataBarang();
