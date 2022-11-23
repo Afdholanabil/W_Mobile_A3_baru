@@ -36,7 +36,6 @@ public class HomeActivity extends AppCompatActivity {
         dbhelp = new dbHelper(getApplicationContext());
         greeting = (TextView)findViewById(R.id.textHalo);
         setGreeting();
-
         navigationView = (BottomNavigationView) findViewById(R.id.nav_view);
         navigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -47,12 +46,14 @@ public class HomeActivity extends AppCompatActivity {
                         break;
                     case R.id.id_nav_edit:
                         startActivity(new Intent(HomeActivity.this, new DataBarangActivity().getClass()));
+
                         break;
                     case R.id.id_nav_laporan:
                         startActivity(new Intent(HomeActivity.this, new LoginActivity().getClass()));
                         break;
                     case R.id.id_nav_setting:
                         startActivity(new Intent(HomeActivity.this, new PengaturanActivity().getClass()));
+
                         break;
                 }
                 return false;
