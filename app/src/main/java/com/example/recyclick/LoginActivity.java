@@ -22,12 +22,19 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.recyclick.API.APIRequestData;
+import com.example.recyclick.API.serverRetrofit;
 import com.example.recyclick.Fragment.BottomNavFragment;
 import com.example.recyclick.Fragment.ContainerFragment;
 import com.example.recyclick.Fragment.RegisterFragment;
 import com.example.recyclick.Koneksi.dbHelper;
+import com.example.recyclick.Model.Login.LoginInfo;
 import com.example.recyclick.Notifikasi.GagalLogin;
 import com.google.android.material.textfield.TextInputEditText;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
     dbHelper db;
@@ -35,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     TextInputEditText tInput;
     EditText tPass;
     Button btnMsk;
+    APIRequestData API;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,18 +84,10 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     String usr = tInput.getText().toString();
                     String pass = tPass.getText().toString();
-                    if (usr.equals("") || pass.equals("")) {
+                    if(usr.equals("")||pass.equals("")){
                         showLogOutDialog();
-                    } else {
-                        Boolean checkUserPass = db.checkUsernamePassword(usr, pass);
-                        if (checkUserPass == true) {
-                            Intent intent = new Intent(LoginActivity.this, new BaseActivity().getClass());
-                            SharedPreferences prefs = LoginActivity.this.getSharedPreferences("com.example.app", Context.MODE_PRIVATE);
-                            prefs.edit().putString("name",usr).apply();
-                            startActivity(intent);
-                        } else {
-                            showLogOutDialog();
-                        }
+                    }else{
+                        loginPost(usr, pass);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -100,6 +100,33 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(LoginActivity.this, new RegisterActivity().getClass()));
 
 
+            }
+        });
+    }
+
+    private void loginPost(String username, String password){
+        API = serverRetrofit.koneksiRetrofit().create(APIRequestData.class);
+        Call<LoginInfo> call = API.CreateLoginPost(username, password);
+        call.enqueue(new Callback<LoginInfo>() {
+            @Override
+            public void onResponse(Call<LoginInfo> call, Response<LoginInfo> response) {
+                if(response.body() != null && response.isSuccessful()){
+                    if(response.body().getKondisi() == 1){
+                        Intent itn = new Intent(LoginActivity.this, HomeActivity.class);
+                        startActivity(itn);
+                    }else{
+                        Log.e("TAG", "onResponse: "+response.body().getPesan());
+                        showLogOutDialog();
+                    }
+                }else{
+                    Log.e("TAG", "onResponse: "+response.body().getPesan());
+                    showLogOutDialog();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginInfo> call, Throwable t) {
+                Log.e("error server", "onFailure: "+t);
             }
         });
     }
@@ -136,14 +163,5 @@ public class LoginActivity extends AppCompatActivity {
             getSupportActionBar().hide();
         }
     }
-//    private void loadFragment(Fragment fragment) {
-//// create a FragmentManager
-//        FragmentManager fragmentManager = getFragmentManager();
-//        FragmentManager fm = getFragmentManager();
-//// create a FragmentTransaction to begin the transaction and replace the Fragment
-//        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-//// replace the FrameLayout with new Fragment
-//        fragmentTransaction.replace(R.id.layoutFragment, fragment);
-//        fragmentTransaction.commit(); // save the changes
-//    }
+
 }
