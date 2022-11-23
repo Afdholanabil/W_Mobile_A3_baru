@@ -1,5 +1,6 @@
 package com.example.recyclick.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.recyclick.DataBarangActivity;
 import com.example.recyclick.Koneksi.dbBarang;
 import com.example.recyclick.R;
 import com.example.recyclick.Util;
@@ -85,7 +87,7 @@ public class TambahBarangFragment extends Fragment {
         fragmentTambahBarangBinding.btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Util.pindahFragment(getActivity().getSupportFragmentManager(), new BottomNavFragment());
+                startActivity(new Intent(getActivity(), new DataBarangActivity().getClass()));
             }
         });
 
@@ -100,7 +102,7 @@ public class TambahBarangFragment extends Fragment {
             } else {
                 boolean insData = db.insertDataBarang(id, nama, jenis, stok2, deskripsi);
                 if (insData == true) {
-                    Util.pindahFragment(getActivity().getSupportFragmentManager(), new BottomNavFragment());
+                    startActivity(new Intent(getActivity(), new DataBarangActivity().getClass()));
                     Toast.makeText(getActivity(), "Berhasil menambahkan barang", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getActivity(), "gagal menambahkan barang", Toast.LENGTH_SHORT).show();

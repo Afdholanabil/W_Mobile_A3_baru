@@ -56,7 +56,7 @@ public class PengaturanActivity extends AppCompatActivity {
         findViewById(R.id.linear3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PengaturanActivity.this, TambahBarangFragment.class);
+                Intent intent = new Intent(PengaturanActivity.this, new ContainerFragment().getClass());
                 startActivity(intent);
                 finish();
             }
@@ -64,9 +64,8 @@ public class PengaturanActivity extends AppCompatActivity {
         findViewById(R.id.linear5).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PengaturanActivity.this, TambahKaryawanFragment.class);
-                startActivity(intent);
-                finish();
+                Util.gantiFragment(getSupportFragmentManager(), new TambahKaryawanFragment());
+
             }
         });
         findViewById(R.id.linear6).setOnClickListener(new View.OnClickListener() {

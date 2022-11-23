@@ -24,7 +24,9 @@
             android:exported="false" />
         <activity
             android:name=".ContainerFragment"
-            android:exported="false" />
+            android:exported="true">
+
+        </activity>
         <activity
             android:name=".LoginActivity"
             android:exported="true" />

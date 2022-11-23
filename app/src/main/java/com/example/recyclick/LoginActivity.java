@@ -85,6 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                             SharedPreferences prefs = LoginActivity.this.getSharedPreferences("com.example.app", Context.MODE_PRIVATE);
                             prefs.edit().putString("name",usr).apply();
                             startActivity(intent);
+                            finish();
                         } else {
                             showLogOutDialog();
                         }
