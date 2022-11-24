@@ -14,11 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.example.recyclick.Adapter.barangAdapter;
 import com.example.recyclick.Koneksi.dbBarang;
-import com.example.recyclick.Model.brData;
 import com.example.recyclick.R;
 import com.example.recyclick.Util;
 import com.example.recyclick.databinding.FragmentDataBarangBinding;
@@ -43,7 +40,6 @@ public class DataBarangFragment extends Fragment {
     private String mParam2;
 
     private RecyclerView recyclerView;
-    private List<brData> listdata = new ArrayList<>();
     dbBarang data;
 
     public DataBarangFragment() {
@@ -89,32 +85,31 @@ public class DataBarangFragment extends Fragment {
                 Util.pindahFragment(getActivity().getSupportFragmentManager(), new TambahBarangFragment());
             }
         });
-        showDataBarang();
 
         // Inflate the layout for this fragment
         return fragmentDataBarangBinding.getRoot();
     }
-    public void showDataBarang(){
-        brData barang = null;
-        SQLiteDatabase db = data.getReadableDatabase();
-        Cursor cr = db.rawQuery("SELECT * FROM barang", null);
-//        String []daftar = new String[cr.getCount()];
-        cr.moveToFirst();
-        for(int i = 0; i< cr.getCount(); i++){
-            cr.moveToPosition(i);
-            String id = cr.getString(0).toString();
-            String nama = cr.getString(1).toString();
-            String kategori = cr.getString(2).toString();
-            int stok = cr.getInt(3);
-            String deskripsi = cr.getString(4).toString();
-            barang = new brData(id, nama, kategori, deskripsi, stok);
-            listdata.add(barang);
-        }
-
-        barangAdapter adapter = new barangAdapter(listdata);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-    }
+//    public void showDataBarang(){
+//        brData barang = null;
+//        SQLiteDatabase db = data.getReadableDatabase();
+//        Cursor cr = db.rawQuery("SELECT * FROM barang", null);
+////        String []daftar = new String[cr.getCount()];
+//        cr.moveToFirst();
+//        for(int i = 0; i< cr.getCount(); i++){
+//            cr.moveToPosition(i);
+//            String id = cr.getString(0).toString();
+//            String nama = cr.getString(1).toString();
+//            String kategori = cr.getString(2).toString();
+//            int stok = cr.getInt(3);
+//            String deskripsi = cr.getString(4).toString();
+//            barang = new brData(id, nama, kategori, deskripsi, stok);
+//            listdata.add(barang);
+//        }
+//
+//        barangAdapter adapter = new barangAdapter(listdata);
+//        recyclerView.setAdapter(adapter);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//    }
     public void showDialog(){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
 

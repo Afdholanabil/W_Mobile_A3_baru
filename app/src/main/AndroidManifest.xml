@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.recyclick">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -26,9 +26,7 @@
             android:exported="false" />
         <activity
             android:name=".ContainerFragment"
-            android:exported="true">
-
-        </activity>
+            android:exported="true"/>
         <activity
             android:name=".LoginActivity"
             android:exported="true" />
@@ -53,6 +51,10 @@
         </activity>
         <activity
             android:name=".BaseActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".TambahBarangActivity"
             android:exported="false">
         </activity>
     </application>

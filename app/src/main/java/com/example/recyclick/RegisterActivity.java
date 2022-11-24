@@ -28,7 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
     TextView btnKembali;
     CardView btnRegist;
     TextInputEditText txtNama, txtUsername, txtTelp;
-    EditText txtPass,txtKonfirm;
+    EditText txtPass, txtKonfirm;
 
 
     @Override
@@ -59,36 +59,35 @@ public class RegisterActivity extends AppCompatActivity {
                 String repass = txtKonfirm.getText().toString();
                 int kedudukan = 2;
 
-                if(nama.equals("")||noTlp.equals("")||usr.equals("")||pass.equals("")||repass.equals("")){
-                    Toast.makeText(getApplicationContext(),"Data Kosong, Harus Diisi ! ",Toast.LENGTH_LONG).show();
-                }else {
+                if (nama.equals("") || noTlp.equals("") || usr.equals("") || pass.equals("") || repass.equals("")) {
+                    Toast.makeText(getApplicationContext(), "Data Kosong, Harus Diisi ! ", Toast.LENGTH_LONG).show();
+                } else {
                     if (usr.length() > 15) {
                         Toast.makeText(getApplicationContext(), "Username Tidak Boleh lebih dari 15 karakter", Toast.LENGTH_SHORT).show();
-                    }else if (pass.length() > 10) {
+                    } else if (pass.length() > 10) {
                         Toast.makeText(getApplicationContext(), "Password tidak boleh lebih dari 10 karakter", Toast.LENGTH_SHORT).show();
-                    }else if (pass.equals(repass)) {
+                    } else if (pass.equals(repass)) {
                         RegisterPost(usr, pass, nama, noTlp, kedudukan);
                     } else {
                         Toast.makeText(getApplicationContext(), "Masukan Password yang Sesuai", Toast.LENGTH_LONG).show();
 
                     }
                 }
-
             }
         });
     }
 
-    private void RegisterPost(String user, String pass, String nama, String notel, int kedudukan){
+    private void RegisterPost(String user, String pass, String nama, String notel, int kedudukan) {
         APIRequestData API = serverRetrofit.koneksiRetrofit().create(APIRequestData.class);
         Call<RegisterInfo> call = API.CreateRegisterPost(user, pass, nama, notel, kedudukan);
         call.enqueue(new Callback<RegisterInfo>() {
             @Override
             public void onResponse(Call<RegisterInfo> call, Response<RegisterInfo> response) {
-                if(response.isSuccessful() && response.body() != null){
-                    if(response.body().isKondisi() == true){
+                if (response.isSuccessful() && response.body() != null) {
+                    if (response.body().isKondisi() == true) {
                         Toast.makeText(RegisterActivity.this, response.body().getPesan(), Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                    }else{
+                    } else {
                         Toast.makeText(RegisterActivity.this, response.body().getPesan(), Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -96,7 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<RegisterInfo> call, Throwable t) {
-                Log.d("server error", "onFailure: "+t);
+                Log.d("server error", "onFailure: " + t);
             }
         });
     }

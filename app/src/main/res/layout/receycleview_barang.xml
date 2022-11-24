@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".Adapter.barangAdapter">
+    >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,7 +31,6 @@
                     tools:ignore="MissingConstraints"
                     android:layout_marginHorizontal="10dp"
                     android:scaleType="fitXY"
-
                     />
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -44,7 +43,7 @@
                         android:layout_height="wrap_content"
                         android:visibility="gone"/>
                     <TextView
-                        android:id="@+id/txt_judul2"
+                        android:id="@+id/txt_judul"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Tas Jinjing Rotan"
@@ -53,7 +52,7 @@
                         android:textColor="@color/black"
                         />
                     <TextView
-                        android:id="@+id/txt_harga2"
+                        android:id="@+id/txt_harga"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Rp 45.000"
@@ -61,7 +60,7 @@
                         android:fontFamily="@font/poppins_regular"
                         android:textColor="@color/black"/>
                     <TextView
-                        android:id="@+id/txt_des2"
+                        android:id="@+id/txt_des"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Tas Jinjing Rotan merupakan kreasi..."

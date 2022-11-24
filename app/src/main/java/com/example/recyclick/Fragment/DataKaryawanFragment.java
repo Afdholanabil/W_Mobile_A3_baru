@@ -14,11 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-import com.example.recyclick.Adapter.karyawanAdapter;
-
 import com.example.recyclick.Koneksi.dbHelper;
 
-import com.example.recyclick.Model.brKaryawan;
 import com.example.recyclick.R;
 import com.example.recyclick.Util;
 import com.example.recyclick.databinding.FragmentDataKaryawanBinding;
@@ -43,7 +40,6 @@ public class DataKaryawanFragment extends Fragment {
     private String mParam2;
 
     private RecyclerView recyclerView;
-    private List<brKaryawan> listdata = new ArrayList<>();
     dbHelper data;
 
 
@@ -97,31 +93,30 @@ public class DataKaryawanFragment extends Fragment {
                 Util.pindahFragment(getActivity().getSupportFragmentManager(), new BottomNavFragment());
             }
         });
-        showDataKaryawan();
         // Inflate the layout for this fragment
         return fragmentDataKaryawanBinding.getRoot();
     }
 
-    public void showDataKaryawan(){
-        brKaryawan karyawan = null;
-        SQLiteDatabase db = data.getReadableDatabase();
-        Cursor cr = db.rawQuery("SELECT * FROM Admin",null);
-        cr.moveToFirst();
-        for(int i =0;i<cr.getCount();i++){
-            cr.moveToPosition(i);
-            String username = cr.getString(0).toString();
-            String pass = cr.getString(1).toString();
-            String nama = cr.getString(2).toString();
-            int noTelp = cr.getInt(3);
-            int kedudukan = cr.getInt(4);
-
-            karyawan = new brKaryawan(username,pass,nama,noTelp,kedudukan);
-            listdata.add(karyawan);
-        }
-
-        karyawanAdapter adapter = new karyawanAdapter(listdata);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-    }
+//    public void showDataKaryawan(){
+//        brKaryawan karyawan = null;
+//        SQLiteDatabase db = data.getReadableDatabase();
+//        Cursor cr = db.rawQuery("SELECT * FROM Admin",null);
+//        cr.moveToFirst();
+//        for(int i =0;i<cr.getCount();i++){
+//            cr.moveToPosition(i);
+//            String username = cr.getString(0).toString();
+//            String pass = cr.getString(1).toString();
+//            String nama = cr.getString(2).toString();
+//            int noTelp = cr.getInt(3);
+//            int kedudukan = cr.getInt(4);
+//
+//            karyawan = new brKaryawan(username,pass,nama,noTelp,kedudukan);
+//            listdata.add(karyawan);
+//        }
+//
+//        karyawanAdapter adapter = new karyawanAdapter(listdata);
+//        recyclerView.setAdapter(adapter);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//    }
 
 }
