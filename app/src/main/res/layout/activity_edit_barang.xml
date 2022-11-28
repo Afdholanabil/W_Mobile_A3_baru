@@ -40,7 +40,7 @@
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="60dp"
+
                 android:layout_marginTop="50dp"
                 tools:ignore="MissingConstraints">
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -240,6 +240,7 @@
                         </androidx.cardview.widget.CardView>
                     </LinearLayout>
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/btnSimpan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/green1"
@@ -260,25 +261,6 @@
                     </androidx.cardview.widget.CardView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </ScrollView>
-
-
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/nav_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_nav_bottom"
-                app:itemIconTint="@color/white"
-                app:itemRippleColor="@color/green3"
-                app:itemTextColor="@color/white"
-                app:menu="@menu/menu"
-                tools:ignore="MissingConstraints"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-
-
-                >
-            </com.google.android.material.bottomnavigation.BottomNavigationView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </RelativeLayout>
 </layout>

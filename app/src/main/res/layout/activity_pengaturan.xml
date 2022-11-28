@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
     <data>
-
     </data>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -43,7 +42,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginHorizontal="20dp"/>
                     <TextView
-                        android:id="@+id/username"
+                        android:id="@+id/txt_username"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="nabil123"
@@ -240,6 +239,27 @@
                     android:layout_gravity="center"/>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/nav_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_nav_bottom"
+                app:itemIconTint="@color/white"
+                app:itemRippleColor="@color/green3"
+                app:itemTextColor="@color/white"
+                app:menu="@menu/menu"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="5dp"
+                android:layout_marginHorizontal="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints">
+            </com.google.android.material.bottomnavigation.BottomNavigationView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </layout>

@@ -1,5 +1,6 @@
 package com.example.recyclick;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.databinding.DataBindingUtil;
@@ -10,6 +11,7 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -19,34 +21,53 @@ import com.example.recyclick.Fragment.DataKaryawanFragment;
 import com.example.recyclick.Fragment.LoginFragment;
 import com.example.recyclick.Fragment.TambahBarangFragment;
 import com.example.recyclick.Fragment.TambahKaryawanFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+import com.google.android.material.navigation.NavigationView;
 
 public class PengaturanActivity extends AppCompatActivity {
-//    private static PengaturanActivity singleInstance;
-//
-//    private boolean isLoggingOut;
-//
-//    private PengaturanActivity() {
-//    }
-//
-//    public static PengaturanActivity getSingleInstance() {
-//        if (singleInstance == null) {
-//            singleInstance = new PengaturanActivity();
-//        }
-//        return singleInstance;
-//    }
-//
-//    public boolean isLoggingOut() {
-//        return isLoggingOut;
-//    }
-//
-//    public void setLoggingOut(boolean isLoggingOut) {
-//        this.isLoggingOut = isLoggingOut;
-//    }
-
+public TextView tNama,tUsername;
+BottomNavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pengaturan);
+        tNama = (TextView)findViewById(R.id.txt_nama);
+        tUsername = (TextView)findViewById(R.id.txt_username);
+        navigationView = (BottomNavigationView) findViewById(R.id.nav_view);
+        //navigator
+        navigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.id_nav_home:
+                        startActivity(new Intent(PengaturanActivity.this, new HomeActivity().getClass()));
+                        break;
+                    case R.id.id_nav_edit:
+                        startActivity(new Intent(PengaturanActivity.this, new DataBarangActivity().getClass()));
+
+                        break;
+                    case R.id.id_nav_laporan:
+                        startActivity(new Intent(PengaturanActivity.this, new LoginActivity().getClass()));
+                        break;
+                    case R.id.id_nav_setting:
+                        startActivity(new Intent(PengaturanActivity.this, new PengaturanActivity().getClass()));
+
+                        break;
+                }
+                return false;
+            }
+        });
+        tNama.setText(SaveAccount.readDataPembeli(PengaturanActivity.this).getNama());
+        tUsername.setText(SaveAccount.readDataPembeli(PengaturanActivity.this).getUsername());
+        findViewById(R.id.linear2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 = new Intent(PengaturanActivity.this, new EditProfileActivity().getClass());
+                startActivity(intent2);
+            }
+        });
+
         findViewById(R.id.linear8).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,23 +77,24 @@ public class PengaturanActivity extends AppCompatActivity {
         findViewById(R.id.linear3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PengaturanActivity.this, new ContainerFragment().getClass());
+                Intent intent = new Intent(PengaturanActivity.this, new TambahBarangActivity().getClass());
                 startActivity(intent);
-                finish();
+
             }
         });
         findViewById(R.id.linear5).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Util.gantiFragment(getSupportFragmentManager(), new TambahKaryawanFragment());
+                startActivity(new Intent(PengaturanActivity.this, new TambahKaryawanActivity().getClass()));
 
             }
         });
         findViewById(R.id.linear6).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.container_logout,new DataKaryawanFragment()).commit();
+                startActivity(new Intent(PengaturanActivity.this, new DataKaryawanActivity().getClass()));
+//                FragmentManager fragmentManager = getSupportFragmentManager();
+//                fragmentManager.beginTransaction().replace(R.id.container_logout,new DataKaryawanFragment()).commit();
             }
         });
 

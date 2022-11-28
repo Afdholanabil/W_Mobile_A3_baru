@@ -1,6 +1,7 @@
 package com.example.recyclick;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,11 +9,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.recyclick.Model.brData;
 
 public class editBarangActivity extends AppCompatActivity {
     private static final String TAG = "editBarangActivity";
     TextView btnBack;
+    CardView btnSimpan;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,14 +22,17 @@ public class editBarangActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(editBarangActivity.this, new DataBarangActivity().getClass()));
+                finish();
             }
         });
-        if(getIntent().hasExtra("Selected")){
-            brData brData = getIntent().getParcelableExtra("Selected");
-            Log.d(TAG, "onCreate: " + brData.toString());
+        btnSimpan = findViewById(R.id.btnSimpan);
+        btnSimpan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         }
 
 
     }
-}

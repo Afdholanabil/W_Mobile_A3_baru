@@ -48,7 +48,8 @@
                 android:id="@+id/scroll1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="80dp"
                 >
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcy_barang"
@@ -67,14 +68,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30dp"
-                android:layout_marginBottom="50dp"
+                android:layout_marginBottom="80dp"
                 android:backgroundTint="@color/green1"
                 android:src="@drawable/ic_baseline_add_24"
                 app:borderWidth="0dp"
                 app:elevation="6dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:ignore="MissingConstraints"></com.google.android.material.floatingactionbutton.FloatingActionButton>
+                tools:ignore="MissingConstraints">
+
+            </com.google.android.material.floatingactionbutton.FloatingActionButton>
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/nav_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_nav_bottom"
+                app:itemIconTint="@color/white"
+                app:itemRippleColor="@color/green3"
+                app:itemTextColor="@color/white"
+                app:menu="@menu/menu"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="5dp"
+                android:layout_marginHorizontal="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:ignore="MissingConstraints">
+            </com.google.android.material.bottomnavigation.BottomNavigationView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </RelativeLayout>

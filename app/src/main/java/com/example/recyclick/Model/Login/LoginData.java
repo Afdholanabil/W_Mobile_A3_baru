@@ -10,8 +10,15 @@ public class LoginData {
 	@SerializedName("username")
 	private String username;
 
+	@SerializedName("")
+
 	public void setNama(String nama){
 		this.nama = nama;
+	}
+
+	public LoginData(String nama, String username) {
+		this.nama = nama;
+		this.username = username;
 	}
 
 	public String getNama(){

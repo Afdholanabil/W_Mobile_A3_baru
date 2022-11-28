@@ -28,9 +28,15 @@ import com.example.recyclick.Fragment.BottomNavFragment;
 import com.example.recyclick.Fragment.ContainerFragment;
 import com.example.recyclick.Fragment.RegisterFragment;
 import com.example.recyclick.Koneksi.dbHelper;
+import com.example.recyclick.Model.DataKaryawan.KaryawanItem;
+import com.example.recyclick.Model.Login.LoginData;
 import com.example.recyclick.Model.Login.LoginInfo;
 import com.example.recyclick.Notifikasi.GagalLogin;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,6 +49,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText tPass;
     Button btnMsk;
     APIRequestData API;
+    SharedPreferences sharedPreferences;
+    LoginData loginData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                         showLogOutDialog();
                     }else{
                         loginPost(usr, pass);
+
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -112,8 +121,16 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<LoginInfo> call, Response<LoginInfo> response) {
                 if(response.body() != null && response.isSuccessful()){
                     if(response.body().getKondisi() == 1){
+                        LoginData loginData = response.body().getData();
+
+                        SharedPreferences sharedPreferences = getSharedPreferences("PREF_MODEL",Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+//                        editor.putString("KEY_MODEL_AKUN",)
+                        SaveAccount.writeDataUser(LoginActivity.this, loginData);
+
                         Intent itn = new Intent(LoginActivity.this, HomeActivity.class);
                         startActivity(itn);
+
                     }else{
                         Log.e("TAG", "onResponse: "+response.body().getPesan());
                         showLogOutDialog();

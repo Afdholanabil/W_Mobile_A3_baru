@@ -1,12 +1,13 @@
 package com.example.recyclick;
 
-<<<<<<< HEAD
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import androidx.cardview.widget.CardView;
 import com.example.recyclick.API.APIRequestData;
 import com.example.recyclick.API.serverRetrofit;
 import com.example.recyclick.Model.DataBarang.AddBarang;
+import com.google.android.material.textfield.TextInputEditText;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,7 +24,8 @@ import retrofit2.Response;
 
 public class TambahBarangActivity extends AppCompatActivity {
 
-    EditText id, nama, stok, harga, deksripsi, kategori;
+    TextInputEditText id, nama, stok, harga, deksripsi, kategori;
+    TextView btnBack;
     Button simpan;
     int rating;
 
@@ -36,8 +39,9 @@ public class TambahBarangActivity extends AppCompatActivity {
         harga = findViewById(R.id.hargaprd);
         deksripsi = findViewById(R.id.deskPrd);
         kategori = findViewById(R.id.kategoriprd);
+        btnBack = findViewById(R.id.btn_back);
         simpan = findViewById(R.id.btn_spn);
-        rating = 5;
+        rating = 1;
         simpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,11 +52,17 @@ public class TambahBarangActivity extends AppCompatActivity {
                 String deskripsi = deksripsi.getText().toString();
                 int Kategoribr = Integer.parseInt(String.valueOf(kategori.getText()));
                 if (idbr.equals(null) || namabr.equals(null) || stok.equals(null) || harga.equals(null) || deskripsi.equals(null) || kategori.equals(null)) {
-                    Toast.makeText(TambahBarangActivity.this, "data Tidak boleh kosong", Toast.LENGTH_SHORT).show();
-                }else{
+                    Toast.makeText(TambahBarangActivity.this, "Data Tidak Boleh Kosong !", Toast.LENGTH_SHORT).show();
+                }else {
                     addProduk(idbr, namabr, stokbr, hargabr, deskripsi, Kategoribr, rating);
                 }
 
+            }
+        });
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 
@@ -84,29 +94,5 @@ public class TambahBarangActivity extends AppCompatActivity {
 
 
 }
-=======
-import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
-public class TambahBarangActivity extends AppCompatActivity {
-TextView btnBack;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tambah_barang);
-        btnBack = (TextView) findViewById(R.id.btn_back);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(TambahBarangActivity.this, new DataBarangActivity().getClass()));
-            }
-        });
-    }
-}
->>>>>>> f9300b5 (commit 3)

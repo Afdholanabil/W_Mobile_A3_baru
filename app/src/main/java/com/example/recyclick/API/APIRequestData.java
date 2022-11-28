@@ -5,6 +5,9 @@ import com.example.recyclick.Model.DataBarang.AddBarang;
 import com.example.recyclick.Model.DataBarang.BarangGetInfo;
 import com.example.recyclick.Model.DataBarang.BarangInfo;
 import com.example.recyclick.Model.DataBarang.DeleteBarang;
+import com.example.recyclick.Model.DataKaryawan.DeleteKaryawan;
+import com.example.recyclick.Model.DataKaryawan.KaryawanGetInfo;
+import com.example.recyclick.Model.Kategori.KategoriInfo;
 import com.example.recyclick.Model.Login.LoginInfo;
 import com.example.recyclick.Model.Register.RegisterInfo;
 
@@ -29,7 +32,7 @@ public interface APIRequestData {
             @Field("kedudukan") int kedudukan
     );
 
-    @GET("showdata.php")
+    @GET("showData.php")
     Call<BarangGetInfo> getDataBarang();
 
     @FormUrlEncoded
@@ -48,6 +51,17 @@ public interface APIRequestData {
     @FormUrlEncoded
     @POST("deleteProdukMobile.php")
     Call<DeleteBarang> postDeleteBarang(@Field("idproduk") String idPrd);
+
+
+    @GET("showKaryawan.php")
+    Call<KaryawanGetInfo> getKaryawanData();
+
+    @GET("showKategori.php")
+    Call<KategoriInfo> getKategoriData();
+
+    @FormUrlEncoded
+    @POST("deleteKaryawanMobile.php")
+    Call<DeleteKaryawan> postDeleteKaryawan (@Field("username") String userKaryawan);
 
 
 }

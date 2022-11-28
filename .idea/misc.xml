@@ -4,9 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/drawable-v24/add_a_photo_48px.xml" value="0.175" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/drawable-v24/button_action_background.xml" value="0.2155" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/drawable-v24/ic_launcher_background.xml" value="0.175" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.175" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/drawable-v24/shape_nav_bottom.xml" value="0.2155" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/drawable-v24/splah_drawable_logo.xml" value="0.1575" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/drawable/action_backgroudn.xml" value="0.2155" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/drawable/action_background.xml" value="0.124" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/drawable/button_action_background.xml" value="0.124" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/drawable/button_error_login.xml" value="0.1585" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/drawable/button_logout_background.xml" value="0.1585" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/drawable/button_neutral_background.xml" value="0.1585" />
@@ -19,14 +24,20 @@
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/activity_bottom_nav.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/activity_brg_adapter.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/activity_container_fragment.xml" value="0.136" />
-        <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/activity_data_barang.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/activity_data_barang.xml" value="0.264" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/activity_data_karyawan.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/activity_edit_barang.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/activity_edit_profile.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/activity_home.xml" value="0.2" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/activity_kry_adapter.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/activity_not_gagal_login.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/activity_pengaturan.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/activity_pengaturan.xml" value="0.2" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/activity_register.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/activity_splash_screen.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/activity_tambah_barang.xml" value="0.24010416666666667" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/activity_tambah_karyawan.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/activity_tambahbarang.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/base_activity.xml" value="0.1" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/fragment_bottom_nav.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/fragment_container.xml" value="0.25416666666666665" />
@@ -41,20 +52,16 @@
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/fragment_register.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/fragment_tambah_barang.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/fragment_tambah_karyawan.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/layout_edit_barang.xml" value="0.253125" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/layout_error_login.xml" value="0.4" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/layout_hapus_barang.xml" value="0.253125" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/layout_logout_dialog.xml" value="0.2" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/list_item_barang.xml" value="0.253125" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/receycleview_barang.xml" value="0.253125" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/recycleview_karyawan.xml" value="0.253125" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/recycleview_kategori.xml" value="0.128" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/menu/menu.xml" value="0.24010416666666667" />
-        <entry key="..\:/Users/WINDOWS 10/AndroidStudioProjects/W_Mobile_A3_baru/app/src/main/res/layout/activity_data_barang.xml" value="0.225" />
-        <entry key="..\:/Users/WINDOWS 10/AndroidStudioProjects/W_Mobile_A3_baru/app/src/main/res/layout/activity_login.xml" value="0.225" />
-        <entry key="..\:/Users/WINDOWS 10/AndroidStudioProjects/W_Mobile_A3_baru/app/src/main/res/layout/activity_tambahbarang.xml" value="0.225" />
-        <entry key="..\:/Users/WINDOWS 10/AndroidStudioProjects/W_Mobile_A3_baru/app/src/main/res/layout/dialog_editbarang.xml" value="0.225" />
-        <entry key="..\:/Users/WINDOWS 10/AndroidStudioProjects/W_Mobile_A3_baru/app/src/main/res/layout/fragment_home.xml" value="0.225" />
-        <entry key="..\:/Users/WINDOWS 10/AndroidStudioProjects/W_Mobile_A3_baru/app/src/main/res/layout/fragment_login.xml" value="0.2" />
-        <entry key="..\:/Users/WINDOWS 10/AndroidStudioProjects/W_Mobile_A3_baru/app/src/main/res/layout/fragment_tambah_barang.xml" value="0.225" />
-        <entry key="..\:/Users/WINDOWS 10/AndroidStudioProjects/W_Mobile_A3_baru/app/src/main/res/layout/receycleview_barang.xml" value="0.2" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/menu/menuBarang.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

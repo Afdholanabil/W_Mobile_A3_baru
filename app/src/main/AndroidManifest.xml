@@ -14,7 +14,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RecyClick"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".TambahKaryawanActivity"
+            android:exported="false" />
+        <activity android:name=".editBarangActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".DataKaryawanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditProfileActivity"
+            android:exported="false" />
         <activity
             android:name=".DataBarangActivity"
             android:exported="false" />
@@ -26,7 +38,7 @@
             android:exported="false" />
         <activity
             android:name=".ContainerFragment"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".LoginActivity"
             android:exported="true" />
@@ -51,12 +63,10 @@
         </activity>
         <activity
             android:name=".BaseActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".TambahBarangActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>

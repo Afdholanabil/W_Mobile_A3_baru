@@ -25,6 +25,17 @@ public class DataItem{
 	@SerializedName("deskripsi")
 	private String deskripsi;
 
+	@SerializedName("kategori")
+	private String kategori;
+
+	public String getKategori() {
+		return kategori;
+	}
+
+	public void setKategori(String kategori) {
+		this.kategori = kategori;
+	}
+
 	public void setNama(String nama){
 		this.nama = nama;
 	}
