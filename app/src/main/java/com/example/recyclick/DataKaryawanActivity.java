@@ -99,6 +99,7 @@ public class DataKaryawanActivity extends AppCompatActivity {
                     String pesan = response.body().getPesan();
                     if(response.body().isKondisi() == true){
                         Toast.makeText(DataKaryawanActivity.this, pesan, Toast.LENGTH_SHORT).show();
+
                     }else{
                         Toast.makeText(DataKaryawanActivity.this, pesan, Toast.LENGTH_SHORT).show();
                     }

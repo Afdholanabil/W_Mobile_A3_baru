@@ -1,14 +1,20 @@
 package com.example.recyclick;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +26,11 @@ import com.example.recyclick.Model.Register.RegisterInfo;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.io.File;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,6 +40,8 @@ public class RegisterActivity extends AppCompatActivity {
     CardView btnRegist;
     TextInputEditText txtNama, txtUsername, txtTelp;
     EditText txtPass, txtKonfirm;
+    Uri uri;
+    ImageView imagepp;
 
 
     @Override
@@ -40,7 +53,13 @@ public class RegisterActivity extends AppCompatActivity {
         txtTelp = (TextInputEditText) findViewById(R.id.inputText2);
         txtPass = (EditText) findViewById(R.id.inputText4);
         txtKonfirm = (EditText) findViewById(R.id.inputText5);
-
+        imagepp = findViewById(R.id.imgprofil);
+        imagepp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getImg();
+            }
+        });
         btnKembali = (TextView) findViewById(R.id.btn_back);
         btnKembali.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,8 +83,16 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
                     if (usr.length() > 15) {
                         Toast.makeText(getApplicationContext(), "Username Tidak Boleh lebih dari 15 karakter", Toast.LENGTH_SHORT).show();
+
+                    } else if(usr.length()<5){
+                        Toast.makeText(RegisterActivity.this, "Username harus lebih dari 5 karakter", Toast.LENGTH_SHORT).show();
                     } else if (pass.length() > 10) {
                         Toast.makeText(getApplicationContext(), "Password tidak boleh lebih dari 10 karakter", Toast.LENGTH_SHORT).show();
+                    }else if(pass.length()<5){
+                        Toast.makeText(RegisterActivity.this, "Password harus lebih dari 5 karakter", Toast.LENGTH_SHORT).show();
+                    } else if(noTlp.length()>13){
+                        Toast.makeText(RegisterActivity.this, "Nomor Handphone Anda lebih dari 13 karakter", Toast.LENGTH_SHORT).show();
+
                     } else if (pass.equals(repass)) {
                         RegisterPost(usr, pass, nama, noTlp, kedudukan);
                     } else {
@@ -78,8 +105,20 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void RegisterPost(String user, String pass, String nama, String notel, int kedudukan) {
+        String uripp = getRealPathFromUri(this, uri);
+        File file = new File(uripp);
+        RequestBody requestPhoto = RequestBody.create(MediaType.parse("image/*"), file);
+        RequestBody userReg = RequestBody.create(MediaType.parse("text/plain"), user);
+        RequestBody passReg = RequestBody.create(MediaType.parse("text/plain"), pass);
+        RequestBody namaReg = RequestBody.create(MediaType.parse("text/plain"), nama);
+        RequestBody notelReg = RequestBody.create(MediaType.parse("text/plain"), notel);
+        RequestBody kedudukanReg = RequestBody.create(MediaType.parse("text/plain"),String.valueOf(kedudukan));
+
+
+        MultipartBody.Part photo = MultipartBody.Part.createFormData("photo", file.getName(),requestPhoto);
+
         APIRequestData API = serverRetrofit.koneksiRetrofit().create(APIRequestData.class);
-        Call<RegisterInfo> call = API.CreateRegisterPost(user, pass, nama, notel, kedudukan);
+        Call<RegisterInfo> call = API.CreateRegisterPost(photo,userReg, passReg, namaReg, notelReg, kedudukanReg);
         call.enqueue(new Callback<RegisterInfo>() {
             @Override
             public void onResponse(Call<RegisterInfo> call, Response<RegisterInfo> response) {
@@ -98,5 +137,55 @@ public class RegisterActivity extends AppCompatActivity {
                 Log.d("server error", "onFailure: " + t);
             }
         });
+    }
+    public void syaratTelp(){
+
+    }
+
+    public void getImg() {
+        final CharSequence[] opsiImg = {"Gallery", "Camera"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+        builder.setTitle("Pilih photo dari");
+        builder.setItems(opsiImg, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                switch (i) {
+                    case 0:
+                        Intent pickPhoto = new Intent(Intent.ACTION_PICK,
+                                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(pickPhoto, 0);
+                        break;
+                    case 1:
+                        Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        startActivityForResult(takePicture, 1);
+                        break;
+                }
+            }
+        });
+        builder.create().show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            uri = data.getData();
+            imagepp.setImageURI(uri);
+        }
+    }
+
+    public static String getRealPathFromUri(Context context, Uri contentUri) {
+        Cursor cursor = null;
+        try {
+            String[] proj = {MediaStore.Images.Media.DATA};
+            cursor = context.getContentResolver().query(contentUri, proj, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
     }
 }

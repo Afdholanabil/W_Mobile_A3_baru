@@ -50,7 +50,10 @@ public class LoginActivity extends AppCompatActivity {
     Button btnMsk;
     APIRequestData API;
     SharedPreferences sharedPreferences;
-    LoginData loginData;
+    public static LoginActivity dbaLogin;
+    public String namaUser;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         };
+
         tInput.addTextChangedListener(loginTextWatcher);
         tPass.addTextChangedListener(loginTextWatcher);
 
@@ -90,13 +94,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    String usr = tInput.getText().toString();
-                    String pass = tPass.getText().toString();
-                    if(usr.equals("")||pass.equals("")){
+                    String usrLogin = tInput.getText().toString();
+                    String passLogin = tPass.getText().toString();
+                    if(usrLogin.equals("")||passLogin.equals("")){
                         showLogOutDialog();
                     }else{
-                        loginPost(usr, pass);
-
+                        loginPost(usrLogin, passLogin);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -121,13 +124,13 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(Call<LoginInfo> call, Response<LoginInfo> response) {
                 if(response.body() != null && response.isSuccessful()){
                     if(response.body().getKondisi() == 1){
+                        namaUser  = response.body().getData().getNama();
                         LoginData loginData = response.body().getData();
-
                         SharedPreferences sharedPreferences = getSharedPreferences("PREF_MODEL",Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
 //                        editor.putString("KEY_MODEL_AKUN",)
                         SaveAccount.writeDataUser(LoginActivity.this, loginData);
-
+                        editor.apply();
                         Intent itn = new Intent(LoginActivity.this, HomeActivity.class);
                         startActivity(itn);
 

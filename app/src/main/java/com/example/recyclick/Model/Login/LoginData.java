@@ -10,7 +10,11 @@ public class LoginData {
 	@SerializedName("username")
 	private String username;
 
-	@SerializedName("")
+	@SerializedName("password")
+	private String pass;
+
+	@SerializedName("role")
+	private int userRole;
 
 	public void setNama(String nama){
 		this.nama = nama;
@@ -31,5 +35,21 @@ public class LoginData {
 
 	public String getUsername(){
 		return username;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+
+	public int getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(int userRole) {
+		this.userRole = userRole;
 	}
 }

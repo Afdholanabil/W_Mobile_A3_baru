@@ -15,6 +15,8 @@ public class KaryawanItem {
 
 @SerializedName("krnoTelepon")
     private String noHp;
+@SerializedName("krRole")
+private String role;
 
 
     public String getUsername() {
@@ -47,5 +49,13 @@ public class KaryawanItem {
 
     public void setNoHp(String noHp) {
         this.noHp = noHp;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

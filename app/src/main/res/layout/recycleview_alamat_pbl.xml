@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp">
+                <TextView
+                    android:id="@+id/txtidAlamat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
+                <TextView
+                    android:id="@+id/txtIdPbl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alamat Pembeli "
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textSize="17sp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/txtDetailAlamat"
+                    android:layout_width="match_parent"
+                    android:text="Detail Alamat"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="15sp"
+                    android:gravity="right"
+
+                    android:layout_height="wrap_content"
+
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kabupaten : "
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="17sp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/txtKab"
+                android:text="Kabupaten"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="17sp"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kecamatan : "
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="17sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/txtKec"
+                android:text="Kecamatan"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="17sp"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+         >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Desa :"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="17sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/txtDesa"
+                android:text="Desa"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="17sp"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

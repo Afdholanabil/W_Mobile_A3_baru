@@ -7,7 +7,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentManager;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -26,7 +28,7 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
 public class PengaturanActivity extends AppCompatActivity {
-public TextView tNama,tUsername;
+public TextView tNama,tUsername,tpass;
 BottomNavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ BottomNavigationView navigationView;
         setContentView(R.layout.activity_pengaturan);
         tNama = (TextView)findViewById(R.id.txt_nama);
         tUsername = (TextView)findViewById(R.id.txt_username);
+        tpass= findViewById(R.id.txt_pass);
         navigationView = (BottomNavigationView) findViewById(R.id.nav_view);
         //navigator
         navigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -60,10 +63,14 @@ BottomNavigationView navigationView;
         });
         tNama.setText(SaveAccount.readDataPembeli(PengaturanActivity.this).getNama());
         tUsername.setText(SaveAccount.readDataPembeli(PengaturanActivity.this).getUsername());
+        tpass.setText(SaveAccount.readDataPembeli(PengaturanActivity.this).getPass());
+
         findViewById(R.id.linear2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String passLogin = tpass.getText().toString();
                 Intent intent2 = new Intent(PengaturanActivity.this, new EditProfileActivity().getClass());
+                intent2.putExtra("PASS",passLogin);
                 startActivity(intent2);
             }
         });
@@ -118,7 +125,13 @@ BottomNavigationView navigationView;
 //                PengaturanActivity.getSingleInstance().setLoggingOut(true);
                 Intent intent = new Intent(PengaturanActivity.this, new LoginActivity().getClass());
 //                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                SharedPreferences sharedPreferences = getSharedPreferences("PREF_MODEL", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                intent.putExtra("USERNAME", String.valueOf(tUsername));
+                editor.clear();
+                editor.apply();
                 startActivity(intent);
+
                 finish();
 
 

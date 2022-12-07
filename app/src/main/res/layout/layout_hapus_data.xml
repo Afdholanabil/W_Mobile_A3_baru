@@ -15,26 +15,40 @@
         android:id="@+id/layoutDialog"
         android:background="@drawable/dialog_background"
         tools:ignore="MissingConstraints">
-        <TextView
+        <androidx.cardview.widget.CardView
+            android:id="@+id/crd1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textJudul"
-            android:paddingVertical="10dp"
-            android:paddingHorizontal="20dp"
-            android:background="@drawable/button_error_login"
-            android:textColor="@color/white"
-            android:textSize="17sp"
-            android:fontFamily="@font/poppins_semibold"/>
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:id="@+id/imageIcon"
-            android:layout_marginEnd="10dp"
-            android:contentDescription="@string/app_name"
-            app:layout_constraintBottom_toBottomOf="@+id/textJudul"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textJudul"
-            app:tint="@color/white" />
+            app:cardBackgroundColor="@color/red"
+            app:cardCornerRadius="20dp"
+            android:background="@drawable/button_error_login">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textJudul"
+                    android:paddingVertical="10dp"
+                    android:paddingHorizontal="30dp"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    android:fontFamily="@font/poppins_semibold"/>
+<!--                <ImageView-->
+<!--                    android:layout_width="25dp"-->
+<!--                    android:layout_height="25dp"-->
+<!--                    android:id="@+id/imageIcon"-->
+<!--                    android:layout_marginEnd="10dp"-->
+<!--                    android:layout_gravity="center|right"-->
+<!--                    android:contentDescription="@string/app_name"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/textJudul"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/textJudul"-->
+<!--                    app:tint="@color/white" />-->
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,7 +60,7 @@
             android:textColor="@color/black"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textJudul"/>
+            app:layout_constraintTop_toBottomOf="@id/crd1"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

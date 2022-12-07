@@ -15,11 +15,10 @@
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
                 tools:ignore="MissingConstraints">
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
                     <androidx.cardview.widget.CardView
                         android:id="@+id/crd1"
                         android:layout_width="match_parent"
@@ -83,6 +82,7 @@
 
                                 >
                                 <ImageView
+                                    android:id="@+id/img"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:padding="35dp"
@@ -115,6 +115,7 @@
                             android:layout_marginVertical="5dp"
                             app:cardCornerRadius="10dp">
                             <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/inputUser"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Masukan Username"
@@ -139,9 +140,36 @@
                             android:layout_marginVertical="5dp"
                             app:cardCornerRadius="10dp">
                             <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/inputPass"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Masukan Pssword"
+                                android:hint="Masukan Password"
+                                android:fontFamily="@font/poppins_regular"
+                                android:textSize="15sp"
+                                android:inputType="textPassword"
+                                android:paddingHorizontal="20dp"
+                                android:paddingVertical="7dp"
+                                android:background="@null"/>
+                        </androidx.cardview.widget.CardView>
+                        <TextView
+                            android:id="@+id/txt6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Konfirmasi Password"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textSize="15sp"
+                            android:textColor="@color/black"/>
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:backgroundTint="@color/grey1"
+                            android:layout_marginVertical="5dp"
+                            app:cardCornerRadius="10dp">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/inputKonfPass"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Masukan Ulang Password"
                                 android:fontFamily="@font/poppins_regular"
                                 android:textSize="15sp"
                                 android:inputType="textPassword"
@@ -164,6 +192,7 @@
                             android:layout_marginVertical="5dp"
                             app:cardCornerRadius="10dp">
                             <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/inputNama"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="Masukan Nama"
@@ -188,6 +217,7 @@
                             android:layout_marginVertical="5dp"
                             app:cardCornerRadius="10dp">
                             <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/inputNoHp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:inputType="textPhonetic"
@@ -201,6 +231,7 @@
 
                     </LinearLayout>
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/btnSimpan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/green1"

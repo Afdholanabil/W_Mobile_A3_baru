@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -81,7 +83,15 @@ public class DataBarangActivity extends AppCompatActivity  {
                 return false;
             }
         });
+
+
+
     }
+//    public void kirimBarang(){
+//        SharedPreferences sharedPreferences = getSharedPreferences("PREF_MODEL", Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        SaveDataBarang.writeDataBarang(DataBarangActivity.this,listdata);
+//    }
 
     public void tampilDataBarang(){
         API = serverRetrofit.koneksiRetrofit().create(APIRequestData.class);
@@ -92,9 +102,15 @@ public class DataBarangActivity extends AppCompatActivity  {
 //                pesan = response.body().getMessage();
                 listdata = response.body().getData();
                 adapter = new AdapterDataBarang(DataBarangActivity.this, listdata);
+//                if(listdata.size() == 1){
+//                    startActivity(new Intent(DataBarangActivity.this, new TambahBarangActivity().getClass()));
+//                }else {
+//                    Toast.makeText(DataBarangActivity.this, "Barang tersedia", Toast.LENGTH_SHORT).show();
+//                }
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
-                Toast.makeText(DataBarangActivity.this,pesan, Toast.LENGTH_SHORT).show();
+
+
             }
             @Override
             public void onFailure(Call<BarangGetInfo> call, Throwable t) {
@@ -105,29 +121,36 @@ public class DataBarangActivity extends AppCompatActivity  {
 
     public void hapusDataBarang(String idprd){
         API = serverRetrofit.koneksiRetrofit().create(APIRequestData.class);
-        Call<DeleteBarang> call = API.postDeleteBarang(idprd);
-        call.enqueue(new Callback<DeleteBarang>() {
-            @Override
-            public void onResponse(Call<DeleteBarang> call, Response<DeleteBarang> response) {
-                if(response.isSuccessful() && response.body() != null){
-                    String pesan = response.body().getPesan();
-                    if(response.body().isKondisi() == true){
-                        Toast.makeText(DataBarangActivity.this, pesan, Toast.LENGTH_SHORT).show();
-                    }else{
-                        Toast.makeText(DataBarangActivity.this, pesan, Toast.LENGTH_SHORT).show();
+            Call<DeleteBarang> call = API.postDeleteBarang(idprd);
+            call.enqueue(new Callback<DeleteBarang>() {
+                @Override
+                public void onResponse(Call<DeleteBarang> call, Response<DeleteBarang> response) {
+                    if(response.isSuccessful() && response.body() != null){
+                        String pesan = response.body().getPesan();
+                        if(response.body().isKondisi() == true){
+                            listdata.clear();
+                            Toast.makeText(DataBarangActivity.this, pesan, Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(DataBarangActivity.this, pesan, Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<DeleteBarang> call, Throwable t) {
-                Log.e("error", "onFailure: "+t );
-            }
-        });
+                @Override
+                public void onFailure(Call<DeleteBarang> call, Throwable t) {
+                    Log.e("error", "onFailure: "+t );
+                }
+            });
+
+
     }
 
     public void editDataBarang(String idbr){
 
+    }
+
+    public void ClearBarang(){
+        listdata.clear();
     }
 
 }
