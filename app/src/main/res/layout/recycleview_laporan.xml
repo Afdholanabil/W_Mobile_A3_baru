@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/recylaps_idtrans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="ID Transaksi"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/recylaps_idpbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="ID Pembali"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/recylaps_idbr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="ID Barang"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/recylaps_namapbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Nama Pbl"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/recylaps_jmlbr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Jumlah"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/recylaps_hargabr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Harga"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/recylaps_tgl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Tanggal"
+            android:textSize="10sp" />
+    </LinearLayout>
+
+
+</LinearLayout>
