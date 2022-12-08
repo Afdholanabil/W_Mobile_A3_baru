@@ -81,6 +81,16 @@
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/recycleview_pemesanan.xml" value="0.253125" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/menu/menu.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/menu/menuBarang.xml" value="0.25416666666666665" />
+        <entry key="..\:/android_git/app/src/main/res/drawable-v24/line_bacground.xml" value="0.1" />
+        <entry key="..\:/android_git/app/src/main/res/layout/activity_home.xml" value="0.16" />
+        <entry key="..\:/android_git/app/src/main/res/layout/activity_laporan.xml" value="0.225" />
+        <entry key="..\:/android_git/app/src/main/res/layout/activity_tambahbarang.xml" value="0.2203125" />
+        <entry key="..\:/android_git/app/src/main/res/layout/activty_laporandata.xml" value="0.1" />
+        <entry key="..\:/android_git/app/src/main/res/layout/popup_kategori.xml" value="0.2203125" />
+        <entry key="..\:/android_git/app/src/main/res/layout/popup_search.xml" value="0.225" />
+        <entry key="..\:/android_git/app/src/main/res/layout/recycleview_laporan.xml" value="0.225" />
+        <entry key="..\:/android_git/app/src/main/res/layout/recycleview_search.xml" value="0.22395833333333334" />
+        <entry key="..\:/android_git/app/src/main/res/layout/recyleview_kategoritb.xml" value="0.2203125" />
       </map>
     </option>
   </component>

@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class KategoriInfo {
-    @SerializedName("pesan")
+        @SerializedName("pesan")
     private String pesan;
 
     @SerializedName("kondisi")

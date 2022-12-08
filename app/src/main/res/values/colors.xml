@@ -18,4 +18,7 @@
     <color name="oren">#E0B354</color>
     <color name="biru">#5562EB</color>
     <color name="kuning">#C4DE23</color>
+    <color name="redtransparant">#ec8c8c</color>
+    <color name="greenTransparant">#bbdccc</color>
+    <color name="abuabuTransparant">#D9D9D9</color>
 </resources>

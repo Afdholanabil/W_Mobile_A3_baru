@@ -73,7 +73,7 @@ public class DataBarangActivity extends AppCompatActivity  {
 
                         break;
                     case R.id.id_nav_laporan:
-                        startActivity(new Intent(DataBarangActivity.this, new LoginActivity().getClass()));
+                        startActivity(new Intent(DataBarangActivity.this, new LaporanActivity().getClass()));
                         break;
                     case R.id.id_nav_setting:
                         startActivity(new Intent(DataBarangActivity.this, new PengaturanActivity().getClass()));

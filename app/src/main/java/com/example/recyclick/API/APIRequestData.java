@@ -9,7 +9,10 @@ import com.example.recyclick.Model.DataBarang.EditBarang;
 import com.example.recyclick.Model.DataKaryawan.DeleteKaryawan;
 import com.example.recyclick.Model.DataKaryawan.EditKaryawan;
 import com.example.recyclick.Model.DataKaryawan.KaryawanGetInfo;
+import com.example.recyclick.Model.Home.SearchGetInfo;
 import com.example.recyclick.Model.Kategori.KategoriInfo;
+import com.example.recyclick.Model.Laporan.LaporanLengkap;
+import com.example.recyclick.Model.Laporan.LaporanUtama;
 import com.example.recyclick.Model.Login.EditProfil;
 import com.example.recyclick.Model.Login.LoginInfo;
 import com.example.recyclick.Model.Pembeli.EditPembeli;
@@ -69,7 +72,8 @@ public interface APIRequestData {
     @GET("showKaryawan.php")
     Call<KaryawanGetInfo> getKaryawanData();
 
-    @GET("showKategori.php")
+    //file php berbeda
+    @GET("showKategoriMobile.php")
     Call<KategoriInfo> getKategoriData();
 
     @FormUrlEncoded
@@ -126,5 +130,17 @@ public interface APIRequestData {
             @Field("kodeTransaksi") String kodeTransaksi,
             @Field("tr_idStatus") int idStatus
     );
+
+    @GET("showlaporan.php")
+    Call<LaporanLengkap> getInfoLaporan();
+
+    @GET("showInfoLaporanMobile.php")
+    Call<LaporanUtama> getInfoLaporanUtama();
+
+    @FormUrlEncoded
+    @POST("searchMobile.php")
+    Call<SearchGetInfo> getInfoSearch(@Field("searched") String searched);
+
+
 
 }
