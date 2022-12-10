@@ -46,7 +46,7 @@ public class AdapterDetailPemesanan extends RecyclerView.Adapter<AdapterDetailPe
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return data == null ? 0 : data.size();
     }
 
     public class DetailPemesananaViewHolder extends RecyclerView.ViewHolder {

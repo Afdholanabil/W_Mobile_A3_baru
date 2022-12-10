@@ -125,6 +125,8 @@ public class RegisterActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     if (response.body().isKondisi() == true) {
                         Toast.makeText(RegisterActivity.this, response.body().getPesan(), Toast.LENGTH_SHORT).show();
+                        Intent intent  = new Intent(RegisterActivity.this,LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                     } else {
                         Toast.makeText(RegisterActivity.this, response.body().getPesan(), Toast.LENGTH_SHORT).show();
@@ -188,4 +190,5 @@ public class RegisterActivity extends AppCompatActivity {
             }
         }
     }
+
 }

@@ -4,19 +4,21 @@ import com.google.gson.annotations.SerializedName;
 
 public class KaryawanItem {
 
-@SerializedName("krUsername")
-    private String Username;
+    @SerializedName("krUsername")
+        private String Username;
 
-@SerializedName("krpassword")
-    private String password;
+    @SerializedName("krpassword")
+        private String password;
 
-@SerializedName("krnama")
-    private String namaLengkap;
+    @SerializedName("krnama")
+        private String namaLengkap;
 
-@SerializedName("krnoTelepon")
-    private String noHp;
-@SerializedName("krRole")
-private String role;
+    @SerializedName("krnoTelepon")
+        private String noHp;
+    @SerializedName("krRole")
+        private String role;
+    @SerializedName("gambarkry")
+        private String gambarkry;
 
 
     public String getUsername() {
@@ -57,5 +59,13 @@ private String role;
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getGambarkry() {
+        return gambarkry;
+    }
+
+    public void setGambarkry(String gambarkry) {
+        this.gambarkry = gambarkry;
     }
 }

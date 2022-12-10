@@ -18,7 +18,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.recyclick.Fragment.DataKaryawanFragment;
 import com.example.recyclick.Fragment.LoginFragment;
 import com.example.recyclick.Fragment.TambahBarangFragment;
@@ -29,14 +32,20 @@ import com.google.android.material.navigation.NavigationView;
 
 public class PengaturanActivity extends AppCompatActivity {
 public TextView tNama,tUsername,tpass;
+ImageView gambarProfil;
 BottomNavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pengaturan);
         tNama = (TextView)findViewById(R.id.txt_nama);
         tUsername = (TextView)findViewById(R.id.txt_username);
         tpass= findViewById(R.id.txt_pass);
+        gambarProfil = findViewById(R.id.imgProfil);
+
+
+
         navigationView = (BottomNavigationView) findViewById(R.id.nav_view);
         //navigator
         navigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -44,7 +53,11 @@ BottomNavigationView navigationView;
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.id_nav_home:
-                        startActivity(new Intent(PengaturanActivity.this, new HomeActivity().getClass()));
+                        Intent intent = new Intent(PengaturanActivity.this, HomeActivity.class);
+
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // To clean up all activities
+
+                        startActivity(intent);
                         break;
                     case R.id.id_nav_edit:
                         startActivity(new Intent(PengaturanActivity.this, new DataBarangActivity().getClass()));
@@ -61,16 +74,29 @@ BottomNavigationView navigationView;
                 return false;
             }
         });
+
+        String gambarProf =(SaveAccount.readDataPembeli(PengaturanActivity.this).getPhoto());
+        Toast.makeText(this,gambarProf, Toast.LENGTH_SHORT).show();
+        Glide.with(getApplicationContext()).load(gambarProf).thumbnail(0.5f).centerCrop()
+                .diskCacheStrategy(DiskCacheStrategy.ALL).error(R.drawable.photo_library_48px).into(gambarProfil);
+
+
         tNama.setText(SaveAccount.readDataPembeli(PengaturanActivity.this).getNama());
         tUsername.setText(SaveAccount.readDataPembeli(PengaturanActivity.this).getUsername());
         tpass.setText(SaveAccount.readDataPembeli(PengaturanActivity.this).getPass());
+
 
         findViewById(R.id.linear2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String passLogin = tpass.getText().toString();
+                String namaUsr = tNama.getText().toString();
+                String username = tUsername.getText().toString();
                 Intent intent2 = new Intent(PengaturanActivity.this, new EditProfileActivity().getClass());
                 intent2.putExtra("PASS",passLogin);
+                intent2.putExtra("GAMBARPROF",gambarProf);
+                intent2.putExtra("NAMAPROF",namaUsr);
+                intent2.putExtra("USERNAMEPROF",username);
                 startActivity(intent2);
             }
         });
@@ -78,6 +104,8 @@ BottomNavigationView navigationView;
         findViewById(R.id.linear8).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 showLogOutDialog();
             }
         });
@@ -105,6 +133,16 @@ BottomNavigationView navigationView;
             }
         });
 
+        findViewById(R.id.linear4).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(PengaturanActivity.this, KontakActivity.class));
+            }
+        });
+
+
+
+
     }
     private void showLogOutDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(PengaturanActivity.this, R.style.AlertDialog);
@@ -124,15 +162,17 @@ BottomNavigationView navigationView;
             public void onClick(View view) {
 //                PengaturanActivity.getSingleInstance().setLoggingOut(true);
                 Intent intent = new Intent(PengaturanActivity.this, new LoginActivity().getClass());
-//                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                SharedPreferences sharedPreferences = getSharedPreferences("PREF_MODEL", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                intent.putExtra("USERNAME", String.valueOf(tUsername));
-                editor.clear();
-                editor.apply();
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                SharedPreferences sharedPreferences = getSharedPreferences("PREF_MODEL", Context.MODE_PRIVATE);
+//                SharedPreferences.Editor editor = sharedPreferences.edit();
+//                intent.putExtra("USERNAME", String.valueOf(tUsername));
                 startActivity(intent);
-
-                finish();
+//                boolean finish = getIntent().getBooleanExtra("finish", false);
+//                if (finish) {
+//                    startActivity(new Intent(PengaturanActivity.this, LoginActivity.class));
+//                    finish();
+//                    return;
+//                }
 
 
 

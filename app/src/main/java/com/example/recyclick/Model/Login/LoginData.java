@@ -16,6 +16,12 @@ public class LoginData {
 	@SerializedName("role")
 	private int userRole;
 
+	@SerializedName("photo")
+	private String photo;
+
+	@SerializedName("noHp")
+	private int noHp;
+
 	public void setNama(String nama){
 		this.nama = nama;
 	}
@@ -51,5 +57,21 @@ public class LoginData {
 
 	public void setUserRole(int userRole) {
 		this.userRole = userRole;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
+	public int getNoHp() {
+		return noHp;
+	}
+
+	public void setNoHp(int noHp) {
+		this.noHp = noHp;
 	}
 }

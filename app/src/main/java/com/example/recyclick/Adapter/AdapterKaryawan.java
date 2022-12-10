@@ -4,16 +4,20 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.recyclick.DataBarangActivity;
 import com.example.recyclick.DataKaryawanActivity;
 import com.example.recyclick.EditKaryawanActivity;
@@ -45,26 +49,39 @@ public class AdapterKaryawan extends RecyclerView.Adapter<AdapterKaryawan.Karyaw
 
     @Override
     public void onBindViewHolder(@NonNull KaryawanViewHolder holder, int position) {
-        KaryawanItem karyawanItem = data.get(position);
-        holder.username.setText(karyawanItem.getUsername());
-        holder.nama.setText(karyawanItem.getNamaLengkap());
-        holder.noTelp.setText(karyawanItem.getNoHp());
-        holder.pass.setText(karyawanItem.getPassword());
+       try{
+           KaryawanItem karyawanItem = data.get(position);
+           holder.username.setText(karyawanItem.getUsername());
+           holder.nama.setText(karyawanItem.getNamaLengkap());
+           holder.noTelp.setText(karyawanItem.getNoHp());
+           holder.pass.setText(karyawanItem.getPassword());
+
+           Glide.with(context).load(karyawanItem.getGambarkry()).thumbnail(0.5f).centerCrop()
+                   .diskCacheStrategy(DiskCacheStrategy.ALL).error(R.drawable.photo_library_48px).into(holder.gambarKaryawan);
+           holder.gambarKry = karyawanItem.getGambarkry();
+       }catch (Exception e){
+           Log.d(e.getMessage(), "onBindViewHolder: ");
+       }
+
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return data == null ? 0 : data.size();
     }
 
     public class KaryawanViewHolder extends RecyclerView.ViewHolder {
         public TextView username,nama,noTelp,pass;
+        public ImageView gambarKaryawan;
+        String gambarKry;
+
         public KaryawanViewHolder(@NonNull View itemView) {
             super(itemView);
             username = itemView.findViewById(R.id.txt_username);
             nama = itemView.findViewById(R.id.txt_nama);
             noTelp= itemView.findViewById(R.id.txt_telp);
             pass = itemView.findViewById(R.id.txt_pass);
+            gambarKaryawan = itemView.findViewById(R.id.imgKaryawan);
             itemView.findViewById(R.id.br_delete).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -110,10 +127,12 @@ public class AdapterKaryawan extends RecyclerView.Adapter<AdapterKaryawan.Karyaw
                     String telp = noTelp.getText().toString();
                     String passKr = pass.getText().toString();
                     Intent intent = new Intent(context, new EditKaryawanActivity().getClass());
-                    intent.putExtra("USER",idKr);
-                    intent.putExtra("NAMA",namaKr);
-                    intent.putExtra("TELP", telp);
-                    intent.putExtra("PASS",passKr);
+                    Toast.makeText(context,gambarKry, Toast.LENGTH_LONG).show();
+                    intent.putExtra("USERKRY",idKr);
+                    intent.putExtra("NAMAKRY",namaKr);
+                    intent.putExtra("TELPKRY", telp);
+                    intent.putExtra("GAMBARKRY",gambarKry);
+                    intent.putExtra("PASSKRY",passKr);
                     context.startActivity(intent);
                 }
             });
