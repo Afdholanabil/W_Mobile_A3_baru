@@ -8,7 +8,7 @@ public class serverRetrofit {
 
 public static Retrofit retrofit;
     public static final String url ="http://192.168.1.9/W-web/Tugas/";
-    public static final String url2 ="http://172.16.109.19:8080/belajarphp/Tugas/";
+    public static final String url2 ="http://192.168.1.8:8080/belajarphp/Tugas/";
     public static Retrofit koneksiRetrofit(){
         if(retrofit == null){
             retrofit = new Retrofit.Builder()

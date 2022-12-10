@@ -56,7 +56,7 @@ public class AdapterDataBarang extends RecyclerView.Adapter<AdapterDataBarang.Ba
            holder.deskripsi.setText(barang.getDeskripsi());
            holder.jenis.setText(barang.getKategori());
            holder.stok.setText(barang.getStok());
-
+           holder.urlgambar = barang.getGambardir();
            Glide.with(cntx).load(barang.getGambardir()).thumbnail(0.5f).centerCrop()
                    .diskCacheStrategy(DiskCacheStrategy.ALL).error(R.drawable.photo_library_48px).into(holder.gambarBarang);
        }catch (Exception e){
@@ -73,6 +73,7 @@ public class AdapterDataBarang extends RecyclerView.Adapter<AdapterDataBarang.Ba
     public class BarangViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView id, nama, deskripsi, harga,jenis,stok,gambar,rating;
         public ImageView gambarBarang;
+        public String urlgambar;
 
         public BarangViewHolder(View itemView) {
             super(itemView);
@@ -102,7 +103,7 @@ public class AdapterDataBarang extends RecyclerView.Adapter<AdapterDataBarang.Ba
                     intent.putExtra("DESKPROD",deskBr);
                     intent.putExtra("STOKPROD",stokBr);
                     intent.putExtra("JENISPROD",jenisBr);
-
+                    intent.putExtra("GAMBARPROD", urlgambar);
                     cntx.startActivity(intent);
 
                 }

@@ -170,7 +170,7 @@ public class HomeActivity extends AppCompatActivity {
         dba = this;
         lymanager = new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView2.setLayoutManager(lymanager);
-        tampilInfoPemesanan();
+//        tampilInfoPemesanan();
 
     }
 
@@ -202,7 +202,6 @@ public class HomeActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
                 kata = listdata.size();
                 Log.e("Error", String.valueOf(kata));
-
             }
 
             @Override

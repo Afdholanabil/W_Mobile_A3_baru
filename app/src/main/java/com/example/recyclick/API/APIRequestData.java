@@ -78,20 +78,8 @@ public interface APIRequestData {
 
     @FormUrlEncoded
     @POST("deleteKaryawanMobile.php")
-    Call<DeleteKaryawan> postDeleteKaryawan (@Field("Username") String userKaryawan);
+    Call<DeleteKaryawan> postDeleteKaryawan(@Field("Username") String userKaryawan);
 
-    @FormUrlEncoded
-    @POST("editProdukMobile.php")
-    Call<EditBarang> postEditBarang (
-            @Field("id_produk") String idprd,
-            @Field("nama_produk") String namaprd,
-            @Field("stok") int stok,
-            @Field("harga_produk") int harga,
-            @Field("gambar_produk") String gambar,
-            @Field("deskripsi") String deskripsi,
-            @Field("prod_idKategori") int kategori,
-            @Field("prod_idRating") int rating
-    );
 
     @FormUrlEncoded
     @POST("editProfil.php")
@@ -110,13 +98,13 @@ public interface APIRequestData {
     Call<transaksiInfo> getTransaksiStatusData();
 
     @GET("showTrDetail.php")
-    Call<transaksiDetailAlamatInfo>getTransaksiDetailAlamat();
+    Call<transaksiDetailAlamatInfo> getTransaksiDetailAlamat();
 
     @FormUrlEncoded
     @POST("showTrDetail2.php")
-    Call<transaksiDetailAlamatInfo>postTrDetail2(
-            @Field("kodeTransaksi")String kodeTr
-            );
+    Call<transaksiDetailAlamatInfo> postTrDetail2(
+            @Field("kodeTransaksi") String kodeTr
+    );
 
     @FormUrlEncoded
     @POST("showAlamatPbl.php")
@@ -126,7 +114,7 @@ public interface APIRequestData {
 
     @FormUrlEncoded
     @POST("editStatusPemesanan.php")
-    Call<EditPembeli>postEditPembeli(
+    Call<EditPembeli> postEditPembeli(
             @Field("kodeTransaksi") String kodeTransaksi,
             @Field("tr_idStatus") int idStatus
     );
@@ -141,6 +129,33 @@ public interface APIRequestData {
     @POST("searchMobile.php")
     Call<SearchGetInfo> getInfoSearch(@Field("searched") String searched);
 
+
+    @Multipart
+    @POST("editProdukMobile.php")
+    Call<EditBarang> postEditBarangWithImg(
+            @Part MultipartBody.Part image,
+            @Part("idproduk") RequestBody id,
+            @Part("namaproduk") RequestBody namaproduk,
+            @Part("stok") int stok,
+            @Part("harga") int harga,
+            @Part("gambarproduk") RequestBody gambar,
+            @Part("deskripsi") RequestBody desk,
+            @Part("kategori") int kgr,
+            @Part("isnull") RequestBody isnull
+    );
+
+    @FormUrlEncoded
+    @POST("editProdukMobile.php")
+    Call<EditBarang> postEditBarangNoImg(
+            @Field("idproduk") String idprd,
+            @Field("namaproduk") String namaprd,
+            @Field("stok") int stok,
+            @Field("harga") int harga,
+            @Field("gambarproduk") String gambar,
+            @Field("deskripsi") String deskripsi,
+            @Field("kategori") int kategori,
+            @Field("isnull") String isnull
+    );
 
 
 }
