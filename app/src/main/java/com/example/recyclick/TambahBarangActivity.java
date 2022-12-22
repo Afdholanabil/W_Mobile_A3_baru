@@ -32,6 +32,7 @@ import com.example.recyclick.API.APIRequestData;
 import com.example.recyclick.API.serverRetrofit;
 import com.example.recyclick.Adapter.AdapterKategoriTB;
 import com.example.recyclick.Model.DataBarang.AddBarang;
+import com.example.recyclick.Model.DataBarang.Getidproduk;
 import com.example.recyclick.Model.Kategori.KategoriInfo;
 import com.example.recyclick.Model.Kategori.KategoriItem;
 import com.google.android.material.textfield.TextInputEditText;
@@ -58,7 +59,7 @@ public class TambahBarangActivity extends AppCompatActivity {
     Uri ur;
     PopupWindow popupWindow;
     private  APIRequestData api;
-    private String kategoriid;
+    private int kategoriid;
     public static TambahBarangActivity tba;
     private List<KategoriItem> item = new ArrayList<>();
 
@@ -80,21 +81,31 @@ public class TambahBarangActivity extends AppCompatActivity {
                 showKategori(view, popupView);
             }
         });
-
+        getidproduk();
         simpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String idbr = id.getText().toString();
-                String namabr = nama.getText().toString();
-                int stokbr = Integer.parseInt(String.valueOf(stok.getText()));
-                int hargabr = Integer.parseInt(String.valueOf(harga.getText()));
-                String deskripsi = deksripsi.getText().toString();
-                int rating = 0;
-                if (idbr.equals(null) || namabr.equals(null) || stok.equals(null) || harga.equals(null) || deskripsi.equals(null) || kategori.equals(null)) {
+
+                if(harga == null){
                     Toast.makeText(TambahBarangActivity.this, "Data Tidak Boleh Kosong !", Toast.LENGTH_SHORT).show();
-                } else {
-                    addProduk(idbr, namabr, stokbr, hargabr, deskripsi, rating);
                 }
+                else{
+
+
+                    if (id.equals("") || nama.equals("") || stok == null || harga == null || deksripsi.equals("") || kategori == null|| ur == null) {
+                        Toast.makeText(TambahBarangActivity.this, "Data Tidak Boleh Kosong !", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        String idbr = id.getText().toString();
+                        String namabr = nama.getText().toString();
+                        int hargabr = Integer.parseInt(harga.getText().toString());
+                        int stokbr = Integer.parseInt(stok.getText().toString());
+                        String deskripsibr = deksripsi.getText().toString();
+                        int rating = 5;
+                        addProduk(idbr, namabr, stokbr, hargabr, deskripsibr, rating);
+                    }
+                }
+
 
             }
         });
@@ -134,20 +145,23 @@ public class TambahBarangActivity extends AppCompatActivity {
         File file = new File(path);
         RequestBody idbr = RequestBody.create(MediaType.parse("text/plain"), id);
         RequestBody namabr = RequestBody.create(MediaType.parse("text/plain"), nama);
-        RequestBody stokbr = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(stok));
-        RequestBody hargabr = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(harga));
+
         RequestBody deskripsibr = RequestBody.create(MediaType.parse("text/plain"), deskripsi);
-        RequestBody kategoribr = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(kategoriid));
-        RequestBody ratingbr = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(rating));
         RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("imageup", file.getName(), requestFile);
-        Call<AddBarang> call = api.postDataBarang(body, idbr, namabr, stokbr, hargabr, deskripsibr, kategoribr, ratingbr);
+        Call<AddBarang> call = api.postDataBarang(body, idbr, namabr, stok, harga, deskripsibr, kategoriid, rating);
         call.enqueue(new Callback<AddBarang>() {
             @Override
             public void onResponse(Call<AddBarang> call, Response<AddBarang> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     if (response.body().isKondisi() == true) {
-                        Toast.makeText(TambahBarangActivity.this, response.body().getPesan(), Toast.LENGTH_SHORT).show();
+                        View view = getLayoutInflater().inflate(R.layout.toast_add_produk, null);
+                        view.findViewById(R.id.toast_succesAddProduk);
+                        Toast toast = new Toast(getApplicationContext());
+                        toast.setDuration(Toast.LENGTH_LONG);
+                        toast.setView(view);
+                        toast.show();
+                        toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
                         startActivity(new Intent(TambahBarangActivity.this, DataBarangActivity.class));
                     } else {
                         Toast.makeText(TambahBarangActivity.this, response.body().getPesan(), Toast.LENGTH_SHORT).show();
@@ -158,6 +172,13 @@ public class TambahBarangActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<AddBarang> call, Throwable t) {
                 Log.d(t.getMessage(), "onFailure: ");
+                View view = getLayoutInflater().inflate(R.layout.toast_no_internet, null);
+                view.findViewById(R.id.toast_noConnection);
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(view);
+                toast.show();
+                toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
             }
         });
     }
@@ -232,7 +253,13 @@ public class TambahBarangActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<KategoriInfo> call, Throwable t) {
-
+                View view = getLayoutInflater().inflate(R.layout.toast_no_internet, null);
+                view.findViewById(R.id.toast_noConnection);
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(view);
+                toast.show();
+                toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
             }
         });
         popupWindow.showAtLocation(view, Gravity.TOP | Gravity.LEFT, location.left, location.bottom);
@@ -242,10 +269,37 @@ public class TambahBarangActivity extends AppCompatActivity {
         popupWindow.dismiss();
     }
 
-    public void setkategori(String id, String kategoriname) {
+    public void setkategori(int id, String kategoriname) {
         kategori.setText(kategoriname);
         kategoriid = id;
     }
+
+    private void getidproduk(){
+        APIRequestData api = serverRetrofit.koneksiRetrofit().create(APIRequestData.class);
+        Call<Getidproduk> call = api.getidprodukincrement();
+        call.enqueue(new Callback<Getidproduk>() {
+            @Override
+            public void onResponse(Call<Getidproduk> call, Response<Getidproduk> response) {
+                if (response.isSuccessful() && response.body() != null){
+                    Getidproduk idprd = response.body();
+                    String ids = idprd.getIdTersedia();
+                    id.setText(ids);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Getidproduk> call, Throwable t) {
+                View view = getLayoutInflater().inflate(R.layout.toast_no_internet, null);
+                view.findViewById(R.id.toast_noConnection);
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(view);
+                toast.show();
+                toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
+            }
+        });
+    }
+
 
 
 }

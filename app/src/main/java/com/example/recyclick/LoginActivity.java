@@ -15,12 +15,14 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.recyclick.API.APIRequestData;
 import com.example.recyclick.API.serverRetrofit;
@@ -45,8 +47,7 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
     dbHelper db;
     TextView tRegist;
-    TextInputEditText tInput;
-    EditText tPass;
+    TextInputEditText tInput,tPass;
     Button btnMsk;
     APIRequestData API;
     SharedPreferences sharedPreferences;
@@ -54,14 +55,15 @@ public class LoginActivity extends AppCompatActivity {
     public String namaUser;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         tInput = (TextInputEditText) findViewById(R.id.inputText);
-        tPass = (EditText) findViewById(R.id.inputPass);
+        tPass = findViewById(R.id.inputPass);
         tRegist = (TextView)findViewById(R.id.text_regist) ;
+
+        Util.setCustomColorText(tRegist,"Belum Punya Akun? ","Daftar Disini","76BA99");
         btnMsk = (Button)findViewById(R.id.btn_msk);
         btnMsk.setEnabled(false);
         db = new dbHelper(getApplicationContext());
@@ -131,7 +133,7 @@ public class LoginActivity extends AppCompatActivity {
 //                        editor.putString("KEY_MODEL_AKUN",)
                         SaveAccount.writeDataUser(LoginActivity.this, loginData);
                         editor.apply();
-                        Intent itn = new Intent(LoginActivity.this, HomeActivity.class);
+                        Intent itn = new Intent(LoginActivity.this, SplashBerhasilLogin.class);
                         startActivity(itn);
 
                     }else{
@@ -146,6 +148,13 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<LoginInfo> call, Throwable t) {
+                View view = getLayoutInflater().inflate(R.layout.toast_no_internet, null);
+                view.findViewById(R.id.toast_noConnection);
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(view);
+                toast.show();
+                toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
                 Log.e("error server", "onFailure: "+t);
             }
         });
@@ -166,7 +175,6 @@ public class LoginActivity extends AppCompatActivity {
         view.findViewById(R.id.btnAction).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 tPass.setText("");
                 alertDialog.dismiss();;
             }
@@ -182,6 +190,8 @@ public class LoginActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
+
+
     }
 
 }

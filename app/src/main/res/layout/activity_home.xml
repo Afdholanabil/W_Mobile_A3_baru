@@ -58,6 +58,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent">
                                     <ImageView
+                                        android:id="@+id/prfHome"
                                         android:layout_width="30dp"
                                         android:layout_height="30dp"
                                         android:src="@drawable/icon_akun">
@@ -164,7 +165,7 @@
                             android:layout_height="wrap_content">
                             <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/rcy_infoPemesanan"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 tools:ignore="MissingConstraints"
                                 tools:listitem="@layout/recycleview_info_tr"/>
@@ -183,6 +184,7 @@
                             android:textSize="17sp"
                             android:textColor="@color/black"/>
                         <TextView
+                            android:id="@+id/tLihat"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Lihat"
@@ -195,16 +197,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp">
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
                             <androidx.recyclerview.widget.RecyclerView
-                                android:layout_width="wrap_content"
+                                android:id="@+id/rcy_barangLaris"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 tools:listitem="@layout/recycleview_barang_laris"
-                                tools:ignore="MissingConstraints" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-
+                                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                                app:spanCount="3"
+                                android:orientation="vertical"
+                                 />
                     </ScrollView>
                 </LinearLayout>
             </ScrollView>

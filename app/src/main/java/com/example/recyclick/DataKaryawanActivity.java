@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +25,7 @@ import com.example.recyclick.Model.DataKaryawan.DeleteKaryawan;
 import com.example.recyclick.Model.DataKaryawan.KaryawanGetInfo;
 import com.example.recyclick.Model.DataKaryawan.KaryawanItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +44,7 @@ public class DataKaryawanActivity extends AppCompatActivity {
     String pesan;
     FloatingActionButton tambahData;
     TextView btnBack;
+    TextInputEditText src;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +69,26 @@ public class DataKaryawanActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        src = findViewById(R.id.srcKry);
+        src.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String kata = src.getText().toString();
+                showPencarianKry(kata);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
     public void tampilDataKaryawan(){
@@ -78,39 +103,96 @@ public class DataKaryawanActivity extends AppCompatActivity {
                 adapter = new AdapterKaryawan(DataKaryawanActivity.this,listdata);
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
-                Toast.makeText(DataKaryawanActivity.this, pesan, Toast.LENGTH_SHORT).show();
+
+
+
             }
 
             @Override
             public void onFailure(Call<KaryawanGetInfo> call, Throwable t) {
-                Toast.makeText(DataKaryawanActivity.this,pesan, Toast.LENGTH_SHORT).show();
+                View view = getLayoutInflater().inflate(R.layout.toast_no_internet, null);
+                view.findViewById(R.id.toast_noConnection);
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(view);
+                toast.show();
+                toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
             }
 
         });
     }
 
-    public void hapusDataKaryawan(String idprd){
+    public void hapusDataKaryawan(String idprd,String gambar){
         API = serverRetrofit.koneksiRetrofit().create(APIRequestData.class);
-        Call<DeleteKaryawan> call = API.postDeleteKaryawan(idprd);
+        Call<DeleteKaryawan> call = API.postDeleteKaryawan(idprd,gambar);
         call.enqueue(new Callback<DeleteKaryawan>() {
             @Override
             public void onResponse(Call<DeleteKaryawan> call, Response<DeleteKaryawan> response) {
                 if(response.isSuccessful() && response.body() != null){
                     String pesan = response.body().getPesan();
                     if(response.body().isKondisi() == true){
-                        Toast.makeText(DataKaryawanActivity.this, pesan, Toast.LENGTH_SHORT).show();
+                        View view = getLayoutInflater().inflate(R.layout.toast_hapus_kry, null);
+                        view.findViewById(R.id.toast_deleteProduk);
+                        Toast toast = new Toast(getApplicationContext());
+                        toast.setDuration(Toast.LENGTH_LONG);
+                        toast.setView(view);
+                        toast.show();
+                        toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
 
                     }else{
-                        Toast.makeText(DataKaryawanActivity.this, pesan, Toast.LENGTH_SHORT).show();
+
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<DeleteKaryawan> call, Throwable t) {
+                View view = getLayoutInflater().inflate(R.layout.toast_no_internet, null);
+                view.findViewById(R.id.toast_noConnection);
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(view);
+                toast.show();
+                toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
                 Log.e("error", "onFailure: "+t );
             }
 
         });
+    }
+
+    private void showPencarianKry(String dicari){
+        API = serverRetrofit.koneksiRetrofit().create(APIRequestData.class);
+        Call<KaryawanGetInfo> call = API.getSrcLiveKry(dicari);
+        call.enqueue(new Callback<KaryawanGetInfo>() {
+            @Override
+            public void onResponse(Call<KaryawanGetInfo> call, Response<KaryawanGetInfo> response) {
+                if(response.body() != null && response.isSuccessful()){
+                    listdata = response.body().getData();
+                    adapter = new AdapterKaryawan(DataKaryawanActivity.this, listdata);
+                    recyclerView.setAdapter(adapter);
+
+
+                }else{
+                    Log.d("gagal", "onResponse: "+response.body().getKode()+" pesan "+response.body().getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<KaryawanGetInfo> call, Throwable t) {
+                View view = getLayoutInflater().inflate(R.layout.toast_no_internet, null);
+                view.findViewById(R.id.toast_noConnection);
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(view);
+                toast.show();
+                toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
+                Log.d("error", "onFailure: "+t.getMessage());
+            }
+        });
+
+
+    }
+    public void hideteksKosongKry(){
+        findViewById(R.id.txt_kondisiProdukKosong).setVisibility(View.GONE);
     }
 }

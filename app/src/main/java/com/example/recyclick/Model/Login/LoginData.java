@@ -20,7 +20,7 @@ public class LoginData {
 	private String photo;
 
 	@SerializedName("noHp")
-	private int noHp;
+	private String noHp;
 
 	public void setNama(String nama){
 		this.nama = nama;
@@ -67,11 +67,11 @@ public class LoginData {
 		this.photo = photo;
 	}
 
-	public int getNoHp() {
+	public String getNoHp() {
 		return noHp;
 	}
 
-	public void setNoHp(int noHp) {
+	public void setNoHp(String noHp) {
 		this.noHp = noHp;
 	}
 }

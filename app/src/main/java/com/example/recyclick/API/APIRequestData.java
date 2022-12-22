@@ -4,15 +4,21 @@ package com.example.recyclick.API;
 import com.example.recyclick.Model.DataBarang.AddBarang;
 import com.example.recyclick.Model.DataBarang.BarangGetInfo;
 import com.example.recyclick.Model.DataBarang.BarangInfo;
+import com.example.recyclick.Model.DataBarang.BarangLaris;
+import com.example.recyclick.Model.DataBarang.BarangLarisInfo;
 import com.example.recyclick.Model.DataBarang.DeleteBarang;
 import com.example.recyclick.Model.DataBarang.EditBarang;
+import com.example.recyclick.Model.DataBarang.Getidproduk;
 import com.example.recyclick.Model.DataKaryawan.DeleteKaryawan;
 import com.example.recyclick.Model.DataKaryawan.EditKaryawan;
 import com.example.recyclick.Model.DataKaryawan.KaryawanGetInfo;
 import com.example.recyclick.Model.Home.SearchGetInfo;
+import com.example.recyclick.Model.Kategori.KategoriEditInfo;
 import com.example.recyclick.Model.Kategori.KategoriInfo;
+import com.example.recyclick.Model.Laporan.BarChartGetInfo;
 import com.example.recyclick.Model.Laporan.LaporanLengkap;
 import com.example.recyclick.Model.Laporan.LaporanUtama;
+import com.example.recyclick.Model.Laporan.LineChartGetInfo;
 import com.example.recyclick.Model.Login.EditProfil;
 import com.example.recyclick.Model.Login.LoginInfo;
 import com.example.recyclick.Model.Pembeli.EditPembeli;
@@ -57,38 +63,61 @@ public interface APIRequestData {
             @Part MultipartBody.Part image,
             @Part("id_produk") RequestBody idprd,
             @Part("nama_produk") RequestBody namaprd,
-            @Part("stok") RequestBody stok,
-            @Part("harga_produk") RequestBody harga,
+            @Part("stok") int stok,
+            @Part("harga_produk") int harga,
             @Part("deskripsi") RequestBody deskripsi,
-            @Part("prod_idKategori") RequestBody kategori,
-            @Part("prod_idRating") RequestBody rating
+            @Part("prod_idKategori") int kategori,
+            @Part("prod_idRating") int rating
     );
 
     @FormUrlEncoded
     @POST("deleteProdukMobile.php")
-    Call<DeleteBarang> postDeleteBarang(@Field("idproduk") String idPrd);
+    Call<DeleteBarang> postDeleteBarang(
+            @Field("id_produk") String idPrd,
+        @Field("gambar_produk") String gambarl
+                );
 
 
     @GET("showKaryawan.php")
     Call<KaryawanGetInfo> getKaryawanData();
 
     //file php berbeda
-    @GET("showKategoriMobile.php")
+    @GET("showKategori.php")
     Call<KategoriInfo> getKategoriData();
+
+    @GET("showKategori.php")
+    Call<KategoriEditInfo> getKatEdit();
+
 
     @FormUrlEncoded
     @POST("deleteKaryawanMobile.php")
-    Call<DeleteKaryawan> postDeleteKaryawan(@Field("Username") String userKaryawan);
+    Call<DeleteKaryawan> postDeleteKaryawan(
+            @Field("Username") String userKaryawan,
+            @Field("photo_user")String photo
+    );
 
+
+    @Multipart
+    @POST("editProfil.php")
+    Call<EditProfil> postEditKaryawan(
+            @Part MultipartBody.Part image,
+            @Part("Username") RequestBody username,
+            @Part("password") RequestBody pass,
+            @Part("namaLengkap") RequestBody nama,
+            @Part("noHp") RequestBody noHp,
+            @Part("photo_user") RequestBody gambar,
+            @Part("isnull") RequestBody isNull
+    );
 
     @FormUrlEncoded
     @POST("editProfil.php")
-    Call<EditProfil> postEditKaryawan(
+    Call<EditProfil> postEditKaryawannoImg(
             @Field("Username") String username,
             @Field("password") String pass,
             @Field("namaLengkap") String nama,
             @Field("noHp") String noHp,
-            @Field("User_role") int role
+            @Field("photo_user") String gambar,
+            @Field("isnull") String isNull
     );
 
     @GET("showTransaksi.php")
@@ -129,6 +158,12 @@ public interface APIRequestData {
     @POST("searchMobile.php")
     Call<SearchGetInfo> getInfoSearch(@Field("searched") String searched);
 
+    @FormUrlEncoded
+    @POST("searchMobile.php")
+    Call<BarangGetInfo> getInfoSrcLive(
+            @Field("searched") String key
+    );
+
 
     @Multipart
     @POST("editProdukMobile.php")
@@ -141,6 +176,7 @@ public interface APIRequestData {
             @Part("gambarproduk") RequestBody gambar,
             @Part("deskripsi") RequestBody desk,
             @Part("kategori") int kgr,
+            @Part("rating") int rating,
             @Part("isnull") RequestBody isnull
     );
 
@@ -154,8 +190,40 @@ public interface APIRequestData {
             @Field("gambarproduk") String gambar,
             @Field("deskripsi") String deskripsi,
             @Field("kategori") int kategori,
+            @Field("rating") int rating,
             @Field("isnull") String isnull
     );
+
+    @GET("showProdukLaris.php")
+    Call<BarangGetInfo> getBarangLaris();
+
+    @FormUrlEncoded
+    @POST("searchKry.php")
+    Call<KaryawanGetInfo> getSrcLiveKry(
+            @Field("searched") String key
+    );
+
+    @FormUrlEncoded
+    @POST("ShowChartOnWeekMobile.php")
+    Call<LineChartGetInfo> postGetChartData(@Field("monday") String senin);
+
+    @GET("showIdproduk.php")
+    Call<Getidproduk> getidprodukincrement();
+
+    @FormUrlEncoded
+    @POST("searchLaporan.php")
+    Call<LaporanLengkap> getInfoSearchlaporan(@Field("searched") String searched);
+
+    @FormUrlEncoded
+    @POST("showProdukKat.php")
+    Call<BarangGetInfo> getProdukWithKat(
+            @Field("idKategori") String idKat
+    );
+
+    @GET("showChartOnMonth.php")
+    Call<BarChartGetInfo> getBarChartData();
+
+
 
 
 }

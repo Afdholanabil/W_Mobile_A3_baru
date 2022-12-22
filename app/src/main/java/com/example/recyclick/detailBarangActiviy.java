@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -60,22 +61,23 @@ ImageView img;
         String namabr = i.getStringExtra("NAMAPROD");
         tNama.setText(namabr);
 
-        String hargabr = i.getStringExtra("HARGAPROD");
-        tHarga.setText(hargabr);
+        int hargabr = i.getIntExtra("HARGAPROD",0);
+        tHarga.setText(String.valueOf(hargabr));
 
-        String stokbr = i.getStringExtra("STOKPROD");
-        tStok.setText(stokbr);
+        int stokbr = i.getIntExtra("STOKPROD",0);
+        tStok.setText(String.valueOf(stokbr));
 
         String deskbr = i.getStringExtra("DESKPROD");
         tDesk.setText(deskbr);
 
-        String jenisbr = i.getStringExtra("JENISPROD");
-        tKat.setText(jenisbr);
+        int jenisbr = i.getIntExtra("JENISPROD",0);
+        tKat.setText(String.valueOf(jenisbr));
 
-        String ratingbr = i.getStringExtra("RATINGPROD");
-        tRat.setText(ratingbr);
+        int ratingbr = i.getIntExtra("RATINGPROD",0);
+        tRat.setText(String.valueOf(ratingbr));
 
         String gambarbr = i.getStringExtra("GAMBARPROD");
+        Toast.makeText(detailBarangActiviy.this, gambarbr, Toast.LENGTH_SHORT).show();
 
         Glide.with(getApplicationContext()).load(gambarbr).thumbnail(0.5f).centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL).error(R.drawable.photo_library_48px).into(img);
@@ -93,10 +95,10 @@ ImageView img;
 
                 String id = listdata.get(0).getId();
                 String nama  = listdata.get(0).getNama();
-                int harga = Integer.parseInt(listdata.get(0).getHarga());
-                int stok = Integer.parseInt(listdata.get(0).getStok());
-                String kategori  = listdata.get(0).getKategori();
-                String rating = listdata.get(0).getRating();
+                int harga = listdata.get(0).getHarga();
+                int stok = listdata.get(0).getStok();
+                int kategori  = listdata.get(0).getKategori();
+                int rating = listdata.get(0).getRating();
                 String desk = listdata.get(0).getDeskripsi();
 
                 tId.setText(id);

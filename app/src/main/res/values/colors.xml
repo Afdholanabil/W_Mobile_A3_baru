@@ -21,4 +21,10 @@
     <color name="redtransparant">#ec8c8c</color>
     <color name="greenTransparant">#bbdccc</color>
     <color name="abuabuTransparant">#D9D9D9</color>
+    <color name="blue1">#805562EB</color>
+    <color name="lime1">#80C4DE23</color>
+    <color name="orange1">#80E0B354</color>
+    <color name="green5">#8076BA99</color>
+    <color name="green6">#425F57</color>
+
 </resources>

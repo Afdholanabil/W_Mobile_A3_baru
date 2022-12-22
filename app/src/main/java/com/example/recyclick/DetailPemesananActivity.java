@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.recyclick.API.APIRequestData;
 import com.example.recyclick.API.serverRetrofit;
@@ -99,7 +101,13 @@ public class DetailPemesananActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(retrofit2.Call<transaksiDetailAlamatInfo> call, Throwable t) {
-
+                View view = getLayoutInflater().inflate(R.layout.toast_no_internet, null);
+                view.findViewById(R.id.toast_noConnection);
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(view);
+                toast.show();
+                toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
             }
         });
 

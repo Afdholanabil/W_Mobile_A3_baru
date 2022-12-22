@@ -31,9 +31,11 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
 public class PengaturanActivity extends AppCompatActivity {
-public TextView tNama,tUsername,tpass;
+public TextView tNama,tUsername,tpass,tRole;
 ImageView gambarProfil;
 BottomNavigationView navigationView;
+int rolePengaturan;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -43,6 +45,14 @@ BottomNavigationView navigationView;
         tUsername = (TextView)findViewById(R.id.txt_username);
         tpass= findViewById(R.id.txt_pass);
         gambarProfil = findViewById(R.id.imgProfil);
+        tRole = findViewById(R.id.txt_role);
+
+        //role2
+
+
+
+        rolePengaturan = SaveAccount.readDataPembeli(PengaturanActivity.this).getUserRole();
+//        tRole.setText(SaveAccount.readDataPembeli(PengaturanActivity.this).getUserRole());
 
 
 
@@ -64,8 +74,14 @@ BottomNavigationView navigationView;
 
                         break;
                     case R.id.id_nav_laporan:
-                        startActivity(new Intent(PengaturanActivity.this, new LoginActivity().getClass()));
-                        break;
+                        if(rolePengaturan == 1){
+                            startActivity(new Intent(PengaturanActivity.this, new LaporanActivity().getClass()));
+                            break;
+
+                        }else {
+                            Toast.makeText(PengaturanActivity.this, "Anda Tidak Dapat Menggunakan Fitur Ini !", Toast.LENGTH_SHORT).show();
+                            break;
+                        }
                     case R.id.id_nav_setting:
                         startActivity(new Intent(PengaturanActivity.this, new PengaturanActivity().getClass()));
 
@@ -76,7 +92,7 @@ BottomNavigationView navigationView;
         });
 
         String gambarProf =(SaveAccount.readDataPembeli(PengaturanActivity.this).getPhoto());
-        Toast.makeText(this,gambarProf, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this,gambarProf, Toast.LENGTH_SHORT).show();
         Glide.with(getApplicationContext()).load(gambarProf).thumbnail(0.5f).centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL).error(R.drawable.photo_library_48px).into(gambarProfil);
 
@@ -85,6 +101,48 @@ BottomNavigationView navigationView;
         tUsername.setText(SaveAccount.readDataPembeli(PengaturanActivity.this).getUsername());
         tpass.setText(SaveAccount.readDataPembeli(PengaturanActivity.this).getPass());
 
+        if(rolePengaturan == 1){
+            findViewById(R.id.linear3).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(PengaturanActivity.this, new TambahBarangActivity().getClass());
+                    startActivity(intent);
+
+
+
+                }
+            });
+            findViewById(R.id.linear5).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(rolePengaturan == 1){
+                        startActivity(new Intent(PengaturanActivity.this, new TambahKaryawanActivity().getClass()));
+                    }else {
+                        findViewById(R.id.linear5).setVisibility(View.GONE);
+
+                    }
+
+
+                }
+            });
+            findViewById(R.id.linear6).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                        startActivity(new Intent(PengaturanActivity.this, new DataKaryawanActivity().getClass()));
+
+                }
+            });
+
+
+
+
+        }else {
+            findViewById(R.id.linear3).setVisibility(View.GONE);
+            findViewById(R.id.linear5).setVisibility(View.GONE);
+            findViewById(R.id.linear6).setVisibility(View.GONE);
+
+        }
 
         findViewById(R.id.linear2).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,44 +159,20 @@ BottomNavigationView navigationView;
             }
         });
 
-        findViewById(R.id.linear8).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-                showLogOutDialog();
-            }
-        });
-        findViewById(R.id.linear3).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(PengaturanActivity.this, new TambahBarangActivity().getClass());
-                startActivity(intent);
-
-            }
-        });
-        findViewById(R.id.linear5).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(PengaturanActivity.this, new TambahKaryawanActivity().getClass()));
-
-            }
-        });
-        findViewById(R.id.linear6).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(PengaturanActivity.this, new DataKaryawanActivity().getClass()));
-//                FragmentManager fragmentManager = getSupportFragmentManager();
-//                fragmentManager.beginTransaction().replace(R.id.container_logout,new DataKaryawanFragment()).commit();
-            }
-        });
-
         findViewById(R.id.linear4).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(PengaturanActivity.this, KontakActivity.class));
             }
         });
+
+        findViewById(R.id.linear8).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showLogOutDialog();
+            }
+        });
+
 
 
 

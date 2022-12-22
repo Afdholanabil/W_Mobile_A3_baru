@@ -60,6 +60,7 @@
                         android:layout_height="match_parent">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/srcKry"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
@@ -67,7 +68,7 @@
                             android:drawablePadding="20dp"
                             android:drawableTint="@color/grey2"
                             android:fontFamily="@font/poppins_regular"
-                            android:hint="Cari Produk "
+                            android:hint="Cari Karyawan "
                             android:padding="10dp"
                             android:textSize="15sp"
                             tools:ignore="MissingConstraints"></com.google.android.material.textfield.TextInputEditText>
@@ -91,6 +92,29 @@
 
             </androidx.recyclerview.widget.RecyclerView>
         </ScrollView>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/txt_kondisiProdukKosong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="15sp"
+                android:gravity="center"
+                android:textColor="@color/grey2"
+                android:text="Data Karyawan Kosong"
+
+                android:textAlignment="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:drawableLeft="@drawable/ic_baseline_error_24_black"
+                android:drawablePadding="5dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

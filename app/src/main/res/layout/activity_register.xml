@@ -313,18 +313,22 @@
                             android:layout_height="wrap_content"
                             app:passwordToggleEnabled="true"
                             app:boxBackgroundColor="@color/white"
+                            app:hintAnimationEnabled="false"
                             >
-                            <EditText
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/inputText4"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@null"
                                 android:fontFamily="@font/poppins_regular"
                                 android:hint="Masukan Password"
+
                                 android:inputType="textPassword"
                                 android:paddingStart="20dp"
                                 android:paddingLeft="10dp"
                                 android:paddingEnd="20dp"
+                                android:paddingTop="15dp"
+                                android:paddingBottom="13dp"
                                 android:textSize="15dp"
                                 app:boxBackgroundColor="@color/white"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -332,7 +336,7 @@
                                 app:layout_constraintTop_toBottomOf="@+id/inputText4"
                                 tools:ignore="MissingClass">
 
-                            </EditText>
+                            </com.google.android.material.textfield.TextInputEditText>
                         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -370,18 +374,22 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:passwordToggleEnabled="true"
+                            app:hintAnimationEnabled="false"
                             app:boxBackgroundColor="@color/white">
-                            <EditText
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/inputText5"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@null"
                                 android:fontFamily="@font/poppins_regular"
                                 android:hint="Masukan Lagi Password Anda"
+
                                 android:inputType="textPassword"
                                 android:paddingStart="20dp"
                                 android:paddingLeft="10dp"
                                 android:paddingEnd="20dp"
+                                android:paddingTop="15dp"
+                                android:paddingBottom="13dp"
                                 android:textSize="15dp"
                                 app:boxBackgroundColor="@color/white"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -390,7 +398,7 @@
                                 tools:ignore="MissingClass"
                                 >
 
-                            </EditText>
+                            </com.google.android.material.textfield.TextInputEditText>
                         </com.google.android.material.textfield.TextInputLayout>
 
 

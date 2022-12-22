@@ -3,18 +3,24 @@ package com.example.recyclick;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recyclick.API.APIRequestData;
 import com.example.recyclick.API.serverRetrofit;
 import com.example.recyclick.Model.Laporan.DataItemUtama;
+import com.example.recyclick.Model.Laporan.LaporanLengkap;
 import com.example.recyclick.Model.Laporan.LaporanUtama;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -38,6 +44,8 @@ public class LaporanActivity extends AppCompatActivity {
         setContentView(R.layout.activity_laporan);
         deklarasiVariabel();
         showLaporan();
+
+        moveFragment(new grafikbatang());
         card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,9 +86,21 @@ public class LaporanActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<LaporanUtama> call, Throwable t) {
+                View view = getLayoutInflater().inflate(R.layout.toast_no_internet, null);
+                view.findViewById(R.id.toast_noConnection);
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(view);
+                toast.show();
+                toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
                 Log.d("error", "onFailure: "+t.getMessage());
             }
         });
+    }
+
+    private void moveFragment(Fragment frag){
+        FragmentTransaction fragtran = getSupportFragmentManager().beginTransaction();
+        fragtran.replace(R.id.framechart, frag).commit();
     }
 
 }

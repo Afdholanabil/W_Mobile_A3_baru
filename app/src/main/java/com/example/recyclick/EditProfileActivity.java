@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -80,7 +81,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 String pass = tPassLama.getText().toString();
                 String passBaru = tPassBaru.getText().toString();
                 String nama = tNama.getText().toString();
-                int noHp = Integer.parseInt(tHp.getText().toString());
+                String noHp = tHp.getText().toString();
                 Intent it = getIntent();
                 String passLogin = it.getStringExtra("PASS");
 
@@ -96,7 +97,11 @@ public class EditProfileActivity extends AppCompatActivity {
                     }
                     else if (pass.equals(passLogin)){
                         EditProfile(username,passBaru,nama,noHp,gambarProf);
-                        finish();
+                        Intent intent  = new Intent(EditProfileActivity.this,PengaturanActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+
+
                     }else {
                         Toast.makeText(EditProfileActivity.this, "Passwrod Lama harus sama", Toast.LENGTH_SHORT).show();
                     }
@@ -115,26 +120,41 @@ public class EditProfileActivity extends AppCompatActivity {
 
     }
 
-    public void EditProfile(String username, String passBaru, String nama, int noHp,String gambarOld){
+    public void EditProfile(String username, String passBaru, String nama, String noHp,String gambarOld){
         APIRequestData api = serverRetrofit.koneksiRetrofit().create(APIRequestData.class);
-        String path = getRealPathFromUri(this, ur);
-        File file = new File(path);
-        RequestBody user = RequestBody.create(MediaType.parse("text/plain"), username);
-        RequestBody passUsr = RequestBody.create(MediaType.parse("text/plain"), passBaru);
-        RequestBody namaUsr = RequestBody.create(MediaType.parse("text/plain"), nama);
-        RequestBody phoneUsr = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(noHp));
-        RequestBody gambarOld2 = RequestBody.create(MediaType.parse("text/plain"),gambarOld);
 
-        RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("photo", file.getName(),requestFile);
-        Call<EditProfil> call = api.postEditKaryawan(body,gambarOld2,user,passUsr,namaUsr,phoneUsr);
+        Call<EditProfil> call;
+
+        if(ur != null){
+            String path = getRealPathFromUri(this, ur);
+            File file = new File(path);
+            RequestBody user = RequestBody.create(MediaType.parse("text/plain"), username);
+            RequestBody passUsr = RequestBody.create(MediaType.parse("text/plain"), passBaru);
+            RequestBody namaUsr = RequestBody.create(MediaType.parse("text/plain"), nama);
+            RequestBody phoneUsr = RequestBody.create(MediaType.parse("text/plain"), noHp);
+            RequestBody gambarOld2 = RequestBody.create(MediaType.parse("text/plain"),gambarOld);
+            RequestBody isNull = RequestBody.create(MediaType.parse("text/plain"),"false");
+            RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
+            MultipartBody.Part body = MultipartBody.Part.createFormData("photo", file.getName(),requestFile);
+            call = api.postEditKaryawan(body,user,passUsr,namaUsr,phoneUsr,gambarOld2,isNull);
+        }else{
+            call = api.postEditKaryawannoImg(username,passBaru,nama,noHp,gambarOld,"true");
+        }
+
         call.enqueue(new Callback<EditProfil>() {
             @Override
             public void onResponse(Call<EditProfil> call, Response<EditProfil> response) {
                 if(response.isSuccessful() && response.body() != null){
                     String pesan = response.body().getPesan();
                     if(response.body().isKondisi() == true){
-                        Toast.makeText(EditProfileActivity.this, pesan, Toast.LENGTH_SHORT).show();
+                        View view = getLayoutInflater().inflate(R.layout.toast_edit_produk, null);
+                        view.findViewById(R.id.toast_succesRegist);
+                        Toast toast = new Toast(getApplicationContext());
+                        toast.setDuration(Toast.LENGTH_LONG);
+                        toast.setView(view);
+                        toast.show();
+                        toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
+                        startActivity(new Intent(EditProfileActivity.this, PengaturanActivity.class));
                     }else{
                         Toast.makeText(EditProfileActivity.this, pesan, Toast.LENGTH_SHORT).show();
                     }
@@ -143,6 +163,13 @@ public class EditProfileActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<EditProfil> call, Throwable t) {
+                View view = getLayoutInflater().inflate(R.layout.toast_no_internet, null);
+                view.findViewById(R.id.toast_noConnection);
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(view);
+                toast.show();
+                toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
                 Log.e("error", "onFailure: "+t );
             }
 

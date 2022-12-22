@@ -172,12 +172,14 @@
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal">
                                 <com.google.android.material.textfield.TextInputEditText
+                                    android:editable="false"
                                     android:id="@+id/kategoriprd"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:hint="Masukan Kategori"
                                     android:fontFamily="@font/poppins_regular"
                                     android:textSize="15sp"
+
                                     android:paddingHorizontal="20dp"
                                     android:layout_weight="1"
                                     android:paddingVertical="7dp"

@@ -58,6 +58,11 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/txt_pass"
                         android:visibility="invisible"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/txt_role"
+                        android:visibility="invisible"/>
                 </LinearLayout>
 
             </LinearLayout>

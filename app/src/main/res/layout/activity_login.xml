@@ -160,8 +160,9 @@
                                 android:layout_height="wrap_content"
                                 app:passwordToggleEnabled="true"
                                 app:boxBackgroundColor="@color/white"
+                                app:hintEnabled="false"
                                 >
-                                <EditText
+                                <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/inputPass"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -171,6 +172,8 @@
                                     android:inputType="textPassword"
                                     android:paddingStart="20dp"
                                     android:maxLength="10"
+                                    android:paddingTop="15dp"
+                                    android:paddingBottom="13dp"
                                     android:paddingLeft="10dp"
                                     android:paddingEnd="20dp"
                                     android:textSize="15dp"
@@ -178,7 +181,7 @@
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toBottomOf="@+id/inputText2"
                                     tools:ignore="MissingClass">
-                                </EditText>
+                                </com.google.android.material.textfield.TextInputEditText>
                             </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>

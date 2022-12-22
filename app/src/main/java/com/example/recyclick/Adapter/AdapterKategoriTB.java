@@ -46,7 +46,7 @@ public class AdapterKategoriTB extends RecyclerView.Adapter<AdapterKategoriTB.ka
 
     public class kategoritbViewholder extends RecyclerView.ViewHolder {
         TextView text;
-        String id;
+        int id;
         public kategoritbViewholder(@NonNull View itemView) {
             super(itemView);
             text = itemView.findViewById(R.id.recy_kgrtext);

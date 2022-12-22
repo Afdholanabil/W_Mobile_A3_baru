@@ -5,14 +5,16 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class KategoriInfo {
-        @SerializedName("pesan")
-    private String pesan;
-
-    @SerializedName("kondisi")
-    private String kondisi;
-
     @SerializedName("data")
     private List<KategoriItem> data;
+
+    @SerializedName("message")
+    private String pesan;
+
+    @SerializedName("kode")
+    private String kondisi;
+
+
 
     public String getPesan() {
         return pesan;

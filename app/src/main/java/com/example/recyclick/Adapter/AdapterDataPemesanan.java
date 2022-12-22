@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.recyclick.DataBarangActivity;
 import com.example.recyclick.DataPemesananActivity;
 import com.example.recyclick.DetailPemesananActivity;
 import com.example.recyclick.HomeActivity;
@@ -53,7 +54,15 @@ public class AdapterDataPemesanan extends RecyclerView.Adapter<AdapterDataPemesa
 
     @Override
     public int getItemCount() {
-        return data.size();
+        int a = 0;
+        if (data == null) {
+
+
+        } else {
+            a = data.size();
+            DataPemesananActivity.dba.hideteksKosong();
+        }
+        return a;
     }
 
     public class PemesananViewHolder extends RecyclerView.ViewHolder {

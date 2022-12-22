@@ -55,13 +55,13 @@ public class AdapterLaporan extends RecyclerView.Adapter<AdapterLaporan.laporanV
 
         public laporanViewHolder( View itemView) {
             super(itemView);
-            idtr = itemView.findViewById(R.id.recylaps_idtrans);
-            idpbl = itemView.findViewById(R.id.recylaps_idpbl);
-            idbr = itemView.findViewById(R.id.recylaps_idbr);
-            nama  = itemView.findViewById(R.id.recylaps_namapbl);
-            jml = itemView.findViewById(R.id.recylaps_jmlbr);
-            ttlharga = itemView.findViewById(R.id.recylaps_hargabr);
-            tgl = itemView.findViewById(R.id.recylaps_tgl);
+            idtr = itemView.findViewById(R.id.rlc_idtransaksi);
+            idpbl = itemView.findViewById(R.id.rlc_idpembeli);
+            idbr = itemView.findViewById(R.id.rlc_idbarang);
+            nama  = itemView.findViewById(R.id.rlc_namapembeli);
+            jml = itemView.findViewById(R.id.rlc_jumlah);
+            ttlharga = itemView.findViewById(R.id.rlc_harga);
+            tgl = itemView.findViewById(R.id.rlc_tanggal);
         }
     }
 }

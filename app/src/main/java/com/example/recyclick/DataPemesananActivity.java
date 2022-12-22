@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,6 +66,10 @@ public class DataPemesananActivity extends AppCompatActivity {
         ubahAntarStatus(kodetr,idStatusAntar);
     }
 
+    public void hideteksKosong(){
+        findViewById(R.id.txt_kondisiProdukKosong).setVisibility(View.GONE);
+    }
+
     public void tampilDataTransaksi(){
         API = serverRetrofit.koneksiRetrofit().create(APIRequestData.class);
         Call<transaksiInfo> call = API.getTransaksiData();
@@ -79,7 +84,13 @@ public class DataPemesananActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<transaksiInfo> call, Throwable t) {
-
+                View view = getLayoutInflater().inflate(R.layout.toast_no_internet, null);
+                view.findViewById(R.id.toast_noConnection);
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(view);
+                toast.show();
+                toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
             }
         });
     }
@@ -92,15 +103,21 @@ public class DataPemesananActivity extends AppCompatActivity {
                 if(response.isSuccessful() && response.body() != null){
                     String pesan = response.body().getPesan();
                     if(response.body().isKondisi() == true){
-                        Toast.makeText(DataPemesananActivity.this, pesan, Toast.LENGTH_SHORT).show();
+                        View view = getLayoutInflater().inflate(R.layout.toast_rubah_terima, null);
+                        view.findViewById(R.id.toast_succesRegist);
+                        Toast toast = new Toast(getApplicationContext());
+                        toast.setDuration(Toast.LENGTH_LONG);
+                        toast.setView(view);
+                        toast.show();
+                        toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
                     }else{
-                        Toast.makeText(DataPemesananActivity.this, pesan, Toast.LENGTH_SHORT).show();
+
                     }
                 }
             }
             @Override
             public void onFailure(Call<EditPembeli> call, Throwable t) {
-                Log.e("error", "onFailure: "+t );
+
             }
 
         });
@@ -115,15 +132,21 @@ public class DataPemesananActivity extends AppCompatActivity {
                 if(response.isSuccessful() && response.body() != null){
                     String pesan = response.body().getPesan();
                     if(response.body().isKondisi() == true){
-                        Toast.makeText(DataPemesananActivity.this, pesan, Toast.LENGTH_SHORT).show();
+                        View view = getLayoutInflater().inflate(R.layout.toast_rubah_proses, null);
+                        view.findViewById(R.id.toast_succesRegist);
+                        Toast toast = new Toast(getApplicationContext());
+                        toast.setDuration(Toast.LENGTH_LONG);
+                        toast.setView(view);
+                        toast.show();
+                        toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
                     }else{
-                        Toast.makeText(DataPemesananActivity.this, pesan, Toast.LENGTH_SHORT).show();
+
                     }
                 }
             }
             @Override
             public void onFailure(Call<EditPembeli> call, Throwable t) {
-                Log.e("error", "onFailure: "+t );
+
             }
 
         });
@@ -138,15 +161,20 @@ public class DataPemesananActivity extends AppCompatActivity {
                 if(response.isSuccessful() && response.body() != null){
                     String pesan = response.body().getPesan();
                     if(response.body().isKondisi() == true){
-                        Toast.makeText(DataPemesananActivity.this, pesan, Toast.LENGTH_SHORT).show();
+                        View view = getLayoutInflater().inflate(R.layout.toast_rubah_pesan, null);
+                        view.findViewById(R.id.toast_succesRegist);
+                        Toast toast = new Toast(getApplicationContext());
+                        toast.setDuration(Toast.LENGTH_LONG);
+                        toast.setView(view);
+                        toast.show();
+                        toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
                     }else{
-                        Toast.makeText(DataPemesananActivity.this, pesan, Toast.LENGTH_SHORT).show();
                     }
                 }
             }
             @Override
             public void onFailure(Call<EditPembeli> call, Throwable t) {
-                Log.e("error", "onFailure: "+t );
+
             }
 
         });

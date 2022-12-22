@@ -11,6 +11,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -77,7 +79,7 @@ public class TambahKaryawanActivity extends AppCompatActivity {
                 String nama = tNama.getText().toString();
                 String noHp = tHp.getText().toString();
 
-                if (username.equals(null) || pass.equals(null) || passKon.equals(null) || nama.equals(null) || noHp.equals(null)) {
+                if (tUser.equals("") || tpass.equals("") || tKonfirPass.equals("") || tNama.equals("") || tHp==null || uri == null) {
                     Toast.makeText(TambahKaryawanActivity.this, "Data Tidak Boleh Kosong !", Toast.LENGTH_SHORT).show();
                 } else {
                     if (username.length() > 15) {
@@ -88,7 +90,7 @@ public class TambahKaryawanActivity extends AppCompatActivity {
                         Toast.makeText(TambahKaryawanActivity.this, "Nomor Hp anda lebih dari 13 karakter", Toast.LENGTH_SHORT).show();
                     } else if (passKon.equals(pass)) {
                         addKaryawan(username, pass, nama, noHp, role);
-                        finish();
+
                     } else {
                         Toast.makeText(TambahKaryawanActivity.this, "Masukan input password yang sama", Toast.LENGTH_SHORT).show();
                     }
@@ -116,8 +118,14 @@ public class TambahKaryawanActivity extends AppCompatActivity {
             public void onResponse(Call<RegisterInfo> call, Response<RegisterInfo> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     if (response.body().isKondisi() == true) {
-                        Toast.makeText(TambahKaryawanActivity.this, response.body().getPesan(), Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(TambahKaryawanActivity.this, DataBarangActivity.class));
+                        View view = getLayoutInflater().inflate(R.layout.toast_berhasil_daftar, null);
+                        view.findViewById(R.id.toast_succesRegist);
+                        Toast toast = new Toast(getApplicationContext());
+                        toast.setDuration(Toast.LENGTH_LONG);
+                        toast.setView(view);
+                        toast.show();
+                        toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
+                        startActivity(new Intent(TambahKaryawanActivity.this, DataKaryawanActivity.class));
                     } else {
                         Toast.makeText(TambahKaryawanActivity.this, response.body().getPesan(), Toast.LENGTH_SHORT).show();
                     }
@@ -126,7 +134,14 @@ public class TambahKaryawanActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<RegisterInfo> call, Throwable t) {
-
+                View view = getLayoutInflater().inflate(R.layout.toast_no_internet, null);
+                view.findViewById(R.id.toast_noConnection);
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(view);
+                toast.show();
+                toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
+                Log.d("error", "onFailure: "+t.getMessage());
             }
         });
     }

@@ -8,87 +8,87 @@ public class DataItem{
 	private String nama;
 
 	@SerializedName("harga")
-	private String harga;
+	private int harga;
 
 	@SerializedName("gambardir")
 	private String gambardir;
 
 	@SerializedName("rating")
-	private String rating;
+	private int rating;
 
 	@SerializedName("id")
 	private String id;
 
 	@SerializedName("stok")
-	private String stok;
+	private int stok;
 
 	@SerializedName("deskripsi")
 	private String deskripsi;
 
 	@SerializedName("kategori")
-	private String kategori;
+	private int kategori;
 
-	public String getKategori() {
-		return kategori;
-	}
-
-	public void setKategori(String kategori) {
-		this.kategori = kategori;
-	}
-
-	public void setNama(String nama){
-		this.nama = nama;
-	}
-
-	public String getNama(){
+	public String getNama() {
 		return nama;
 	}
 
-	public void setHarga(String harga){
-		this.harga = harga;
+	public void setNama(String nama) {
+		this.nama = nama;
 	}
 
-	public String getHarga(){
+	public int getHarga() {
 		return harga;
 	}
 
-	public void setGambardir(String gambardir){
-		this.gambardir = gambardir;
+	public void setHarga(int harga) {
+		this.harga = harga;
 	}
 
-	public String getGambardir(){
+	public String getGambardir() {
 		return gambardir;
 	}
 
-	public void setRating(String rating){
-		this.rating = rating;
+	public void setGambardir(String gambardir) {
+		this.gambardir = gambardir;
 	}
 
-	public String getRating(){
+	public int getRating() {
 		return rating;
 	}
 
-	public void setId(String id){
-		this.id = id;
+	public void setRating(int rating) {
+		this.rating = rating;
 	}
 
-	public String getId(){
+	public String getId() {
 		return id;
 	}
 
-	public void setStok(String stok){
-		this.stok = stok;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public String getStok(){
+	public int getStok() {
 		return stok;
 	}
 
-	public void setDeskripsi(String deskripsi){
+	public void setStok(int stok) {
+		this.stok = stok;
+	}
+
+	public String getDeskripsi() {
+		return deskripsi;
+	}
+
+	public void setDeskripsi(String deskripsi) {
 		this.deskripsi = deskripsi;
 	}
 
-	public String getDeskripsi(){
-		return deskripsi;
+	public int getKategori() {
+		return kategori;
+	}
+
+	public void setKategori(int kategori) {
+		this.kategori = kategori;
 	}
 }

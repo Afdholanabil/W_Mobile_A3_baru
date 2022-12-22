@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -36,7 +37,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
-    TextView btnKembali;
+    TextView btnKembali,backMasuk;
     CardView btnRegist;
     TextInputEditText txtNama, txtUsername, txtTelp;
     EditText txtPass, txtKonfirm;
@@ -53,6 +54,16 @@ public class RegisterActivity extends AppCompatActivity {
         txtTelp = (TextInputEditText) findViewById(R.id.inputText2);
         txtPass = (EditText) findViewById(R.id.inputText4);
         txtKonfirm = (EditText) findViewById(R.id.inputText5);
+        backMasuk = findViewById(R.id.tv33);
+        backMasuk.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                Intent intent  = new Intent(RegisterActivity.this,LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
         imagepp = findViewById(R.id.imgprofil);
         imagepp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String repass = txtKonfirm.getText().toString();
                 int kedudukan = 2;
 
-                if (nama.equals("") || noTlp.equals("") || usr.equals("") || pass.equals("") || repass.equals("")) {
+                if (txtNama.equals("") || txtTelp.equals("") || txtUsername.equals("") || txtPass.equals("") || txtKonfirm.equals("") || uri == null) {
                     Toast.makeText(getApplicationContext(), "Data Kosong, Harus Diisi ! ", Toast.LENGTH_LONG).show();
                 } else {
                     if (usr.length() > 15) {
@@ -90,14 +101,13 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Password tidak boleh lebih dari 10 karakter", Toast.LENGTH_SHORT).show();
                     }else if(pass.length()<5){
                         Toast.makeText(RegisterActivity.this, "Password harus lebih dari 5 karakter", Toast.LENGTH_SHORT).show();
-                    } else if(noTlp.length()>13){
+                    } else if(txtTelp.length()>13){
                         Toast.makeText(RegisterActivity.this, "Nomor Handphone Anda lebih dari 13 karakter", Toast.LENGTH_SHORT).show();
 
                     } else if (pass.equals(repass)) {
                         RegisterPost(usr, pass, nama, noTlp, kedudukan);
                     } else {
                         Toast.makeText(getApplicationContext(), "Masukan Password yang Sesuai", Toast.LENGTH_LONG).show();
-
                     }
                 }
             }
@@ -124,10 +134,18 @@ public class RegisterActivity extends AppCompatActivity {
             public void onResponse(Call<RegisterInfo> call, Response<RegisterInfo> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     if (response.body().isKondisi() == true) {
-                        Toast.makeText(RegisterActivity.this, response.body().getPesan(), Toast.LENGTH_SHORT).show();
+                        View view = getLayoutInflater().inflate(R.layout.toast_berhasil_daftar, null);
+                        view.findViewById(R.id.toast_succesRegist);
+                        Toast toast = new Toast(getApplicationContext());
+                        toast.setDuration(Toast.LENGTH_LONG);
+                        toast.setView(view);
+                        toast.show();
+                        toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
+
                         Intent intent  = new Intent(RegisterActivity.this,LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                        startActivity(intent);
+
                     } else {
                         Toast.makeText(RegisterActivity.this, response.body().getPesan(), Toast.LENGTH_SHORT).show();
                     }
@@ -136,6 +154,13 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<RegisterInfo> call, Throwable t) {
+                View view = getLayoutInflater().inflate(R.layout.toast_no_internet, null);
+                view.findViewById(R.id.toast_noConnection);
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(view);
+                toast.show();
+                toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
                 Log.d("server error", "onFailure: " + t);
             }
         });

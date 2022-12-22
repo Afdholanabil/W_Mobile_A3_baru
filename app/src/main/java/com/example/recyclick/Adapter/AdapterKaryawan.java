@@ -67,7 +67,12 @@ public class AdapterKaryawan extends RecyclerView.Adapter<AdapterKaryawan.Karyaw
 
     @Override
     public int getItemCount() {
-        return data == null ? 0 : data.size();
+        int a = 0;
+        if (data != null) {
+            a = data.size();
+            DataKaryawanActivity.dba.hideteksKosongKry();
+        }
+        return a;
     }
 
     public class KaryawanViewHolder extends RecyclerView.ViewHolder {
@@ -93,7 +98,7 @@ public class AdapterKaryawan extends RecyclerView.Adapter<AdapterKaryawan.Karyaw
                     ((TextView) view2.findViewById(R.id.textMessage)).setText("Klik Hapus untuk Menghapus Data !");
                     ((Button) view2.findViewById(R.id.btnHapus)).setText("Hapus");
                     ((Button) view2.findViewById(R.id.btnKembali)).setText("Kembali");
-                    ((ImageView) view2.findViewById(R.id.imageIcon)).setImageResource(R.drawable.ic_baseline_help_24);
+
 
                     AlertDialog alertDialog = builder.create();
 
@@ -101,7 +106,8 @@ public class AdapterKaryawan extends RecyclerView.Adapter<AdapterKaryawan.Karyaw
                         @Override
                         public void onClick(View view) {
                             String idItem = username.getText().toString();
-                            DataKaryawanActivity.dba.hapusDataKaryawan(idItem);
+                            DataKaryawanActivity.dba.hapusDataKaryawan(idItem,gambarKry);
+                            context.startActivity(new Intent(context,DataKaryawanActivity.class));
                             alertDialog.dismiss();
 
                         }

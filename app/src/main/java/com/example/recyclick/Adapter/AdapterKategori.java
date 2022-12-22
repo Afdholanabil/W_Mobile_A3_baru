@@ -1,16 +1,21 @@
 package com.example.recyclick.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.recyclick.DataBarangActivity;
 import com.example.recyclick.Model.DataKaryawan.KaryawanItem;
 import com.example.recyclick.Model.Kategori.KategoriItem;
+import com.example.recyclick.PengaturanActivity;
 import com.example.recyclick.R;
 
 import java.util.ConcurrentModificationException;
@@ -39,7 +44,7 @@ public class AdapterKategori extends RecyclerView.Adapter<AdapterKategori.Katego
     @Override
     public void onBindViewHolder(@NonNull KategoriViewHolder holder, int position) {
         KategoriItem kategoriItem = data.get(position);
-        holder.id.setText(kategoriItem.getId());
+        holder.id.setText(String.valueOf(kategoriItem.getId()));
         holder.nama.setText(kategoriItem.getNamaKategori());
     }
 
@@ -50,13 +55,20 @@ public class AdapterKategori extends RecyclerView.Adapter<AdapterKategori.Katego
 
     public class KategoriViewHolder extends RecyclerView.ViewHolder {
         public TextView id,nama;
+        public CardView con;
         public KategoriViewHolder(@NonNull View itemView) {
             super(itemView);
             id = itemView.findViewById(R.id.txt_id);
             nama = itemView.findViewById(R.id.txt_kategori);
-            nama.setOnClickListener(new View.OnClickListener() {
+            con = itemView.findViewById(R.id.containerKat);
+            con.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    String idKat = id.getText().toString();
+                    Intent intent = new Intent(context, DataBarangActivity.class);
+//
+                    intent.putExtra("IdKat",idKat);
+                    context.startActivity(intent);
 
                 }
             });
@@ -64,7 +76,5 @@ public class AdapterKategori extends RecyclerView.Adapter<AdapterKategori.Katego
         }
 
     }
-    public interface itemListed{
 
-    }
 }

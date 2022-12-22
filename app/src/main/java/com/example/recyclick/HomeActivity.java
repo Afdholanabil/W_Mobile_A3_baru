@@ -3,13 +3,17 @@ package com.example.recyclick;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,19 +25,26 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.recyclick.API.APIRequestData;
 import com.example.recyclick.API.serverRetrofit;
+import com.example.recyclick.Adapter.AdapterBarangLaris;
 import com.example.recyclick.Adapter.AdapterDataBarang;
 import com.example.recyclick.Adapter.AdapterInfoPemesanan;
 import com.example.recyclick.Adapter.AdapterKategori;
 import com.example.recyclick.Adapter.AdapterSearch;
 import com.example.recyclick.Koneksi.dbHelper;
+import com.example.recyclick.Model.DataBarang.BarangGetInfo;
+import com.example.recyclick.Model.DataBarang.BarangLaris;
+import com.example.recyclick.Model.DataBarang.BarangLarisInfo;
 import com.example.recyclick.Model.DataBarang.DataItem;
 import com.example.recyclick.Model.DataKaryawan.KaryawanItem;
 import com.example.recyclick.Model.Home.DataItemSearch;
@@ -61,13 +72,15 @@ public class HomeActivity extends AppCompatActivity {
     TextView lihatPemesanan;
     public dbHelper dbhelp;
     BottomNavigationView navigationView;
-    CardView lay1;
+    CardView lay1,imgPrf;
     private EditText srch;
-    private RecyclerView recyclerView1, recyclerView2;
-    private RecyclerView.Adapter adapter;
+    ImageView img;
+    private RecyclerView recyclerView1, recyclerView2,recyclerView3;
+    private RecyclerView.Adapter adapter,adapter2;
     private RecyclerView.LayoutManager lymanager;
     private List<KategoriItem> listdata = new ArrayList<>();
     private List<transaksiData> listdata2 = new ArrayList<>();
+    private List<DataItem> listdata3 = new ArrayList<>();
     public static HomeActivity dba;
     APIRequestData API;
     String pesan;
@@ -94,8 +107,17 @@ public class HomeActivity extends AppCompatActivity {
         int width = LinearLayout.LayoutParams.MATCH_PARENT;
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
         pop = new PopupWindow(popupView, width, height, false);
+        img = findViewById(R.id.prfHome);
+        imgPrf = findViewById(R.id.iconAkun);
+
+
+        String gambarProf =(SaveAccount.readDataPembeli(HomeActivity.this).getPhoto());
+//        Toast.makeText(this,gambarProf, Toast.LENGTH_SHORT).show();
+        Glide.with(getApplicationContext()).load(gambarProf).thumbnail(0.5f).centerCrop()
+                .diskCacheStrategy(DiskCacheStrategy.ALL).error(R.drawable.photo_library_48px).into(img);
 
         srch = findViewById(R.id.home_textsearch);
+        srch.clearFocus();
         srch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -115,16 +137,20 @@ public class HomeActivity extends AppCompatActivity {
         });
         API = serverRetrofit.koneksiRetrofit().create(APIRequestData.class);
 
-        if (role == 2) {
             lihatPemesanan.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(HomeActivity.this, new DataPemesananActivity().getClass()));
+                    if(role == 1){
+                        startActivity(new Intent(HomeActivity.this, new DataPemesananActivity().getClass()));
+                    }else{
+                        Toast.makeText(HomeActivity.this, "Fitur Tidak Tersedia !", Toast.LENGTH_SHORT).show();
+                        lihatPemesanan.setOnClickListener(null);
+
+                    }
+
                 }
             });
-        } else {
-            lihatPemesanan.setOnClickListener(null);
-        }
+
 
 
         setGreeting();
@@ -147,6 +173,7 @@ public class HomeActivity extends AppCompatActivity {
                             startActivity(new Intent(HomeActivity.this, new LaporanActivity().getClass()));
                             break;
                         } else {
+                            Toast.makeText(HomeActivity.this, "Anda Tidak Dapat Menggunakan Fitur Ini !", Toast.LENGTH_SHORT).show();
                             break;
                         }
 
@@ -161,16 +188,23 @@ public class HomeActivity extends AppCompatActivity {
 
         //RecycleView
         recyclerView1 = (RecyclerView) findViewById(R.id.rcy_kategori);
-        dba = this;
+
         lymanager = new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView1.setLayoutManager(lymanager);
         tampilKategori();
 
         recyclerView2 = (RecyclerView) findViewById(R.id.rcy_infoPemesanan);
-        dba = this;
+
         lymanager = new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView2.setLayoutManager(lymanager);
-//        tampilInfoPemesanan();
+        tampilInfoPemesanan();
+
+        recyclerView3 = (RecyclerView) findViewById(R.id.rcy_barangLaris);
+
+        recyclerView3.setLayoutManager(new GridLayoutManager(HomeActivity.this,3));
+        recyclerView3.setHasFixedSize(true);
+
+        tampilBarangLaris();
 
     }
 
@@ -206,7 +240,41 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(retrofit2.Call<KategoriInfo> call, Throwable t) {
+                View view = getLayoutInflater().inflate(R.layout.toast_no_internet, null);
+                view.findViewById(R.id.toast_noConnection);
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(view);
+                toast.show();
+                toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
 
+            }
+        });
+
+    }
+
+    public void tampilBarangLaris() {
+        Call<BarangGetInfo> call = API.getBarangLaris();
+        call.enqueue(new Callback<BarangGetInfo>() {
+            @Override
+            public void onResponse(retrofit2.Call<BarangGetInfo> call, Response<BarangGetInfo> response) {
+                pesan = response.body().getMessage();
+                listdata3 = response.body().getData();
+                adapter2 = new AdapterBarangLaris(HomeActivity.this, listdata3);
+                recyclerView3.setAdapter(adapter2);
+                adapter2.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onFailure(retrofit2.Call<BarangGetInfo> call, Throwable t) {
+                View view = getLayoutInflater().inflate(R.layout.toast_no_internet, null);
+                view.findViewById(R.id.toast_noConnection);
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(view);
+                toast.show();
+                toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
             }
         });
 
@@ -229,7 +297,13 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(retrofit2.Call<transaksiInfo> call, Throwable t) {
-
+                View view = getLayoutInflater().inflate(R.layout.toast_no_internet, null);
+                view.findViewById(R.id.toast_noConnection);
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(view);
+                toast.show();
+                toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
             }
         });
 
@@ -252,7 +326,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onResponse(Call<SearchGetInfo> call, Response<SearchGetInfo> response) {
                 if(response.body() != null && response.isSuccessful()){
                     item = response.body().getData();
-                    AdapterSearch adapter = new AdapterSearch(item);
+                    AdapterSearch adapter = new AdapterSearch(HomeActivity.this,item);
                     recy.setAdapter(adapter);
                     recy.setLayoutManager(new LinearLayoutManager(HomeActivity.this));
                 }else{
@@ -263,6 +337,13 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<SearchGetInfo> call, Throwable t) {
                 Log.d("error", "onFailure: "+t.getMessage());
+                View view = getLayoutInflater().inflate(R.layout.toast_no_internet, null);
+                view.findViewById(R.id.toast_noConnection);
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(view);
+                toast.show();
+                toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
             }
         });
 
@@ -271,5 +352,54 @@ public class HomeActivity extends AppCompatActivity {
         } else {
             pop.dismiss();
         }
+    }
+    private void showLogOutDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this, R.style.AlertDialog);
+        View view = LayoutInflater.from(HomeActivity.this).inflate(
+                R.layout.layout_logout_dialog,(ConstraintLayout)findViewById(R.id.layoutDialogContainer));
+        builder.setView(view);
+        ((TextView) view.findViewById(R.id.textJudul)).setText("Apakah Yakin Untuk LogOut ?");
+        ((TextView) view.findViewById(R.id.textMessage)).setText("Klik Logout untuk Logout");
+        ((Button) view.findViewById(R.id.btnOut)).setText("LogOut");
+        ((Button) view.findViewById(R.id.btnKembali)).setText("Kembali");
+        ((ImageView) view.findViewById(R.id.imageIcon)).setImageResource(R.drawable.ic_baseline_help_24);
+
+        AlertDialog alertDialog = builder.create();
+
+        view.findViewById(R.id.btnOut).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                PengaturanActivity.getSingleInstance().setLoggingOut(true);
+                Intent intent = new Intent(HomeActivity.this, new LoginActivity().getClass());
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                SharedPreferences sharedPreferences = getSharedPreferences("PREF_MODEL", Context.MODE_PRIVATE);
+//                SharedPreferences.Editor editor = sharedPreferences.edit();
+//                intent.putExtra("USERNAME", String.valueOf(tUsername));
+                startActivity(intent);
+//                boolean finish = getIntent().getBooleanExtra("finish", false);
+//                if (finish) {
+//                    startActivity(new Intent(PengaturanActivity.this, LoginActivity.class));
+//                    finish();
+//                    return;
+//                }
+
+
+
+            }
+        });
+        view.findViewById(R.id.btnKembali).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+        if(alertDialog.getWindow() != null){
+            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+        }
+        alertDialog.show();
+    }
+@Override
+    public void onBackPressed(){
+        showLogOutDialog();
     }
 }

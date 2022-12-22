@@ -4,9 +4,10 @@
     package="com.example.recyclick">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:permissionGroup="android.permission-group.STORAGE"
-        android:protectionLevel="dangerous"/>
+        android:protectionLevel="dangerous" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -20,6 +21,12 @@
         android:theme="@style/Theme.RecyClick"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".grafikbatang"
+            android:exported="false" />
+        <activity
+            android:name=".SplashBerhasilLogin"
+            android:exported="false" />
         <activity
             android:name=".KontakActivity"
             android:exported="false" />
