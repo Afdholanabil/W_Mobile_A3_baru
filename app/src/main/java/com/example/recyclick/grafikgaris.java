@@ -40,6 +40,7 @@ public class grafikgaris extends Fragment {
 
     public LineChart lChart;
     public List<LineChartDataItem> item = new ArrayList<>();
+    int color1;
 
     @Nullable
     @Override
@@ -50,6 +51,9 @@ public class grafikgaris extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         lChart = view.findViewById(R.id.chartline);
+        color1 = ContextCompat.getColor(getContext(), R.color.green1);
+        lChart.setNoDataText("Loading...");
+        lChart.setNoDataTextColor(color1);
         getChartData();
     }
 
@@ -85,7 +89,6 @@ public class grafikgaris extends Fragment {
     private void setChartdata(List<LineChartDataItem> item){
         LineDataSet lineDataSet = new LineDataSet(datavalue(item), "Data Penghasilan Seminggu");
         lineDataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
-        int color1 = ContextCompat.getColor(getContext(), R.color.green1);
         lineDataSet.setColor(color1);
         lineDataSet.setLineWidth(2);
         lineDataSet.setCircleSize(5);
@@ -100,6 +103,7 @@ public class grafikgaris extends Fragment {
         dataSets.add(lineDataSet);
 
         LineData line  = new LineData(dataSets);
+
         lChart.setData(line);
         lChart.invalidate();
         lChart.getAxisLeft().setDrawGridLines(false);
@@ -107,6 +111,10 @@ public class grafikgaris extends Fragment {
         lChart.getXAxis().setDrawGridLines(false);
         lChart.animateX(1000);
         lChart.getAxisRight().setEnabled(false);
+        lChart.getDescription().setEnabled(false);
+        lChart.getLegend().setEnabled(false);
+        lChart.setExtraBottomOffset(12);
+
 
         ArrayList<String> Xlabel = new ArrayList<>();
         Xlabel.add(0, "Senin");

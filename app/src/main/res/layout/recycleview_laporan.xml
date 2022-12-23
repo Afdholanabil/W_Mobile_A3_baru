@@ -102,14 +102,14 @@
 
                         <TextView
                             android:id="@+id/rlc_idtransaksi"
-                            android:layout_width="wrap_content"
+                            android:layout_width="50dp"
                             android:layout_height="wrap_content"
-                            android:text="ID Transaksi"
+                            android:text="TR00000001"
                             android:textSize="8sp" />
 
                         <TextView
                             android:id="@+id/rlc_idpembeli"
-                            android:layout_width="wrap_content"
+                            android:layout_width="50dp"
                             android:layout_height="wrap_content"
                             android:text="ID Pembeli"
                             android:maxLength="10"
@@ -117,7 +117,7 @@
 
                         <TextView
                             android:id="@+id/rlc_idbarang"
-                            android:layout_width="wrap_content"
+                            android:layout_width="50dp"
                             android:layout_height="wrap_content"
                             android:text="ID Barang"
                             android:textSize="8sp" />
@@ -195,7 +195,7 @@
 
                         <TextView
                             android:id="@+id/rlc_namapembeli"
-                            android:layout_width="wrap_content"
+                            android:layout_width="50dp"
                             android:layout_height="wrap_content"
                             android:text="ID Transaksi"
                             android:maxLength="10"
@@ -203,14 +203,14 @@
 
                         <TextView
                             android:id="@+id/rlc_jumlah"
-                            android:layout_width="wrap_content"
+                            android:layout_width="50dp"
                             android:layout_height="wrap_content"
                             android:text="ID Pembeli"
                             android:textSize="8sp" />
 
                         <TextView
                             android:id="@+id/rlc_harga"
-                            android:layout_width="wrap_content"
+                            android:layout_width="50dp"
                             android:layout_height="wrap_content"
                             android:text="ID Barang"
                             android:textSize="8sp" />
@@ -222,11 +222,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginStart="30dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginEnd="10dp"
                     app:layout_constraintStart_toEndOf="@id/rcl_layout2"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     android:orientation="vertical">
 
                     <TextView
@@ -242,16 +243,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="8sp" />
                 </LinearLayout>
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </LinearLayout>
-
-
-
-
     </androidx.cardview.widget.CardView>
-
-
 </LinearLayout>

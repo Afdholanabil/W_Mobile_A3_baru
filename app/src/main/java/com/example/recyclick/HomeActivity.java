@@ -127,7 +127,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String kata = srch.getText().toString();
-                showPencarian(srch,popupView, kata, i);
+                showPencarian(srch ,popupView, kata, i);
             }
 
             @Override
@@ -310,7 +310,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void showPencarian(View view, View view1, String dicari, int nilai){
-
         int[] loc_int = new int[2];
         lay1.getLocationOnScreen(loc_int);
         Rect location = new Rect();
@@ -347,7 +346,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        if (nilai > 0) {
+        if (nilai > 0 ) {
             pop.showAtLocation(view, Gravity.TOP | Gravity.LEFT, location.left, location.bottom);
         } else {
             pop.dismiss();

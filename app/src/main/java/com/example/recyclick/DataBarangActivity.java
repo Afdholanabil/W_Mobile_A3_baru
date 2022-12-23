@@ -51,6 +51,7 @@ public class DataBarangActivity extends AppCompatActivity  {
     private List<DataItemSearch> item = new ArrayList<>();
     private List<KategoriItem> listdata2 = new ArrayList<>();
     public static DataBarangActivity dbanew;
+    private int role ;
     APIRequestData API;
     String pesan;
     FloatingActionButton tambahData;
@@ -65,6 +66,7 @@ public class DataBarangActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_data_barang);
         recyclerView = (RecyclerView)findViewById(R.id.rcy_barang);
         dbanew= this;
+        role = SaveAccount.readDataPembeli(DataBarangActivity.this).getUserRole();
         lymanager = new LinearLayoutManager(DataBarangActivity.this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(lymanager);
 //        tampilDataBarang();
@@ -86,11 +88,15 @@ public class DataBarangActivity extends AppCompatActivity  {
                         break;
                     case R.id.id_nav_edit:
                         startActivity(new Intent(DataBarangActivity.this, new DataBarangActivity().getClass()));
-
                         break;
                     case R.id.id_nav_laporan:
-                        startActivity(new Intent(DataBarangActivity.this, new LaporanActivity().getClass()));
-                        break;
+                        if (role == 1) {
+                            startActivity(new Intent(DataBarangActivity.this, new LaporanActivity().getClass()));
+                            break;
+                        } else {
+                            Toast.makeText(DataBarangActivity.this, "Anda Tidak Dapat Menggunakan Fitur Ini !", Toast.LENGTH_SHORT).show();
+                            break;
+                        }
                     case R.id.id_nav_setting:
                         startActivity(new Intent(DataBarangActivity.this, new PengaturanActivity().getClass()));
 
@@ -222,13 +228,13 @@ public class DataBarangActivity extends AppCompatActivity  {
 
     }
 
-    public void editDataBarang(String idbr){
-
-    }
-
-    public void ClearBarang(){
-        listdata.clear();
-    }
+//    public void editDataBarang(String idbr){
+//
+//    }
+//
+//    public void ClearBarang(){
+//        listdata.clear();
+//    }
 
     private void showPencarian(String dicari){
         API = serverRetrofit.koneksiRetrofit().create(APIRequestData.class);

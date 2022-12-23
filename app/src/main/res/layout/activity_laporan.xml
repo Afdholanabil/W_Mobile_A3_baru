@@ -31,22 +31,53 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-<!--            <androidx.cardview.widget.CardView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="right"-->
-<!--                android:layout_marginEnd="10dp"-->
-<!--                android:backgroundTint="@color/green1"-->
-<!--                app:cardCornerRadius="5dp"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent">-->
+            <LinearLayout
+                android:id="@+id/lp_layout1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-<!--                <ImageView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_margin="5dp"-->
-<!--                    android:src="@drawable/ic_baseline_calendar_today_24" />-->
-<!--            </androidx.cardview.widget.CardView>-->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/lpr_grapmenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="10dp"
+                    android:backgroundTint="@color/green1"
+                    app:cardCornerRadius="5dp">
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_margin="3dp"
+                        android:src="@drawable/ic_baseline_insert_chart_outlined_24" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/lp_textmenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical" />
+            </LinearLayout>
+            <!--            <androidx.cardview.widget.CardView-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_gravity="right"-->
+            <!--                android:layout_marginEnd="10dp"-->
+            <!--                android:backgroundTint="@color/green1"-->
+            <!--                app:cardCornerRadius="5dp"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent">-->
+
+            <!--                <ImageView-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="match_parent"-->
+            <!--                    android:layout_margin="5dp"-->
+            <!--                    android:src="@drawable/ic_baseline_calendar_today_24" />-->
+            <!--            </androidx.cardview.widget.CardView>-->
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
@@ -85,11 +116,11 @@
             android:layout_gravity="center_vertical"
             android:layout_marginHorizontal="5dp"
             android:background="@drawable/line_bacground"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/textinfo"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:orientation="horizontal" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textinfo"
@@ -99,10 +130,10 @@
             android:text="Data Laporan"
             android:textColor="@color/black"
             android:textStyle="bold|italic"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/line2"
             app:layout_constraintStart_toEndOf="@id/line1"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:id="@+id/line2"
@@ -112,11 +143,11 @@
             android:layout_marginHorizontal="5dp"
             android:layout_weight="2"
             android:background="@drawable/line_bacground"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/textinfo"
-            app:layout_constraintTop_toTopOf="parent"
-            android:orientation="horizontal" />
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.cardview.widget.CardView
@@ -163,8 +194,8 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        app:cardCornerRadius="10dp"
         android:backgroundTint="@color/green3"
+        app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/laps_brterjual"
         app:layout_constraintTop_toBottomOf="@id/title1">
@@ -284,6 +315,33 @@
             android:layout_marginHorizontal="10dp"
             android:text="Data Lengkap Penjualan"
             android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        >
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/nav_view_lp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/shape_nav_bottom"
+            app:itemIconTint="@color/white"
+            app:itemRippleColor="@color/green3"
+            app:itemTextColor="@color/white"
+            app:labelVisibilityMode="unlabeled"
+
+            app:menu="@menu/menu">
+
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+
     </androidx.cardview.widget.CardView>
 
 
