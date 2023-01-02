@@ -20,7 +20,9 @@ public class AdapterLaporan extends RecyclerView.Adapter<AdapterLaporan.laporanV
     int itemlenght;
     public AdapterLaporan(List<DataItemLengkap> item) {
         this.item = item;
-        this.itemlenght = item.size();
+        if (item != null){
+            itemlenght = item.size();
+        }
     }
 
     @NonNull
@@ -44,7 +46,8 @@ public class AdapterLaporan extends RecyclerView.Adapter<AdapterLaporan.laporanV
         holder.jml.setText(itemlaporan.getJumlah());
         holder.ttlharga.setText(itemlaporan.getTotalharga());
         holder.tgl.setText(itemlaporan.getTanggal());
-        holder.numtrans.setText("Pembelian Ke-"+itemlenght--);
+        int len = itemlenght - position;
+        holder.numtrans.setText("Pembelian Ke-"+ len);
     }
 
     @Override

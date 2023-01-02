@@ -89,7 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String repass = txtKonfirm.getText().toString();
                 int kedudukan = 2;
 
-                if (txtNama.equals("") || txtTelp.equals("") || txtUsername.equals("") || txtPass.equals("") || txtKonfirm.equals("") || uri == null) {
+                if (txtNama.equals(null) || txtNama.length() == 0 || txtTelp.length() == 0  || txtUsername.length() == 0 || txtPass.length() == 0 || txtKonfirm.length() == 0 || uri == null) {
                     Toast.makeText(getApplicationContext(), "Data Kosong, Harus Diisi ! ", Toast.LENGTH_LONG).show();
                 } else {
                     if (usr.length() > 15) {

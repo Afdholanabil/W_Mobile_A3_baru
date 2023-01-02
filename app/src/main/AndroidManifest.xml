@@ -23,9 +23,11 @@
         tools:targetApi="31">
         <activity
             android:name=".grafikbatang"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="Instantiatable" />
         <activity
             android:name=".SplashBerhasilLogin"
+            android:noHistory="true"
             android:exported="false" />
         <activity
             android:name=".KontakActivity"
@@ -84,6 +86,7 @@
         <activity
             android:name=".SplashScreen"
             android:exported="true"
+
             android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

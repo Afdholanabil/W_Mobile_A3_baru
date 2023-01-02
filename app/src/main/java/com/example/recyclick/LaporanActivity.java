@@ -2,6 +2,8 @@ package com.example.recyclick;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -22,25 +24,32 @@ import com.example.recyclick.API.serverRetrofit;
 import com.example.recyclick.Model.Laporan.DataItemUtama;
 import com.example.recyclick.Model.Laporan.LaporanLengkap;
 import com.example.recyclick.Model.Laporan.LaporanUtama;
+import com.example.recyclick.Notifikasi.loadingToast;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LaporanActivity extends AppCompatActivity {
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager lymanager;
     private CardView card;
-    public static DataBarangActivity dba;
-    public LinearLayout layoutmenu;
-    private int menuloop = 0;
-    private BottomNavigationView navigationViewlp;
+    public static LaporanActivity lpa;
     APIRequestData API;
     List<DataItemUtama> item;
-    TextView penjualan, dikirim, penjualanbulan, penjualantahun, textgraphmenu;
+    TextView penjualan, dikirim, penjualanbulan, penjualantahun,textgraphmenu;
+    public LinearLayout layoutmenu;
+    BottomNavigationView navigationViewlp;
+
+    private int menuloop = 0;
+    private long mLastClickTime = 0;
 
 
     @Override
@@ -60,30 +69,38 @@ public class LaporanActivity extends AppCompatActivity {
         layoutmenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+
                 String text;
                 textgraphmenu.setWidth(290);
-                switch (menuloop) {
-                    case 0:
-                        text = "Grafik Mingguan";
-                        textgraphmenu.setText(text);
-                        menuloop = 2;
-                        break;
-                    case 1:
-                        text = "Grafik Mingguan";
-                        textgraphmenu.setText(text);
-                        moveFragment(new grafikgaris());
-                        menuloop++;
-                        break;
-                    case 2:
-                        text = "Grafik Bulanan";
-                        textgraphmenu.setText(text);
-                        moveFragment(new grafikbatang());
-                        menuloop = 1;
-                        break;
-                }
+
+                    switch (menuloop) {
+                        case 0:
+                            text = "Grafik Mingguan";
+                            textgraphmenu.setText(text);
+                            menuloop = 2;
+                            break;
+                        case 1:
+                            text = "Grafik Mingguan";
+                            textgraphmenu.setText(text);
+                            moveFragment(new grafikgaris());
+
+                            menuloop++;
+                            break;
+                        case 2:
+                            text = "Grafik Bulanan";
+                            textgraphmenu.setText(text);
+                            moveFragment(new grafikbatang());
+
+                            menuloop = 1;
+                            break;
+                    }
             }
         });
-
 
         navigationViewlp.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -92,30 +109,18 @@ public class LaporanActivity extends AppCompatActivity {
                     case R.id.id_nav_home:
                         startActivity(new Intent(LaporanActivity.this, new HomeActivity().getClass()));
                         break;
+
                     case R.id.id_nav_edit:
                         startActivity(new Intent(LaporanActivity.this, new DataBarangActivity().getClass()));
-
                         break;
-                    case R.id.id_nav_laporan:
-                        startActivity(new Intent(LaporanActivity.this, new LaporanActivity().getClass()));
-                        break;
-//                        if (role == 1) {
-//
-//                        } else {
-//                            Toast.makeText(LaporanActivity.this, "Anda Tidak Dapat Menggunakan Fitur Ini !", Toast.LENGTH_SHORT).show();
-//                            break;
-//                        }
 
                     case R.id.id_nav_setting:
                         startActivity(new Intent(LaporanActivity.this, new PengaturanActivity().getClass()));
-
                         break;
                 }
                 return false;
             }
         });
-
-
 
 
     }
@@ -133,10 +138,17 @@ public class LaporanActivity extends AppCompatActivity {
 
     public void showLaporan(){
         Call<LaporanUtama> call = API.getInfoLaporanUtama();
+        View view = getLayoutInflater().inflate(R.layout.toast_loading, null);
+        view.findViewById(R.id.toast_noConnection);
+        Toast toast = new Toast(getApplicationContext());
+        toast.setView(view);
+        toast.show();
+        toast.setGravity(Gravity.CENTER,0,0);
         call.enqueue(new Callback<LaporanUtama>() {
             @Override
             public void onResponse(Call<LaporanUtama> call, Response<LaporanUtama> response) {
                 if(response.isSuccessful() && response.body() != null){
+                    toast.cancel();
                     Log.d("berhasil", "kode "+response.body().getKode()+" || message "+response.body().getMessage());
                     item = response.body().getData();
                     int nilai = item.get(0).getBarangTerjual();

@@ -147,7 +147,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 if(response.isSuccessful() && response.body() != null){
                     String pesan = response.body().getPesan();
                     if(response.body().isKondisi() == true){
-                        View view = getLayoutInflater().inflate(R.layout.toast_edit_produk, null);
+                        View view = getLayoutInflater().inflate(R.layout.toast_edit_profil, null);
                         view.findViewById(R.id.toast_succesRegist);
                         Toast toast = new Toast(getApplicationContext());
                         toast.setDuration(Toast.LENGTH_LONG);

@@ -313,7 +313,7 @@
                             android:layout_height="wrap_content"
                             app:passwordToggleEnabled="true"
                             app:boxBackgroundColor="@color/white"
-                            app:hintAnimationEnabled="false"
+                            app:hintEnabled="false"
                             >
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/inputText4"
@@ -374,7 +374,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:passwordToggleEnabled="true"
-                            app:hintAnimationEnabled="false"
+                            app:hintEnabled="false"
                             app:boxBackgroundColor="@color/white">
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/inputText5"

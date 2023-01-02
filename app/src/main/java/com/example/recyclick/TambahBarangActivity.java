@@ -92,7 +92,7 @@ public class TambahBarangActivity extends AppCompatActivity {
                 else{
 
 
-                    if (id.equals("") || nama.equals("") || stok == null || harga == null || deksripsi.equals("") || kategori == null|| ur == null) {
+                    if (id.equals("") || nama.length() == 0 || stok.length() == 0 || harga.length() == 0  || deksripsi.length() == 0 || kategori.length() == 0|| ur == null) {
                         Toast.makeText(TambahBarangActivity.this, "Data Tidak Boleh Kosong !", Toast.LENGTH_SHORT).show();
 
                     } else {

@@ -34,6 +34,9 @@ public class transaksiData {
     @SerializedName("namaStatus")
     private String namaStatus;
 
+    @SerializedName("pesanPembeli")
+    private String pesanPembeli;
+
     public String getIdTransaksi() {
         return idTransaksi;
     }
@@ -112,5 +115,13 @@ public class transaksiData {
 
     public void setNamaStatus(String namaStatus) {
         this.namaStatus = namaStatus;
+    }
+
+    public String getPesanPembeli() {
+        return pesanPembeli;
+    }
+
+    public void setPesanPembeli(String pesanPembeli) {
+        this.pesanPembeli = pesanPembeli;
     }
 }

@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
                     String usrLogin = tInput.getText().toString();
                     String passLogin = tPass.getText().toString();
                     if(usrLogin.equals("")||passLogin.equals("")){
-                        showLogOutDialog();
+                        showAlertDialogFailed();
                     }else{
                         loginPost(usrLogin, passLogin);
                     }
@@ -112,8 +112,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginActivity.this, new RegisterActivity().getClass()));
-
-
             }
         });
     }
@@ -138,11 +136,11 @@ public class LoginActivity extends AppCompatActivity {
 
                     }else{
                         Log.e("TAG", "onResponse: "+response.body().getPesan());
-                        showLogOutDialog();
+                        showAlertDialogFailed();
                     }
                 }else{
                     Log.e("TAG", "onResponse: "+response.body().getPesan());
-                    showLogOutDialog();
+                    showAlertDialogFailed();
                 }
             }
 
@@ -160,7 +158,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void showLogOutDialog() {
+    private void showAlertDialogFailed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this, R.style.AlertDialog);
         View view = LayoutInflater.from(LoginActivity.this).inflate(
                 R.layout.layout_error_login,(ConstraintLayout)findViewById(R.id.layoutDialogContainer));

@@ -30,6 +30,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -144,13 +145,17 @@ public class grafikgaris extends Fragment {
         return datax;
     }
 
-
     public String setDateOnMonday() {
         Calendar cal = Calendar.getInstance();
         int day = cal.get(Calendar.DAY_OF_WEEK);
+        int month = cal.get(Calendar.MONTH);
+        int year = cal.get(Calendar.YEAR);
+
+
         SimpleDateFormat dateformat = new SimpleDateFormat("dd");
         SimpleDateFormat dateformatmonthYear = new SimpleDateFormat("yyyy-MM");
         int date = Integer.parseInt(dateformat.format(cal.getTime()));
+
         switch (day) {
             case Calendar.MONDAY:
                 break;
@@ -173,8 +178,28 @@ public class grafikgaris extends Fragment {
                 date -= 6;
                 break;
         }
+
+        Calendar cal2;
+        if(date < 1){
+            if(month == 0){
+                int lastyear = year -1;
+                cal2 = new GregorianCalendar(lastyear, 11, 1);
+                int dayoflastmonth = cal2.getMaximum(Calendar.DAY_OF_MONTH);
+                dayoflastmonth += date;
+                return lastyear+"-12-"+dayoflastmonth;
+            }else{
+                int lastmonth = month - 1;
+                cal2 = new GregorianCalendar(year, lastmonth, 1);
+                int dayoflastmonth = cal2.getMaximum(Calendar.DAY_OF_MONTH);
+                dayoflastmonth += date;
+                return year+"-"+lastmonth+"-"+dayoflastmonth;
+            }
+        }
         return dateformatmonthYear.format(cal.getTime())+"-"+date;
     }
+
+
+
 
 
 

@@ -56,7 +56,7 @@ public class AdapterSearch extends RecyclerView.Adapter<AdapterSearch.SearchView
             holder.rating.setText(String.valueOf(barang.getRating()));
             holder.urlGambar = barang.getGambar();
 
-            Glide.with(context).load(barang.getGambar()).thumbnail(0.5f).centerCrop()
+            Glide.with(context).load("https://workshopjti.com/RecyclickA3/"+barang.getGambar()).thumbnail(0.5f).centerCrop()
                     .diskCacheStrategy(DiskCacheStrategy.ALL).error(R.drawable.photo_library_48px).into(holder.gambar);
         }catch (Exception e){
             Log.d(e.getMessage(), "onBindViewHolder: ");

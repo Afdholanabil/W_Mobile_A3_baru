@@ -76,6 +76,7 @@ public class LaporanLengkapActivity  extends AppCompatActivity {
     }
     private void showDataLaporanLengkap(){
         Call<LaporanLengkap> call = api.getInfoLaporan();
+
         call.enqueue(new Callback<LaporanLengkap>() {
             @Override
             public void onResponse(Call<LaporanLengkap> call, Response<LaporanLengkap> response) {

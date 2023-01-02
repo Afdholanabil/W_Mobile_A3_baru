@@ -44,13 +44,14 @@ public class detailAlamatActivity extends AppCompatActivity {
         desk = findViewById(R.id.txtDesk);
 
         Intent intent = getIntent();
-        String idAl = intent.getStringExtra("IDALAMAT");
+//        String idAl = intent.getStringExtra("IDALAMAT");
         String userP = intent.getStringExtra("USERNAME");
-        idAlamat.setText(idAl);
+//        idAlamat.setText(idAl);
+        idAlamat.setVisibility(View.GONE);
         userPbl.setText(userP);
 
 
-        tampilAlamatDetail("akhdan123");
+        tampilAlamatDetail(userP);
 
 
     }

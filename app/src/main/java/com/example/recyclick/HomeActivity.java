@@ -68,7 +68,7 @@ import retrofit2.Response;
 public class HomeActivity extends AppCompatActivity {
     String waktu, j;
     Cursor cursor;
-    private TextView greeting;
+    private TextView greeting,tLihatProduk;
     TextView lihatPemesanan;
     public dbHelper dbhelp;
     BottomNavigationView navigationView;
@@ -101,6 +101,13 @@ public class HomeActivity extends AppCompatActivity {
         lihatPemesanan = findViewById(R.id.lihatPemesanan);
         lihatPemesanan.setBackground(null);
         navigationView = (BottomNavigationView) findViewById(R.id.nav_view);
+        tLihatProduk = findViewById(R.id.tLihat);
+        tLihatProduk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeActivity.this, DataBarangActivity.class));
+            }
+        });
 
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.popup_search, null);

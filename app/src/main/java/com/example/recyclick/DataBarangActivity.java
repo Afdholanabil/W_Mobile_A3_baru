@@ -215,13 +215,7 @@ public class DataBarangActivity extends AppCompatActivity  {
                 @Override
                 public void onFailure(Call<DeleteBarang> call, Throwable t) {
                     Log.e("error", "onFailure: "+t );
-                    View view = getLayoutInflater().inflate(R.layout.toast_no_internet, null);
-                    view.findViewById(R.id.toast_noConnection);
-                    Toast toast = new Toast(getApplicationContext());
-                    toast.setDuration(Toast.LENGTH_LONG);
-                    toast.setView(view);
-                    toast.show();
-                    toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
+
                 }
             });
 

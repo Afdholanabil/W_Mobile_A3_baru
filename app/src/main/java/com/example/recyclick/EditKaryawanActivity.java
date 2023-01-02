@@ -148,7 +148,13 @@ public class EditKaryawanActivity extends AppCompatActivity {
                 if(response.isSuccessful() && response.body() != null){
                     String pesan = response.body().getPesan();
                     if(response.body().isKondisi() == true){
-                        Toast.makeText(EditKaryawanActivity.this, pesan, Toast.LENGTH_SHORT).show();
+                        View view = getLayoutInflater().inflate(R.layout.toast_edit_karyawan, null);
+                        view.findViewById(R.id.toast_succesRegist);
+                        Toast toast = new Toast(getApplicationContext());
+                        toast.setDuration(Toast.LENGTH_LONG);
+                        toast.setView(view);
+                        toast.show();
+                        toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
                         startActivity(new Intent(EditKaryawanActivity.this, PengaturanActivity.class));
                     }else{
                         Toast.makeText(EditKaryawanActivity.this, pesan, Toast.LENGTH_SHORT).show();

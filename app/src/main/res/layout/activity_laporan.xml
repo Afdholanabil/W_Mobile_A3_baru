@@ -50,10 +50,10 @@
                     app:cardCornerRadius="5dp">
 
                     <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:layout_margin="3dp"
-                        android:src="@drawable/ic_baseline_insert_chart_outlined_24" />
+                        android:src="@drawable/ic_baseline_insert_chart_24" />
                 </androidx.cardview.widget.CardView>
 
                 <TextView
@@ -343,6 +343,4 @@
         </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     </androidx.cardview.widget.CardView>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

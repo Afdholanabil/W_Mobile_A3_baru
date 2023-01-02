@@ -58,7 +58,7 @@ public class AdapterBarangLaris extends RecyclerView.Adapter<AdapterBarangLaris.
 
             holder.urlgambarLaris =barang.getGambardir();
 
-            Glide.with(context).load(barang.getGambardir()).thumbnail(0.5f).centerCrop()
+            Glide.with(context).load("https://workshopjti.com/RecyclickA3/"+barang.getGambardir()).thumbnail(0.5f).centerCrop()
                     .diskCacheStrategy(DiskCacheStrategy.ALL).error(R.drawable.photo_library_48px).into(holder.gambarBarangLaris);
 
 

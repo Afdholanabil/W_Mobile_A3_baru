@@ -41,7 +41,9 @@ import retrofit2.http.Part;
 public interface APIRequestData {
     @FormUrlEncoded
     @POST("loginmobile.php")
-    Call<LoginInfo> CreateLoginPost(@Field("lgn_user") String username, @Field("lgn_pass") String password);
+    Call<LoginInfo> CreateLoginPost(
+            @Field("lgn_user") String username,
+            @Field("lgn_pass") String password);
 
     @Multipart
     @POST("registermobile.php")
@@ -126,9 +128,6 @@ public interface APIRequestData {
     @GET("showTrStatus.php")
     Call<transaksiInfo> getTransaksiStatusData();
 
-    @GET("showTrDetail.php")
-    Call<transaksiDetailAlamatInfo> getTransaksiDetailAlamat();
-
     @FormUrlEncoded
     @POST("showTrDetail2.php")
     Call<transaksiDetailAlamatInfo> postTrDetail2(
@@ -204,6 +203,12 @@ public interface APIRequestData {
     );
 
     @FormUrlEncoded
+    @POST("searchPemesanan.php")
+    Call<transaksiInfo> getSrcLivePemesanan(
+            @Field("searched") String key
+    );
+
+    @FormUrlEncoded
     @POST("ShowChartOnWeekMobile.php")
     Call<LineChartGetInfo> postGetChartData(@Field("monday") String senin);
 
@@ -222,6 +227,7 @@ public interface APIRequestData {
 
     @GET("showChartOnMonth.php")
     Call<BarChartGetInfo> getBarChartData();
+
 
 
 

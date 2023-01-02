@@ -1,42 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:translationX="2dp"
+    android:translationY="2dp"
+    app:layoutDescription="@xml/activity_splash_berhasil_login_scene"
     tools:context=".SplashBerhasilLogin">
+
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:backgroundTint="@color/white"
         android:orientation="vertical">
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-        android:background="@color/green2"
-        android:src="@drawable/berhasil_login_vector2"
-        tools:ignore="MissingConstraints">
 
-    </ImageView>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:textAlignment="center"
-        android:text="LOGIN BERHASIL !"
-        android:textSize="37sp"
-        android:padding="20dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:textColor="@color/green6"
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:background="@color/green2"
+            android:src="@drawable/berhasil_login_vector2"
+            tools:ignore="MissingConstraints">
+
+        </ImageView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
             android:background="@drawable/background_berhasil_login"
-            />
+            android:fontFamily="@font/poppins_semibold"
+            android:padding="20dp"
+            android:text="LOGIN BERHASIL !"
+            android:textAlignment="center"
+            android:textColor="@color/green6"
+            android:textSize="37sp" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Mengalihkan Halaman ...."
+            android:layout_marginTop="30dp"
             android:fontFamily="@font/poppins_regular"
-            android:textSize="25sp"
             android:gravity="center"
-            android:layout_marginTop="30dp"/>
+            android:text="Mengalihkan Halaman ...."
+            android:textSize="25sp" />
+
         <pl.droidsonroids.gif.GifImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,8 +55,6 @@
         </pl.droidsonroids.gif.GifImageView>
 
 
-
-
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>

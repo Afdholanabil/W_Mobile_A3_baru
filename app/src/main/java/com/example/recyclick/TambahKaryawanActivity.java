@@ -79,13 +79,17 @@ public class TambahKaryawanActivity extends AppCompatActivity {
                 String nama = tNama.getText().toString();
                 String noHp = tHp.getText().toString();
 
-                if (tUser.equals("") || tpass.equals("") || tKonfirPass.equals("") || tNama.equals("") || tHp==null || uri == null) {
+                if (tUser.length() == 0 || tpass.length() == 0  || tKonfirPass.length() == 0 || tNama.length() == 0 || tHp.length() == 0 || uri == null) {
                     Toast.makeText(TambahKaryawanActivity.this, "Data Tidak Boleh Kosong !", Toast.LENGTH_SHORT).show();
                 } else {
                     if (username.length() > 15) {
                         Toast.makeText(TambahKaryawanActivity.this, "Username tidak boleh lebih dari 15 karakter", Toast.LENGTH_SHORT).show();
+                    } else if(username.length() <5){
+                        Toast.makeText(TambahKaryawanActivity.this, "Username Harus Lebih Dari 5 Karakter", Toast.LENGTH_SHORT).show();
                     } else if (pass.length() > 10) {
                         Toast.makeText(TambahKaryawanActivity.this, "Password tidak boleh lebih dari 10 karakter", Toast.LENGTH_SHORT).show();
+                    }else if(pass.length()<5){
+                        Toast.makeText(TambahKaryawanActivity.this, "Password Harus Lebih dari 5 Karakter", Toast.LENGTH_SHORT).show();
                     } else if (noHp.length() > 13) {
                         Toast.makeText(TambahKaryawanActivity.this, "Nomor Hp anda lebih dari 13 karakter", Toast.LENGTH_SHORT).show();
                     } else if (passKon.equals(pass)) {

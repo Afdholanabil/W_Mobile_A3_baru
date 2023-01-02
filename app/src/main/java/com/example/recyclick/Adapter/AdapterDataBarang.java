@@ -65,7 +65,7 @@ public class AdapterDataBarang extends RecyclerView.Adapter<AdapterDataBarang.Ba
             holder.stok.setText(String.valueOf(barang.getStok()));
             holder.rating.setText(String.valueOf(barang.getRating()));
             holder.urlgambar = barang.getGambardir();
-            Glide.with(cntx).load(barang.getGambardir()).thumbnail(0.5f).centerCrop()
+            Glide.with(cntx).load("https://workshopjti.com/RecyclickA3/"+barang.getGambardir()).thumbnail(0.5f).centerCrop()
                     .diskCacheStrategy(DiskCacheStrategy.ALL).error(R.drawable.photo_library_48px).into(holder.gambarBarang);
         } catch (Exception e) {
             Log.d(e.getMessage(), "onBindViewHolder: ");

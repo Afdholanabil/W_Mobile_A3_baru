@@ -16,6 +16,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -140,9 +142,11 @@ public class editBarangActivity extends AppCompatActivity {
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (txtId.equals("") || txtNama.equals("") || txtStok.equals("") || txtHarga.equals("") || txtDesk.equals("") || txtJenis.equals("")) {
+                if (txtId.equals("") || txtNama.length() == 0 || txtStok.length() == 0 || txtHarga.length() == 0 || txtDesk.length() == 0 || txtJenis.length() == 0) {
                     Toast.makeText(editBarangActivity.this, "Data Tidak Boleh Kosong !", Toast.LENGTH_SHORT).show();
-                } else {
+                }else if(txtHarga.length() > 10 && txtStok.length()>10){
+                    Toast.makeText(editBarangActivity.this, "Input Harga dan Stok Terlalu Banyak !", Toast.LENGTH_SHORT).show();
+                } else{
                     AlertDialog.Builder builder = new AlertDialog.Builder(view.getRootView().getContext(), R.style.AlertDialog);
                     View view2 = LayoutInflater.from(view.getRootView().getContext()).inflate(
                             R.layout.layout_hapus_data, null);
@@ -164,6 +168,7 @@ public class editBarangActivity extends AppCompatActivity {
                             int hargabr = Integer.parseInt(String.valueOf(txtHarga.getText()));
                             String deskbr = txtDesk.getText().toString();
                             int rating = 5;
+
                             EditDataBarang(idbr, namabr, stokbr, hargabr, deskbr, kategoriid, rating, gambarbr);
 
                         }
@@ -189,6 +194,46 @@ public class editBarangActivity extends AppCompatActivity {
                 getImg();
             }
         });
+
+        txtHarga.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(txtHarga.length() ==10){
+                    Toast.makeText(eba, "Harga tidak boleh lebih dari 10 digit !", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        txtStok.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(txtStok.length() == 10 ){
+                    Toast.makeText(eba, "Stok tidak boleh lebih dari 10 digit !", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+
 
 
     }

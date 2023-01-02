@@ -56,7 +56,7 @@ public class AdapterKaryawan extends RecyclerView.Adapter<AdapterKaryawan.Karyaw
            holder.noTelp.setText(karyawanItem.getNoHp());
            holder.pass.setText(karyawanItem.getPassword());
 
-           Glide.with(context).load(karyawanItem.getGambarkry()).thumbnail(0.5f).centerCrop()
+           Glide.with(context).load("https://workshopjti.com/RecyclickA3/"+karyawanItem.getGambarkry()).thumbnail(0.5f).centerCrop()
                    .diskCacheStrategy(DiskCacheStrategy.ALL).error(R.drawable.photo_library_48px).into(holder.gambarKaryawan);
            holder.gambarKry = karyawanItem.getGambarkry();
        }catch (Exception e){
