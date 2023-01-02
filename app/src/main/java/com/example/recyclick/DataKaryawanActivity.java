@@ -93,19 +93,27 @@ public class DataKaryawanActivity extends AppCompatActivity {
 
     public void tampilDataKaryawan(){
         API = serverRetrofit.koneksiRetrofit().create(APIRequestData.class);
+        View view = getLayoutInflater().inflate(R.layout.toast_loading, null);
+        view.findViewById(R.id.toast_noConnection);
+        Toast toast = new Toast(getApplicationContext());
+        toast.setView(view);
+        toast.show();
+        toast.setGravity(Gravity.CENTER,0,0);
         Call<KaryawanGetInfo> call = API.getKaryawanData();
         call.enqueue(new Callback<KaryawanGetInfo>() {
             @Override
             public void onResponse(Call<KaryawanGetInfo> call, Response<KaryawanGetInfo> response) {
-                pesan = response.body().getMessage();
-                listdata = response.body().getData();
-                Log.e("data", "onResponse: "+listdata );
-                adapter = new AdapterKaryawan(DataKaryawanActivity.this,listdata);
-                recyclerView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+                if(response.isSuccessful() && response.body() != null) {
+                    toast.cancel();
+                    pesan = response.body().getMessage();
+                    listdata = response.body().getData();
+                    Log.e("data", "onResponse: " + listdata);
+                    adapter = new AdapterKaryawan(DataKaryawanActivity.this, listdata);
+                    recyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
 
 
-
+                }
             }
 
             @Override

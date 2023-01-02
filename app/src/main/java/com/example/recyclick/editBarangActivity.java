@@ -131,7 +131,7 @@ public class editBarangActivity extends AppCompatActivity {
 
         String gambarbr = i.getStringExtra("GAMBARPROD");
 
-        Glide.with(getApplicationContext()).load(gambarbr).thumbnail(0.5f).centerCrop()
+        Glide.with(getApplicationContext()).load("https://workshopjti.com/RecyclickA3/"+gambarbr).thumbnail(0.5f).centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL).error(R.drawable.photo_library_48px).into(imgBarang);
 
 
@@ -389,25 +389,5 @@ public class editBarangActivity extends AppCompatActivity {
         kategoriid = id;
 
     }
-
-//    private void getidproduk(){
-//        APIRequestData api = serverRetrofit.koneksiRetrofit().create(APIRequestData.class);
-//        Call<Getidproduk> call = api.getidprodukincrement();
-//        call.enqueue(new Callback<Getidproduk>() {
-//            @Override
-//            public void onResponse(Call<Getidproduk> call, Response<Getidproduk> response) {
-//                if (response.isSuccessful() && response.body() != null){
-//                    Getidproduk idprd = response.body();
-//                    String ids = idprd.getIdTersedia();
-//                    txtId.setText(ids);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Getidproduk> call, Throwable t) {
-//
-//            }
-//        });
-//    }
 
 }

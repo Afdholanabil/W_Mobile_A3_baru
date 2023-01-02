@@ -196,7 +196,6 @@
                 android:layout_height="match_parent"
                 android:textSize="15sp"
                 android:padding="5dp"
-                android:text="Tidak Ada Pesan"
                 android:maxLines="2"
                 android:fontFamily="@font/poppins_regular"
                 />

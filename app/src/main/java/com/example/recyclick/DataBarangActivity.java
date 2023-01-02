@@ -164,17 +164,24 @@ public class DataBarangActivity extends AppCompatActivity  {
 
     public void tampilDataBarang(){
         API = serverRetrofit.koneksiRetrofit().create(APIRequestData.class);
+        View view = getLayoutInflater().inflate(R.layout.toast_loading, null);
+        view.findViewById(R.id.toast_noConnection);
+        Toast toast = new Toast(getApplicationContext());
+        toast.setView(view);
+        toast.show();
+        toast.setGravity(Gravity.CENTER,0,0);
         Call<BarangGetInfo> call = API.getDataBarang();
         call.enqueue(new Callback<BarangGetInfo>() {
             @Override
             public void onResponse(Call<BarangGetInfo> call, Response<BarangGetInfo> response) {
+                if(response.isSuccessful() && response.body() != null) {
+                    toast.cancel();
 //                pesan = response.body().getMessage();
-                listdata = response.body().getData();
-                adapter = new AdapterDataBarang(DataBarangActivity.this, listdata);
-                recyclerView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
-
-
+                    listdata = response.body().getData();
+                    adapter = new AdapterDataBarang(DataBarangActivity.this, listdata);
+                    recyclerView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
             }
             @Override
             public void onFailure(Call<BarangGetInfo> call, Throwable t) {

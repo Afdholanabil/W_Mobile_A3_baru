@@ -197,12 +197,4 @@ public class grafikgaris extends Fragment {
         }
         return dateformatmonthYear.format(cal.getTime())+"-"+date;
     }
-
-
-
-
-
-
-
-
 }

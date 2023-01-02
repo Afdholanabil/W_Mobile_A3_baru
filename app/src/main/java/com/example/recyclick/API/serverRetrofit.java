@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class serverRetrofit {
 
 public static Retrofit retrofit;
-    public static final String url ="http://172.16.110.10/W-web/Tugas/";
+    public static final String url ="http://192.168.18.74/W-web/Tugas/";
     public static final String url2 ="https://workshopjti.com/RecyclickA3/AndroidAPI/";
     public static Retrofit koneksiRetrofit(){
         if(retrofit == null){

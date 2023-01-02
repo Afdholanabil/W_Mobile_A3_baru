@@ -68,7 +68,6 @@ public class transaksiData {
     public void setUsernamePembeli(String usernamePembeli) {
         this.usernamePembeli = usernamePembeli;
     }
-
     public int getStatus() {
         return status;
     }

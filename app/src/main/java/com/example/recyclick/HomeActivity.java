@@ -120,7 +120,7 @@ public class HomeActivity extends AppCompatActivity {
 
         String gambarProf =(SaveAccount.readDataPembeli(HomeActivity.this).getPhoto());
 //        Toast.makeText(this,gambarProf, Toast.LENGTH_SHORT).show();
-        Glide.with(getApplicationContext()).load(gambarProf).thumbnail(0.5f).centerCrop()
+        Glide.with(getApplicationContext()).load("https://workshopjti.com/RecyclickA3/"+gambarProf).thumbnail(0.5f).centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL).error(R.drawable.photo_library_48px).into(img);
 
         srch = findViewById(R.id.home_textsearch);
@@ -223,7 +223,7 @@ public class HomeActivity extends AppCompatActivity {
         System.out.println(hour);
 
         if (hour <= 6 || hour <= 11) {
-            waktu = " pagi ";
+            waktu = " Pagi ";
         } else if (hour <= 17) {
             waktu = " Siang ";
         } else if (hour <= 24) {
@@ -371,26 +371,12 @@ public class HomeActivity extends AppCompatActivity {
         ((ImageView) view.findViewById(R.id.imageIcon)).setImageResource(R.drawable.ic_baseline_help_24);
 
         AlertDialog alertDialog = builder.create();
-
         view.findViewById(R.id.btnOut).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                PengaturanActivity.getSingleInstance().setLoggingOut(true);
                 Intent intent = new Intent(HomeActivity.this, new LoginActivity().getClass());
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                SharedPreferences sharedPreferences = getSharedPreferences("PREF_MODEL", Context.MODE_PRIVATE);
-//                SharedPreferences.Editor editor = sharedPreferences.edit();
-//                intent.putExtra("USERNAME", String.valueOf(tUsername));
                 startActivity(intent);
-//                boolean finish = getIntent().getBooleanExtra("finish", false);
-//                if (finish) {
-//                    startActivity(new Intent(PengaturanActivity.this, LoginActivity.class));
-//                    finish();
-//                    return;
-//                }
-
-
-
             }
         });
         view.findViewById(R.id.btnKembali).setOnClickListener(new View.OnClickListener() {

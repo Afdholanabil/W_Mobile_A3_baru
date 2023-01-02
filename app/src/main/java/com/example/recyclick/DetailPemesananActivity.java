@@ -88,14 +88,8 @@ public class DetailPemesananActivity extends AppCompatActivity {
         tampilDetailPemesanan(idTr);
         tampilAlamatPembeli(UserPbl);
 
-//        recyclerView2 = findViewById(R.id.rcyAlamatPembeli);
-//        dba= this;
-//        lymanager2 =new LinearLayoutManager(DetailPemesananActivity.this, LinearLayoutManager.HORIZONTAL,false);
-//        recyclerView2.setLayoutManager(lymanager2);
-//        tampilAlamatPembeli(UserPbl);
-
         pesanPembeli = findViewById(R.id.txtPesanPembeli);
-        tampilPesanPembeli();
+        tampilPesanPembeli(UserPbl);
 
         kab = findViewById(R.id.txt_kab);
         kec = findViewById(R.id.txt_kec);
@@ -163,19 +157,17 @@ public class DetailPemesananActivity extends AppCompatActivity {
 
     }
 
-    public void tampilPesanPembeli(){
+    public void tampilPesanPembeli(String username){
         API = serverRetrofit.koneksiRetrofit().create(APIRequestData.class);
-        Call<transaksiInfo> call = API.getTransaksiData();
+        Call<transaksiInfo> call = API.getTransaksiPesan(username);
         call.enqueue(new Callback<transaksiInfo>() {
             @Override
             public void onResponse(retrofit2.Call<transaksiInfo> call, Response<transaksiInfo> response) {
                 listdata4 = response.body().getData();
                String pesanPem = listdata4.get(0).getPesanPembeli();
-
                pesanPembeli.setText(pesanPem);
 
-                Log.d(pesanPem, "onResponsePesanPembeli: ");
-
+               Log.d(pesanPem, "onResponsePesanPembeli: ");
             }
             @Override
             public void onFailure(retrofit2.Call<transaksiInfo> call, Throwable t) {
@@ -184,4 +176,6 @@ public class DetailPemesananActivity extends AppCompatActivity {
         });
 
     }
+
+
 }

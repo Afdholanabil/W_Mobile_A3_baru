@@ -125,8 +125,16 @@ public interface APIRequestData {
     @GET("showTransaksi.php")
     Call<transaksiInfo> getTransaksiData();
 
+
+
     @GET("showTrStatus.php")
     Call<transaksiInfo> getTransaksiStatusData();
+
+    @FormUrlEncoded
+    @POST("showPesanTr.php")
+    Call<transaksiInfo> getTransaksiPesan(
+            @Field("Username") String usernamePesan
+    );
 
     @FormUrlEncoded
     @POST("showTrDetail2.php")
@@ -227,6 +235,7 @@ public interface APIRequestData {
 
     @GET("showChartOnMonth.php")
     Call<BarChartGetInfo> getBarChartData();
+
 
 
 

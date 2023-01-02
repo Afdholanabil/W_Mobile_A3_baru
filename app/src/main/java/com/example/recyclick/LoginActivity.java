@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void loginPost(String username, String password){
+    public void loginPost(String username, String password){
         API = serverRetrofit.koneksiRetrofit().create(APIRequestData.class);
         Call<LoginInfo> call = API.CreateLoginPost(username, password);
         call.enqueue(new Callback<LoginInfo>() {
@@ -133,7 +133,6 @@ public class LoginActivity extends AppCompatActivity {
                         editor.apply();
                         Intent itn = new Intent(LoginActivity.this, SplashBerhasilLogin.class);
                         startActivity(itn);
-
                     }else{
                         Log.e("TAG", "onResponse: "+response.body().getPesan());
                         showAlertDialogFailed();

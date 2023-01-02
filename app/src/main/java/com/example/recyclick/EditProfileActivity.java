@@ -66,7 +66,8 @@ public class EditProfileActivity extends AppCompatActivity {
         });
         Intent i = getIntent();
         String gambarProf = i.getStringExtra("GAMBARPROF");
-        Glide.with(getApplicationContext()).load(gambarProf).thumbnail(0.5f).centerCrop()
+
+        Glide.with(getApplicationContext()).load("https://workshopjti.com/RecyclickA3/"+gambarProf).thumbnail(0.5f).centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL).error(R.drawable.photo_library_48px).into(imgEdit);
 
         role = 2;

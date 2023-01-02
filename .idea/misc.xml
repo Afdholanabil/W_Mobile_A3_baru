@@ -35,6 +35,7 @@
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/drawable/dialog_background.xml" value="0.1585" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/drawable/ic_baseline_calendar_today_24.xml" value="0.184" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/drawable/ic_baseline_error_24_black.xml" value="0.184" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1945" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/drawable/ic_launcher_background.xml" value="0.175" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/drawable/line_bacground.xml" value="0.1945" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/drawable/login_background.xml" value="0.1" />
@@ -120,6 +121,8 @@
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/layout/toast_rubah_terima.xml" value="0.259375" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/menu/menu.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/menu/menuBarang.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1945" />
+        <entry key="..\:/Users/HP/AndroidStudioProjects/RecyClick/app/src/main/res/mipmap-anydpi-v26/ic_launcher_a3.xml" value="0.1945" />
       </map>
     </option>
   </component>

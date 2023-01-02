@@ -69,12 +69,8 @@ public class AdapterKategori extends RecyclerView.Adapter<AdapterKategori.Katego
 //
                     intent.putExtra("IdKat",idKat);
                     context.startActivity(intent);
-
                 }
             });
-
         }
-
     }
-
 }

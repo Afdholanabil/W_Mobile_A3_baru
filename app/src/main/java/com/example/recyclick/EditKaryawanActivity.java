@@ -77,7 +77,7 @@ public class EditKaryawanActivity extends AppCompatActivity {
         tNohp.setText(noHpKr);
 
         String gambarKr =it.getStringExtra("GAMBARKRY");
-        Glide.with(getApplicationContext()).load(gambarKr).thumbnail(0.5f).centerCrop()
+        Glide.with(getApplicationContext()).load("https://workshopjti.com/RecyclickA3/"+gambarKr).thumbnail(0.5f).centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL).error(R.drawable.photo_library_48px).into(imgEditKry);
 
 
