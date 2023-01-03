@@ -107,9 +107,6 @@ int rolePengaturan;
                 public void onClick(View view) {
                     Intent intent = new Intent(PengaturanActivity.this, new TambahBarangActivity().getClass());
                     startActivity(intent);
-
-
-
                 }
             });
             findViewById(R.id.linear5).setOnClickListener(new View.OnClickListener() {

@@ -57,7 +57,6 @@ import retrofit2.Response;
 
 
 public class editBarangActivity extends AppCompatActivity {
-
     TextView btnBack;
     CardView btnSimpan;
     String pesan;
@@ -256,12 +255,18 @@ public class editBarangActivity extends AppCompatActivity {
         } else {
             call = api.postEditBarangNoImg(id, nama, stok, harga, gambarOld, desk, jenis,rating, "true");
         }
-
+        View view = getLayoutInflater().inflate(R.layout.toast_loading, null);
+        view.findViewById(R.id.toast_noConnection);
+        Toast toast = new Toast(getApplicationContext());
+        toast.setView(view);
+        toast.show();
+        toast.setGravity(Gravity.CENTER,0,0);
         call.enqueue(new Callback<EditBarang>() {
             @Override
             public void onResponse(Call<EditBarang> call, Response<EditBarang> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     String pesan = response.body().getPesan();
+                    toast.cancel();
                     if (response.body().isKondisi() == true) {
                         View view = getLayoutInflater().inflate(R.layout.toast_edit_produk, null);
                         view.findViewById(R.id.toast_succesRegist);
@@ -279,6 +284,7 @@ public class editBarangActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<EditBarang> call, Throwable t) {
+                toast.cancel();
                 View view = getLayoutInflater().inflate(R.layout.toast_no_internet, null);
                 view.findViewById(R.id.toast_noConnection);
                 Toast toast = new Toast(getApplicationContext());
@@ -294,26 +300,26 @@ public class editBarangActivity extends AppCompatActivity {
 
 
     public void getImg() {
-        final CharSequence[] opsiImg = {"Gallery", "Camera"};
-        AlertDialog.Builder builder = new AlertDialog.Builder(editBarangActivity.this);
-        builder.setTitle("Pilih gambar dari");
-        builder.setItems(opsiImg, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                switch (i) {
-                    case 0:
+//        final CharSequence[] opsiImg = {"Gallery", "Camera"};
+//        AlertDialog.Builder builder = new AlertDialog.Builder(editBarangActivity.this);
+//        builder.setTitle("Pilih gambar dari");
+//        builder.setItems(opsiImg, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                switch (i) {
+//                    case 0:
                         Intent pickPhoto = new Intent(Intent.ACTION_PICK,
                                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                         startActivityForResult(pickPhoto, 0);
-                        break;
-                    case 1:
-                        Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        startActivityForResult(takePicture, 1);
-                        break;
-                }
-            }
-        });
-        builder.create().show();
+//                        break;
+//                    case 1:
+//                        Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                        startActivityForResult(takePicture, 1);
+//                        break;
+//                }
+//            }
+//        });
+//        builder.create().show();
     }
 
     @Override

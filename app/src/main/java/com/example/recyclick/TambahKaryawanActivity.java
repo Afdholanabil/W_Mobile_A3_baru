@@ -94,7 +94,6 @@ public class TambahKaryawanActivity extends AppCompatActivity {
                         Toast.makeText(TambahKaryawanActivity.this, "Nomor Hp anda lebih dari 13 karakter", Toast.LENGTH_SHORT).show();
                     } else if (passKon.equals(pass)) {
                         addKaryawan(username, pass, nama, noHp, role);
-
                     } else {
                         Toast.makeText(TambahKaryawanActivity.this, "Masukan input password yang sama", Toast.LENGTH_SHORT).show();
                     }
@@ -152,26 +151,26 @@ public class TambahKaryawanActivity extends AppCompatActivity {
 
 
     public void getImg() {
-        final CharSequence[] opsiImg = {"Gallery", "Camera"};
-        AlertDialog.Builder builder = new AlertDialog.Builder(TambahKaryawanActivity.this);
-        builder.setTitle("Pilih photo dari");
-        builder.setItems(opsiImg, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                switch (i) {
-                    case 0:
+//        final CharSequence[] opsiImg = {"Gallery", "Camera"};
+//        AlertDialog.Builder builder = new AlertDialog.Builder(TambahKaryawanActivity.this);
+//        builder.setTitle("Pilih photo dari");
+//        builder.setItems(opsiImg, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                switch (i) {
+//                    case 0:
                         Intent pickPhoto = new Intent(Intent.ACTION_PICK,
                                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                         startActivityForResult(pickPhoto, 0);
-                        break;
-                    case 1:
-                        Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        startActivityForResult(takePicture, 1);
-                        break;
-                }
-            }
-        });
-        builder.create().show();
+//                        break;
+//                    case 1:
+//                        Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                        startActivityForResult(takePicture, 1);
+//                        break;
+//                }
+//            }
+//        });
+//        builder.create().show();
     }
 
     @Override

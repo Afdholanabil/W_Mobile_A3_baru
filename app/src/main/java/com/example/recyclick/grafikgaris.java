@@ -68,8 +68,6 @@ public class grafikgaris extends Fragment {
                 if(response.isSuccessful() && response.body() != null){
                     item = response.body().getData();
                     setChartdata(item);
-                }else{
-                    Log.d("error", "onResponse: tidak ada data");
                 }
             }
 
@@ -98,13 +96,10 @@ public class grafikgaris extends Fragment {
         lineDataSet.setDrawFilled(true);
         lineDataSet.setFillDrawable(draw);
 
-
-
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(lineDataSet);
 
         LineData line  = new LineData(dataSets);
-
         lChart.setData(line);
         lChart.invalidate();
         lChart.getAxisLeft().setDrawGridLines(false);
@@ -116,7 +111,6 @@ public class grafikgaris extends Fragment {
         lChart.getLegend().setEnabled(false);
         lChart.setExtraBottomOffset(12);
 
-
         ArrayList<String> Xlabel = new ArrayList<>();
         Xlabel.add(0, "Senin");
         Xlabel.add(1, "Selasa");
@@ -126,14 +120,10 @@ public class grafikgaris extends Fragment {
         Xlabel.add(5, "Sabtu");
         Xlabel.add(6, "Minggu");
 
-
         XAxis xaxis = lChart.getXAxis();
         xaxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xaxis.setGranularity(1f);
-//        xaxis.setLabelRotationAngle(+30);
         xaxis.setValueFormatter(new IndexAxisValueFormatter(Xlabel));
-
-
     }
 
     private ArrayList<Entry> datavalue(List<LineChartDataItem> item){
@@ -150,7 +140,6 @@ public class grafikgaris extends Fragment {
         int day = cal.get(Calendar.DAY_OF_WEEK);
         int month = cal.get(Calendar.MONTH);
         int year = cal.get(Calendar.YEAR);
-
 
         SimpleDateFormat dateformat = new SimpleDateFormat("dd");
         SimpleDateFormat dateformatmonthYear = new SimpleDateFormat("yyyy-MM");

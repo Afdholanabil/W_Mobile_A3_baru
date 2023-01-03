@@ -149,11 +149,20 @@ public class TambahBarangActivity extends AppCompatActivity {
         RequestBody deskripsibr = RequestBody.create(MediaType.parse("text/plain"), deskripsi);
         RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("imageup", file.getName(), requestFile);
+
+        View view = getLayoutInflater().inflate(R.layout.toast_loading, null);
+        view.findViewById(R.id.toast_noConnection);
+        Toast toast = new Toast(getApplicationContext());
+        toast.setView(view);
+        toast.show();
+        toast.setGravity(Gravity.CENTER,0,0);
+
         Call<AddBarang> call = api.postDataBarang(body, idbr, namabr, stok, harga, deskripsibr, kategoriid, rating);
         call.enqueue(new Callback<AddBarang>() {
             @Override
             public void onResponse(Call<AddBarang> call, Response<AddBarang> response) {
                 if (response.isSuccessful() && response.body() != null) {
+                    toast.cancel();
                     if (response.body().isKondisi() == true) {
                         View view = getLayoutInflater().inflate(R.layout.toast_add_produk, null);
                         view.findViewById(R.id.toast_succesAddProduk);
@@ -171,6 +180,7 @@ public class TambahBarangActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<AddBarang> call, Throwable t) {
+                toast.cancel();
                 Log.d(t.getMessage(), "onFailure: ");
                 View view = getLayoutInflater().inflate(R.layout.toast_no_internet, null);
                 view.findViewById(R.id.toast_noConnection);
@@ -185,26 +195,26 @@ public class TambahBarangActivity extends AppCompatActivity {
 
 
     public void getImg() {
-        final CharSequence[] opsiImg = {"Gallery", "Camera"};
-        AlertDialog.Builder builder = new AlertDialog.Builder(TambahBarangActivity.this);
-        builder.setTitle("Pilih gambar dari");
-        builder.setItems(opsiImg, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                switch (i) {
-                    case 0:
+//        final CharSequence[] opsiImg = {"Gallery", "Camera"};
+//        AlertDialog.Builder builder = new AlertDialog.Builder(TambahBarangActivity.this);
+//        builder.setTitle("Pilih gambar dari");
+//        builder.setItems(opsiImg, new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                switch (i) {
+//                    case 0:
                         Intent pickPhoto = new Intent(Intent.ACTION_PICK,
                                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                         startActivityForResult(pickPhoto, 0);
-                        break;
-                    case 1:
-                        Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        startActivityForResult(takePicture, 1);
-                        break;
-                }
-            }
-        });
-        builder.create().show();
+//                        break;
+//                    case 1:
+//                        Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                        startActivityForResult(takePicture, 1);
+//                        break;
+//                }
+//            }
+//        });
+//        builder.create().show();
     }
 
     @Override
