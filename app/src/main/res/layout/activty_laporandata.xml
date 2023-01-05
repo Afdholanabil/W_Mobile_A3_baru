@@ -1,70 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:padding="5dp"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/lapsdt_card"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:backgroundTint="@color/grey1"
-        android:paddingHorizontal="10dp"
-        app:cardCornerRadius="20dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="40dp">
-
-            <EditText
-                android:id="@+id/txt_Search"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:padding="10dp"
-                android:background="@null" />
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:layout_marginEnd="10dp"
-                android:src="@drawable/ic_baseline_search_24" />
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
+    android:layout_height="match_parent">
     <TextView
+        android:id="@+id/llp_nullAlert"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Detail Lengkap Laporan Penjualan"
-        android:textSize="15dp"
-        android:textStyle="bold|italic"
-        android:layout_marginVertical="10dp"
-        android:layout_marginHorizontal="20dp"/>
+        android:drawableLeft="@drawable/ic_baseline_error_24_black"
+        android:drawablePadding="5dp"
+        android:fontFamily="@font/poppins_regular"
+        android:gravity="center"
+        android:text="Data Produk Kosong"
+
+        android:textAlignment="center"
+        android:textColor="@color/grey2"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:layout_marginHorizontal="10dp"
-        android:background="@color/black"/>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/lapsdt_recycle"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/lapsdt_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/recycleview_laporan">
+            android:layout_margin="20dp"
+            android:backgroundTint="@color/grey1"
+            android:paddingHorizontal="10dp"
+            app:cardCornerRadius="20dp">
 
-        </androidx.recyclerview.widget.RecyclerView>
-    </ScrollView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <EditText
+                    android:id="@+id/txt_Search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:background="@null" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/ic_baseline_search_24" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detail Lengkap Laporan Penjualan"
+            android:textSize="15dp"
+            android:textStyle="bold|italic"
+            android:layout_marginVertical="10dp"
+            android:layout_marginHorizontal="20dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginHorizontal="10dp"
+            android:background="@color/black"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lapsdt_recycle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/recycleview_laporan">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </ScrollView>
+    </LinearLayout>
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

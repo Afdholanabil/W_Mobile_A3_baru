@@ -75,13 +75,13 @@ public class AdapterDataBarang extends RecyclerView.Adapter<AdapterDataBarang.Ba
 
     @Override
     public int getItemCount() {
-        int a = 0;
-        if (data == null) {
-            DataBarangActivity.dbanew.setTeksDataKosong();
-
-        } else {
+        int a;
+        if (data != null) {
             a = data.size();
             DataBarangActivity.dbanew.hideteksKosong();
+        } else {
+            a = 0;
+            DataBarangActivity.dbanew.setTeksDataKosong();
         }
         return a;
     }

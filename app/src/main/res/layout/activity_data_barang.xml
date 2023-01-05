@@ -86,24 +86,25 @@
 
 
             </ScrollView>
+
             <TextView
                 android:id="@+id/txt_kondisiProdukKosong"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
+                android:drawableLeft="@drawable/ic_baseline_error_24_black"
+                android:drawablePadding="5dp"
                 android:fontFamily="@font/poppins_regular"
-                android:textSize="15sp"
                 android:gravity="center"
-                android:textColor="@color/grey2"
                 android:text="Data Produk Kosong"
 
                 android:textAlignment="center"
-                app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/grey2"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:drawableLeft="@drawable/ic_baseline_error_24_black"
-                android:drawablePadding="5dp"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/btn_addBarang"

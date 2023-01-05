@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.recyclick.LaporanLengkapActivity;
 import com.example.recyclick.Model.Laporan.DataItemLengkap;
 import com.example.recyclick.R;
 
@@ -16,11 +17,12 @@ import java.util.List;
 
 public class AdapterLaporan extends RecyclerView.Adapter<AdapterLaporan.laporanViewHolder> {
 
-    List<DataItemLengkap> item ;
+    List<DataItemLengkap> item;
     int itemlenght;
+
     public AdapterLaporan(List<DataItemLengkap> item) {
         this.item = item;
-        if (item != null){
+        if (item != null) {
             itemlenght = item.size();
         }
     }
@@ -47,23 +49,28 @@ public class AdapterLaporan extends RecyclerView.Adapter<AdapterLaporan.laporanV
         holder.ttlharga.setText(itemlaporan.getTotalharga());
         holder.tgl.setText(itemlaporan.getTanggal());
         int len = itemlenght - position;
-        holder.numtrans.setText("Pembelian Ke-"+ len);
+        holder.numtrans.setText("Pembelian Ke-" + len);
     }
 
     @Override
     public int getItemCount() {
-        return (item != null) ? item.size() : 0;
+        if (item != null) {
+            LaporanLengkapActivity.LLA.nullAlertNotif(false);
+            return item.size();
+        }
+        LaporanLengkapActivity.LLA.nullAlertNotif(true);
+        return 0;
     }
 
     public class laporanViewHolder extends RecyclerView.ViewHolder {
-        TextView idtr, idbr, idpbl, nama, tgl, jml,ttlharga, numtrans;
+        TextView idtr, idbr, idpbl, nama, tgl, jml, ttlharga, numtrans;
 
-        public laporanViewHolder( View itemView) {
+        public laporanViewHolder(View itemView) {
             super(itemView);
             idtr = itemView.findViewById(R.id.rlc_idtransaksi);
             idpbl = itemView.findViewById(R.id.rlc_idpembeli);
             idbr = itemView.findViewById(R.id.rlc_idbarang);
-            nama  = itemView.findViewById(R.id.rlc_namapembeli);
+            nama = itemView.findViewById(R.id.rlc_namapembeli);
             jml = itemView.findViewById(R.id.rlc_jumlah);
             ttlharga = itemView.findViewById(R.id.rlc_harga);
             tgl = itemView.findViewById(R.id.rlc_tanggal);

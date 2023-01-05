@@ -132,13 +132,9 @@ public class DataBarangActivity extends AppCompatActivity  {
 //
         if(idKat != null) {
             tampilProdukWithKat(idKat);
-
         }else{
             tampilDataBarang();
         }
-
-
-
         recyclerView2 = findViewById(R.id.rcy_kategoriBarang);
         dbanew = this;
         lymanager = new LinearLayoutManager(DataBarangActivity.this, LinearLayoutManager.HORIZONTAL, false);
@@ -308,7 +304,6 @@ public class DataBarangActivity extends AppCompatActivity  {
                 listdata = response.body().getData();
                 adapter = new AdapterDataBarang(DataBarangActivity.this, listdata);
                 recyclerView.setAdapter(adapter);
-
             }
 
             @Override

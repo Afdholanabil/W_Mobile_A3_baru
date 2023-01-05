@@ -6,9 +6,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Rect;
@@ -22,6 +20,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -34,10 +33,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.recyclick.API.APIRequestData;
 import com.example.recyclick.API.serverRetrofit;
 import com.example.recyclick.Adapter.AdapterKategoriEB;
-import com.example.recyclick.Adapter.AdapterKategoriTB;
-import com.example.recyclick.Model.DataBarang.DeleteBarang;
 import com.example.recyclick.Model.DataBarang.EditBarang;
-import com.example.recyclick.Model.DataBarang.Getidproduk;
 import com.example.recyclick.Model.Kategori.KategoriEditData;
 import com.example.recyclick.Model.Kategori.KategoriEditInfo;
 import com.example.recyclick.Model.Kategori.KategoriInfo;
@@ -65,10 +61,11 @@ public class editBarangActivity extends AppCompatActivity {
     int ratingbr;
     Uri ur;
     ImageView imgBarang,imgkgr;
-    RecyclerView recyclerView;
     PopupWindow popupWindow2;
     APIRequestData API;
     private int kategoriid;
+    private List<KategoriItem> sup;
+    private LinearLayout imglayout;
 
     public List<KategoriEditData> dataKat = new ArrayList<>();
 
@@ -86,6 +83,7 @@ public class editBarangActivity extends AppCompatActivity {
         txtDesk = findViewById(R.id.inputDesk);
         ratingbr = 1;
         imgBarang = findViewById(R.id.ed_image);
+        imglayout = findViewById(R.id.aeb_linear1);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,6 +107,7 @@ public class editBarangActivity extends AppCompatActivity {
         });
 
 
+
         Intent i = getIntent();
         String idbr = i.getStringExtra("ID");
         txtId.setText(idbr);
@@ -125,11 +124,18 @@ public class editBarangActivity extends AppCompatActivity {
         String deskbr = i.getStringExtra("DESKPROD");
         txtDesk.setText(deskbr);
 
-//        String jenisbr = i.getStringExtra("JENISPROD");
-//        txtJenis.setText(jenisbr);
+        String jenisbr = i.getStringExtra("JENISPROD");
+        kategoriid = Integer.parseInt(jenisbr);
+        tampilKategori(kategoriid);
+
 
         String gambarbr = i.getStringExtra("GAMBARPROD");
-
+        if(gambarbr != null){
+            ViewGroup.LayoutParams params = imglayout.getLayoutParams();
+            params.height = 420;
+            params.width = 420;
+            imglayout.setLayoutParams(params);
+        }
         Glide.with(getApplicationContext()).load("https://workshopjti.com/RecyclickA3/"+gambarbr).thumbnail(0.5f).centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL).error(R.drawable.photo_library_48px).into(imgBarang);
 
@@ -393,6 +399,33 @@ public class editBarangActivity extends AppCompatActivity {
     public void setkategori(int id, String kategoriname) {
         txtJenis.setText(kategoriname);
         kategoriid = id;
+
+    }
+
+
+    public void tampilKategori(int ktid) {
+        API = serverRetrofit.koneksiRetrofit().create(APIRequestData.class);
+        Call<KategoriInfo> call = API.getKategoriData();
+        call.enqueue(new Callback<KategoriInfo>() {
+            @Override
+            public void onResponse(retrofit2.Call<KategoriInfo> call, Response<KategoriInfo> response) {
+                    if(response.body()!= null && response.isSuccessful()){
+                       sup = response.body().getData();
+                       KategoriItem item = sup.get(ktid);
+                       txtJenis.setText(item.getNamaKategori());
+                    }
+            }
+            @Override
+            public void onFailure(retrofit2.Call<KategoriInfo> call, Throwable t) {
+                View view = getLayoutInflater().inflate(R.layout.toast_no_internet, null);
+                view.findViewById(R.id.toast_noConnection);
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_LONG);
+                toast.setView(view);
+                toast.show();
+                toast.setGravity(Gravity.TOP | Gravity.CENTER,0,0);
+            }
+        });
 
     }
 

@@ -89,7 +89,6 @@ public class grafikbatang extends Fragment {
         barDataSet.setColors(new int[] {color5, color1, color2, color3, color4,
                 color6, color6, color4, color3, color2, color1, color5});
 
-
         ArrayList<IBarDataSet> dataSets = new ArrayList<>();
         dataSets.add(barDataSet);
 

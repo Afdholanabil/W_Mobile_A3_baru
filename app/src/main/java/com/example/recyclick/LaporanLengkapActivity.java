@@ -35,10 +35,13 @@ public class LaporanLengkapActivity  extends AppCompatActivity {
 
     private RecyclerView recycle;
     private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager lymanager;
-    EditText src;
+    public EditText src;
+    private TextView nullalert;
     private APIRequestData api;
     private List<DataItemLengkap> item = new ArrayList<>();
+    private boolean textwatchercon = false;
+    public static LaporanLengkapActivity LLA;
+
 
 
     @Override
@@ -46,8 +49,6 @@ public class LaporanLengkapActivity  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         deklarasiVariable();
         showDataLaporanLengkap();
-
-
 
         src.addTextChangedListener(new TextWatcher() {
             @Override
@@ -58,7 +59,15 @@ public class LaporanLengkapActivity  extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String kata = src.getText().toString();
-                showPencarian(kata);
+                if(i2 >0){
+                    showPencarian(kata);
+                    if(textwatchercon){
+                        nullalert.setText("Data tidak ditemukan");
+                        nullalert.setVisibility(View.VISIBLE);
+                    }
+                }else{
+                    showDataLaporanLengkap();
+                }
             }
 
             @Override
@@ -70,10 +79,23 @@ public class LaporanLengkapActivity  extends AppCompatActivity {
 
     private void deklarasiVariable(){
         setContentView(R.layout.activty_laporandata);
+        LLA = this;
         recycle = findViewById(R.id.lapsdt_recycle);
         api = serverRetrofit.koneksiRetrofit().create(APIRequestData.class);
         src = findViewById(R.id.txt_Search);
+        nullalert = findViewById(R.id.llp_nullAlert);
     }
+
+
+    public void nullAlertNotif(boolean condition){
+        if (condition){
+            this.textwatchercon = condition;
+            nullalert.setVisibility(View.VISIBLE);
+        }else{
+            nullalert.setVisibility(View.GONE);
+        }
+    }
+
     private void showDataLaporanLengkap(){
         Call<LaporanLengkap> call = api.getInfoLaporan();
 
@@ -88,7 +110,6 @@ public class LaporanLengkapActivity  extends AppCompatActivity {
                     recycle.setLayoutManager(new LinearLayoutManager(LaporanLengkapActivity.this));
                 }
             }
-
             @Override
             public void onFailure(Call<LaporanLengkap> call, Throwable t) {
                 View view = getLayoutInflater().inflate(R.layout.toast_no_internet, null);
@@ -112,8 +133,6 @@ public class LaporanLengkapActivity  extends AppCompatActivity {
                     item = response.body().getData();
                     adapter = new AdapterLaporan(item);
                     recycle.setAdapter(adapter);
-
-
                 }else{
                     Log.d("gagal", "onResponse: "+response.body().getKode()+" pesan "+response.body().getMessage());
                 }
