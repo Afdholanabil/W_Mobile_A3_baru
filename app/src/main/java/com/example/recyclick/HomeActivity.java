@@ -22,12 +22,14 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.ScrollView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -88,12 +90,14 @@ public class HomeActivity extends AppCompatActivity {
     public int role;
     public PopupWindow pop;
     private List<DataItemSearch> item = new ArrayList<>();
+    private ScrollView scroll;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        scroll = findViewById(R.id.ach_scroll);
         dbhelp = new dbHelper(getApplicationContext());
         greeting = (TextView) findViewById(R.id.textHalo);
         lay1 = findViewById(R.id.home_cardsearch);
@@ -212,6 +216,13 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView3.setHasFixedSize(true);
 
         tampilBarangLaris();
+
+        scroll.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+                pop.dismiss();
+            }
+        });
 
     }
 

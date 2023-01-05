@@ -13,11 +13,13 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.ScrollView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -62,6 +64,7 @@ public class TambahBarangActivity extends AppCompatActivity {
     private int kategoriid;
     public static TambahBarangActivity tba;
     private List<KategoriItem> item = new ArrayList<>();
+    private ScrollView scroll;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -122,11 +125,19 @@ public class TambahBarangActivity extends AppCompatActivity {
             }
         });
 
+        scroll.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+                popupWindow.dismiss();
+            }
+        });
+
     }
 
     private void deklarasi() {
         setContentView(R.layout.activity_tambahbarang);
         tba = this;
+        scroll = findViewById(R.id.atb_scroll);
         id = findViewById(R.id.idPrd);
         nama = findViewById(R.id.namaPrd);
         stok = findViewById(R.id.stokPrd);

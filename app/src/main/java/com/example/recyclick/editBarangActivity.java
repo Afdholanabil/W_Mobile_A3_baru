@@ -12,6 +12,7 @@ import android.database.Cursor;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
@@ -21,10 +22,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,7 +68,8 @@ public class editBarangActivity extends AppCompatActivity {
     APIRequestData API;
     private int kategoriid;
     private List<KategoriItem> sup;
-    private LinearLayout imglayout;
+    private ScrollView scroll;
+//    private LinearLayout imglayout;
 
     public List<KategoriEditData> dataKat = new ArrayList<>();
 
@@ -73,6 +77,7 @@ public class editBarangActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_barang);
+        scroll = findViewById(R.id.aeb_scroll);
         btnBack = (TextView) findViewById(R.id.btn_back);
         txtId = findViewById(R.id.inputId);
         txtNama = findViewById(R.id.inputNama);
@@ -83,7 +88,7 @@ public class editBarangActivity extends AppCompatActivity {
         txtDesk = findViewById(R.id.inputDesk);
         ratingbr = 1;
         imgBarang = findViewById(R.id.ed_image);
-        imglayout = findViewById(R.id.aeb_linear1);
+//        imglayout = findViewById(R.id.aeb_linear1);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -130,12 +135,12 @@ public class editBarangActivity extends AppCompatActivity {
 
 
         String gambarbr = i.getStringExtra("GAMBARPROD");
-        if(gambarbr != null){
-            ViewGroup.LayoutParams params = imglayout.getLayoutParams();
-            params.height = 420;
-            params.width = 420;
-            imglayout.setLayoutParams(params);
-        }
+//        if(gambarbr != null){
+//            ViewGroup.LayoutParams params = imglayout.getLayoutParams();
+//            params.height = 420;
+//            params.width = 420;
+//            imglayout.setLayoutParams(params);
+//        }
         Glide.with(getApplicationContext()).load("https://workshopjti.com/RecyclickA3/"+gambarbr).thumbnail(0.5f).centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL).error(R.drawable.photo_library_48px).into(imgBarang);
 
@@ -238,8 +243,12 @@ public class editBarangActivity extends AppCompatActivity {
             }
         });
 
-
-
+        scroll.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+                popupWindow2.dismiss();
+            }
+        });
 
     }
 

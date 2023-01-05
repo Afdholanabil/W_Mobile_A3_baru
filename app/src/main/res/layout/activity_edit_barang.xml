@@ -45,9 +45,9 @@
             </androidx.cardview.widget.CardView>
 
             <ScrollView
+                android:id="@+id/aeb_scroll"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
                 android:layout_marginTop="50dp"
                 tools:ignore="MissingConstraints">
 
